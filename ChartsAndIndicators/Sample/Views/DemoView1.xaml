@@ -4,11 +4,13 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            mc:Ignorable="d"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:controls="clr-namespace:Controls;assembly=Controls"
+             mc:Ignorable="d"
             d:DesignHeight="450" d:DesignWidth="600"
              >
     <Grid>
         <Label Content="{Binding Info}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+        <controls:BarChart ></controls:BarChart>
     </Grid>
 </UserControl>
