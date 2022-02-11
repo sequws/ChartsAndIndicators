@@ -11,6 +11,6 @@
              >
     <Grid>
         <Label Content="{Binding Info}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-        <controls:BarChart ></controls:BarChart>
+        <controls:BarChart></controls:BarChart>
     </Grid>
 </UserControl>
