@@ -10,6 +10,9 @@ namespace Sample.Views
         public DemoView1()
         {
             InitializeComponent();
+
+            //MainBarChart.BarValues.Add("foo", 20);
+            //MainBarChart.BarValues.Add("bar", 40);
         }
     }
 }

@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Controls
@@ -29,27 +20,72 @@ namespace Controls
             set => SetField(ref _chartName, value);
         }
 
+        private Dictionary<string,double> _barValues = new Dictionary<string, double>();
+
+        public Dictionary<string,double> BarValues
+        {
+            get { return _barValues; }
+            set
+            {
+                _barValues = value;
+                SetField(ref _barValues, value);
+            }
+        }
+        
         public BarChart()
         {
             InitializeComponent();
 
             DataContext = this;
-            ChartName = "Bar Chart";  
+            ChartName = "Bar Chart";
+
+            BarValues.Add("foo", 20);
+            BarValues.Add("bar", 40);
         }
 
         private void DrawMainRect(int margin = 10)
         {
-            //MainCanvas.Children.Clear();
-            //Rectangle rect = new Rectangle();
-            //Canvas.SetLeft(rect, margin);
-            //Canvas.SetTop(rect, margin);
-            //rect.Height = MainCanvas.ActualHeight - 2 * margin;
-            //rect.Width = MainCanvas.ActualWidth - 2 * margin;
-            //rect.Stroke = Brushes.Gray;
-            //rect.StrokeThickness = 2;
-            //MainCanvas.Children.Add(rect);
+            MainCanvas.Children.Clear();
+
+            int i = 0;
+            foreach(var kvpBar in BarValues)
+            {
+                var barX = (MainCanvas.ActualWidth - BarValues.Count * 40) / 2;
+                var barY = MainCanvas.ActualHeight - 100;
+                Rectangle rect = new Rectangle();
+                rect.Height = kvpBar.Value * 10;
+                rect.Width = 40;
+                rect.Stroke = Brushes.Blue;
+                rect.StrokeThickness = 2;
+                Canvas.SetLeft(rect, barX + i * 50);
+                Canvas.SetTop(rect, barY - rect.Height);
+
+                var text = new TextBlock()
+                {
+                    Text = kvpBar.Key,
+                };
+
+                Canvas.SetLeft(text, barX + i *40);
+                Canvas.SetTop(text, 90);
+
+                MainCanvas.Children.Add(rect);
+                MainCanvas.Children.Add(text);
+                i ++;
+            }
         }
 
+        #region events
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            DrawMainRect();
+        }
+
+        #endregion
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -68,14 +104,5 @@ namespace Controls
         }
         #endregion
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            DrawMainRect();
-        }
     }
 }
