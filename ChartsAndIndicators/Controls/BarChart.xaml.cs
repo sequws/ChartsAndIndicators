@@ -31,25 +31,23 @@ namespace Controls
 
         public BarChart()
         {
-            InitializeComponent();           
+            InitializeComponent();
 
             DataContext = this;
-            ChartName = "Test Name";
-            
+            ChartName = "Bar Chart";  
         }
 
         private void DrawMainRect(int margin = 10)
         {
-            MainCanvas.Children.Clear();
-            Rectangle rect = new Rectangle();
-            Canvas.SetLeft(rect, margin);
-            Canvas.SetTop(rect, margin);
-            rect.Height = MainCanvas.ActualHeight - 2 * margin;
-            rect.Width = MainCanvas.ActualWidth - 2 * margin;
-            rect.Stroke = Brushes.Gray;
-            rect.StrokeThickness = 2;
-
-            MainCanvas.Children.Add(rect);
+            //MainCanvas.Children.Clear();
+            //Rectangle rect = new Rectangle();
+            //Canvas.SetLeft(rect, margin);
+            //Canvas.SetTop(rect, margin);
+            //rect.Height = MainCanvas.ActualHeight - 2 * margin;
+            //rect.Width = MainCanvas.ActualWidth - 2 * margin;
+            //rect.Stroke = Brushes.Gray;
+            //rect.StrokeThickness = 2;
+            //MainCanvas.Children.Add(rect);
         }
 
 
@@ -75,7 +73,7 @@ namespace Controls
             
         }
 
-        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             DrawMainRect();
         }

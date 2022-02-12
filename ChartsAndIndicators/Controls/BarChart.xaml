@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded" SizeChanged="UserControl_SizeChanged">
-    <Grid>
-        <DockPanel Background="Wheat">
-            <TextBlock DockPanel.Dock="Top" Height="14" Text="{Binding ChartName}"></TextBlock>
-            <Grid>
-                <Canvas x:Name="MainCanvas" MinWidth="450" MinHeight="350" />
-            </Grid>
-        </DockPanel>     
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded"
+             MinWidth="20" Width="Auto">
+    <Grid SizeChanged="Grid_SizeChanged">
+        <Border BorderBrush="Black" Background="Wheat" BorderThickness="2" CornerRadius="15" >
+            <DockPanel  >
+                <Label DockPanel.Dock="Top" FontSize="14" FontWeight="Bold" Content="{Binding ChartName}" Margin="2"></Label>
+                <Canvas x:Name="MainCanvas"  MinWidth="40" MinHeight="40" />
+            </DockPanel>
+        </Border>
     </Grid>
 </UserControl>
