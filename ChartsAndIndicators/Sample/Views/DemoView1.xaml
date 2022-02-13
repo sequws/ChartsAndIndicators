@@ -9,8 +9,14 @@
              mc:Ignorable="d"
             d:DesignHeight="450" d:DesignWidth="600"
              >
-    <Grid>
-        <Label Content="{Binding Info}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" Height="30" DockPanel.Dock="Top">
+            <!--<Label Content="{Binding Info}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>-->
+            <Button x:Name="AddBarButton" Content="Add bar" Width="100" Margin="2" Click="AddBarButton_Click"></Button>
+            <TextBox x:Name="BarNameTextBox" Text="bar" Width="100"></TextBox>
+            <TextBox x:Name="BarValueTextBox" Text="100" Width="100"></TextBox>            
+        </StackPanel>
+       
         <controls:BarChart x:Name="MainBarChart"></controls:BarChart>
-    </Grid>
+    </DockPanel>
 </UserControl>

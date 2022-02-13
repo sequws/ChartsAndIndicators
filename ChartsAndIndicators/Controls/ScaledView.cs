@@ -27,8 +27,8 @@ namespace Controls
         double canvasWidth;
         double canvasHeight;
 
-        double barMaxWidth = 60;
-        double barMinMargin = 4;
+        double barMaxWidth = 80;
+        double barMinMargin = 10;
         double textHeight = 22;
 
         Dictionary<string, double> barValues = new Dictionary<string, double>();
@@ -82,12 +82,13 @@ namespace Controls
 
         public void DrawScaledBars(Dictionary<string, double> barValues)
         {
+            var tmpW = (canvasWidth - barValues.Count * 2*barMinMargin) / barValues.Count;
+            var barW = Math.Min(tmpW, barMaxWidth);
+
             int i = 0;
             foreach (var bar in barValues)
             {
                 var barH = bar.Value * Scale;
-                var barW = Math.Min( barMaxWidth, canvasWidth / (barValues.Count* barMinMargin));
-
                 Rectangle rect = new Rectangle();
                 rect.Height = Math.Abs(barH);
                 rect.Width = barW;
@@ -106,11 +107,11 @@ namespace Controls
 
                 var text = new TextBlock();
                 text.TextWrapping = TextWrapping.Wrap;
-                text.Width = barW + barMinMargin;
+                text.Width = barW + 2*barMinMargin;
                 text.TextAlignment = TextAlignment.Center;
                 text.Text = $"{bar.Key}\n{ bar.Value.ToString("N2")}";
 
-                Canvas.SetLeft(text, barX - 2* barMinMargin);
+                Canvas.SetLeft(text, barX - barMinMargin);
                 Canvas.SetTop(text, bar.Value <= 0 ? lineZeroY - 2*textHeight : lineZeroY );
 
                 _canvas.Children.Add(rect);

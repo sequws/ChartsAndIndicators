@@ -28,7 +28,7 @@ namespace Controls
             set
             {
                 _barValues = value;
-                SetField(ref _barValues, value);
+                SetField(ref _barValues, value);                
             }
         }
 
@@ -47,6 +47,15 @@ namespace Controls
             BarValues.Add("GBPJPY", -15);
 
             scaledView = new ScaledView(MainCanvas);
+        }
+
+        public void AddBar(string name, double value)
+        {
+            if(!BarValues.ContainsKey(name))
+            {
+                BarValues.Add(name, value);
+                DrawMainRect();
+            }
         }
 
         private void DrawMainRect(int margin = 10)
