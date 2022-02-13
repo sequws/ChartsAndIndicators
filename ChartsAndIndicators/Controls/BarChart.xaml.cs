@@ -43,7 +43,7 @@ namespace Controls
 
             BarValues.Add("foo", 20);
             BarValues.Add("bar", 40);
-            //BarValues.Add("nir", -15);
+            BarValues.Add("nir", -15);
 
             scaledView = new ScaledView(MainCanvas);
         }

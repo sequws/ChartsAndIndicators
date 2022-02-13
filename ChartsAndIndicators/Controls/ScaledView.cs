@@ -24,10 +24,11 @@ namespace Controls
         double lineZeroY = 0;
         double centerX = 0;
         Canvas _canvas;
-        double canvasW;
-        double canvasH;
+        double canvasWidth;
+        double canvasHeight;
 
         double barMaxWidth = 40;
+        double barMinMargin = 4;
 
         Dictionary<string, double> barValues = new Dictionary<string, double>();
 
@@ -39,26 +40,27 @@ namespace Controls
         public void Draw(Dictionary<string, double> barValues, int margin = 5)
         {
             ctrlHeight = _canvas.ActualHeight;
-            canvasH = ctrlHeight- 2*margin;
+            canvasHeight = ctrlHeight- 2*margin;
             ctrlWidth = _canvas.ActualWidth;
-            canvasW = ctrlWidth- 2*margin;
+            canvasWidth = ctrlWidth- 2*margin;
 
             var maxH = barValues.Max(x => x.Value);
             var minH = barValues.Min(x => x.Value);
             viewMaxH = minH < 0 ? maxH + Math.Abs( minH) : maxH;
 
-            Scale = canvasH / viewMaxH;
-            var lineXratio = minH < 0 ? maxH / minH : 1;
+            Scale = canvasHeight / viewMaxH;
+            var lineXratio = minH < 0 ? Math.Abs(( maxH + Math.Abs(minH)) / minH) : 1;
 
-            lineZeroY = canvasH / lineXratio;
+            lineZeroY = canvasHeight - (canvasHeight / lineXratio);
+            centerX = ctrlWidth / 2;
 
             _canvas.Children.Clear();
 
             Line lineZero = new Line();
             lineZero.X1 = margin;
-            lineZero.X2 = canvasW + margin;
-            lineZero.Y1 = lineZeroY;
-            lineZero.Y2 = lineZeroY;
+            lineZero.X2 = canvasWidth + margin;
+            lineZero.Y1 =  lineZeroY;
+            lineZero.Y2 =  lineZeroY;
             lineZero.Stroke = Brushes.Fuchsia;
             lineZero.StrokeThickness = 2;
 
@@ -73,6 +75,8 @@ namespace Controls
             Canvas.SetTop(rect, 100);
 
             _canvas.Children.Add(rect);
+
+            DrawScaledBars(barValues);
         }
 
         public void DrawScaledBars(Dictionary<string, double> barValues)
@@ -81,8 +85,7 @@ namespace Controls
             foreach (var bar in barValues)
             {
                 var barH = bar.Value * Scale;
-                var barW = barMaxWidth;
-
+                var barW = Math.Min( barMaxWidth, canvasWidth / (barValues.Count* barMinMargin));
 
                 Rectangle rect = new Rectangle();
                 rect.Height = Math.Abs(barH);
@@ -90,8 +93,16 @@ namespace Controls
                 rect.Stroke = Brushes.Blue;
                 rect.StrokeThickness = 2;
 
-                //Canvas.SetLeft(rect, barX + i * 50);
-                //Canvas.SetTop(rect, barY - rect.Height);
+                // seriesW
+                var barSeriesW = barValues.Count * (barW + barMinMargin);
+
+                var barX = centerX - (0.5*barSeriesW) + i*(barW + barMinMargin);
+                var barY = bar.Value > 0 ? lineZeroY - barH : lineZeroY;
+
+                Canvas.SetLeft(rect, barX );
+                Canvas.SetTop(rect, barY );
+
+                _canvas.Children.Add(rect);
 
                 i++;
             }
