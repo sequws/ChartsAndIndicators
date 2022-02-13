@@ -27,8 +27,9 @@ namespace Controls
         double canvasWidth;
         double canvasHeight;
 
-        double barMaxWidth = 40;
+        double barMaxWidth = 60;
         double barMinMargin = 4;
+        double textHeight = 22;
 
         Dictionary<string, double> barValues = new Dictionary<string, double>();
 
@@ -90,8 +91,9 @@ namespace Controls
                 Rectangle rect = new Rectangle();
                 rect.Height = Math.Abs(barH);
                 rect.Width = barW;
-                rect.Stroke = Brushes.Blue;
+                rect.Stroke = Brushes.Black;
                 rect.StrokeThickness = 2;
+                rect.Fill = bar.Value >= 0 ? Brushes.DarkGreen : Brushes.DarkRed;
 
                 // seriesW
                 var barSeriesW = barValues.Count * (barW + barMinMargin);
@@ -102,7 +104,17 @@ namespace Controls
                 Canvas.SetLeft(rect, barX );
                 Canvas.SetTop(rect, barY );
 
+                var text = new TextBlock();
+                text.TextWrapping = TextWrapping.Wrap;
+                text.Width = barW + barMinMargin;
+                text.TextAlignment = TextAlignment.Center;
+                text.Text = $"{bar.Key}\n{ bar.Value.ToString("N2")}";
+
+                Canvas.SetLeft(text, barX - 2* barMinMargin);
+                Canvas.SetTop(text, bar.Value <= 0 ? lineZeroY - 2*textHeight : lineZeroY );
+
                 _canvas.Children.Add(rect);
+                _canvas.Children.Add(text);
 
                 i++;
             }

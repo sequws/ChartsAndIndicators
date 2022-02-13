@@ -41,9 +41,10 @@ namespace Controls
             DataContext = this;
             ChartName = "Bar Chart";
 
-            BarValues.Add("foo", 20);
-            BarValues.Add("bar", 40);
-            BarValues.Add("nir", -15);
+            BarValues.Add("GBPUSD", 20);
+            BarValues.Add("EURUSD", 40);
+            BarValues.Add("NASDAQ", -80);
+            BarValues.Add("GBPJPY", -15);
 
             scaledView = new ScaledView(MainCanvas);
         }
