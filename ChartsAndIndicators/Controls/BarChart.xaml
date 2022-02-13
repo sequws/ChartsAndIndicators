@@ -11,7 +11,7 @@
         <Border BorderBrush="Black" Background="Wheat" BorderThickness="2" CornerRadius="15" >
             <DockPanel  >
                 <Label DockPanel.Dock="Top" FontSize="14" FontWeight="Bold" Content="{Binding ChartName}" Margin="2"></Label>
-                <Canvas x:Name="MainCanvas" Background="AliceBlue"  MinWidth="40" MinHeight="40" />
+                <Canvas x:Name="MainCanvas"   MinWidth="40" MinHeight="40" />
             </DockPanel>
         </Border>
     </Grid>

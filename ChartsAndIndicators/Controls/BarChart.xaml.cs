@@ -31,6 +31,8 @@ namespace Controls
                 SetField(ref _barValues, value);
             }
         }
+
+        ScaledView scaledView;
         
         public BarChart()
         {
@@ -41,37 +43,16 @@ namespace Controls
 
             BarValues.Add("foo", 20);
             BarValues.Add("bar", 40);
+            //BarValues.Add("nir", -15);
+
+            scaledView = new ScaledView(MainCanvas);
         }
 
         private void DrawMainRect(int margin = 10)
         {
             MainCanvas.Children.Clear();
 
-            int i = 0;
-            foreach(var kvpBar in BarValues)
-            {
-                var barX = (MainCanvas.ActualWidth - BarValues.Count * 40) / 2;
-                var barY = MainCanvas.ActualHeight - 100;
-                Rectangle rect = new Rectangle();
-                rect.Height = kvpBar.Value * 10;
-                rect.Width = 40;
-                rect.Stroke = Brushes.Blue;
-                rect.StrokeThickness = 2;
-                Canvas.SetLeft(rect, barX + i * 50);
-                Canvas.SetTop(rect, barY - rect.Height);
-
-                var text = new TextBlock()
-                {
-                    Text = kvpBar.Key,
-                };
-
-                Canvas.SetLeft(text, barX + i *40);
-                Canvas.SetTop(text, 90);
-
-                MainCanvas.Children.Add(rect);
-                MainCanvas.Children.Add(text);
-                i ++;
-            }
+            scaledView.Draw(BarValues, margin);
         }
 
         #region events
