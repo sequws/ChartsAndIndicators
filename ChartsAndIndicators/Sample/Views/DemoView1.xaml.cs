@@ -23,8 +23,10 @@ namespace Sample.Views
             try
             {
                 //MainBarChart.BarValues.Add( BarNameTextBox.Text,  int.Parse(BarValueTextBox.Text));
-                MainBarChart.AddBar(BarNameTextBox.Text + barId, double.Parse(BarValueTextBox.Text)+(barId*10));
+                MainBarChart.AddBar(BarNameTextBox.Text + barId, double.Parse(BarValueTextBox.Text));
                 barId++;
+                var val = double.Parse(BarValueTextBox.Text) + (barId * 5);
+                BarValueTextBox.Text = val.ToString();
             }
             catch (System.Exception)
             {
