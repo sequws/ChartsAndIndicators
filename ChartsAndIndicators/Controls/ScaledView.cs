@@ -29,7 +29,7 @@ namespace Controls
 
         double barMaxWidth = 80;
         double barMinMargin = 5;
-        double textHeight = 22;
+        double textHeight = 10;
 
         Dictionary<string, double> barValues = new Dictionary<string, double>();
 
@@ -112,9 +112,11 @@ namespace Controls
                 text.Width = barW + 2*barMinMargin;
                 text.TextAlignment = TextAlignment.Center;
                 text.Text = $"{bar.Key}\n{ bar.Value.ToString("N1")}";
+                text.FontSize = textHeight;
 
                 Canvas.SetLeft(text, barX - barMinMargin);
-                Canvas.SetTop(text, bar.Value <= 0 ? lineZeroY - 2*textHeight : lineZeroY );
+                Canvas.SetTop(text, bar.Value <= 0 ? lineZeroY - 2*(textHeight+4) : lineZeroY );
+                text.Visibility = text.Width < 4 * 8 ? Visibility.Hidden : Visibility.Visible;
 
                 _canvas.Children.Add(rect);
                 _canvas.Children.Add(text);
