@@ -31,6 +31,9 @@ namespace Controls
         double barMinMargin = 5;
         double textHeight = 10;
 
+        double minH = 0;
+        double maxH = 0;
+
         Dictionary<string, double> barValues = new Dictionary<string, double>();
 
         public ScaledView(Canvas canvas)
@@ -45,8 +48,8 @@ namespace Controls
             ctrlWidth = _canvas.ActualWidth;
             canvasWidth = ctrlWidth- 2*margin;
 
-            var maxH = barValues.Max(x => x.Value);
-            var minH = barValues.Min(x => x.Value);
+            maxH = barValues.Max(x => x.Value);
+            minH = barValues.Min(x => x.Value);
             viewMaxH = minH < 0 ? maxH + Math.Abs( minH) : maxH;
 
             Scale = canvasHeight / viewMaxH;
@@ -78,6 +81,7 @@ namespace Controls
             _canvas.Children.Add(rect);
 
             DrawScaledBars(barValues);
+            DrawAxisY();
         }
 
         public void DrawScaledBars(Dictionary<string, double> barValues)
@@ -123,6 +127,20 @@ namespace Controls
 
                 i++;
             }
+        }
+
+        private void DrawAxisY()
+        {
+            Line axisY = new Line();
+            axisY.Stroke = Brushes.Black;
+            axisY.StrokeThickness = 1;
+
+            axisY.X1 = 10;
+            axisY.X2 = 10;
+            axisY.Y1 = lineZeroY -  minH * Scale;
+            axisY.Y2 = lineZeroY - maxH * Scale;
+
+            _canvas.Children.Add(axisY);
         }
     }
 }
