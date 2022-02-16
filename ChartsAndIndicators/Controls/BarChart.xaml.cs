@@ -20,6 +20,23 @@ namespace Controls
             set => SetField(ref _chartName, value);
         }
 
+        private bool _isValueVIsible;
+
+        public bool IsValueVisible
+        {
+            get =>_isValueVIsible;
+            set => SetField(ref _isValueVIsible, value);
+        }
+
+        private bool _isDescVisible;
+
+        public bool IsDescVisible
+        {
+            get =>_isDescVisible;
+            set => SetField(ref _isDescVisible, value);
+        }
+
+
         private Dictionary<string,double> _barValues = new Dictionary<string, double>();
 
         public Dictionary<string,double> BarValues
