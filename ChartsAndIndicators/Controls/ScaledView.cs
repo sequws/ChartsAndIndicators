@@ -43,6 +43,8 @@ namespace Controls
 
         public void Draw(Dictionary<string, double> barValues, int margin = 5)
         {
+            if (barValues.Count == 0) return;
+
             ctrlHeight = _canvas.ActualHeight;
             canvasHeight = ctrlHeight- 2*margin;
             ctrlWidth = _canvas.ActualWidth;
@@ -55,7 +57,7 @@ namespace Controls
             Scale = canvasHeight / viewMaxH;
             var lineXratio = minH < 0 ? Math.Abs(( maxH + Math.Abs(minH)) / minH) : 1;
 
-            lineZeroY = canvasHeight - (canvasHeight / lineXratio);
+            lineZeroY = lineXratio > 0 ? canvasHeight - (canvasHeight / lineXratio) : 0;
             centerX = ctrlWidth / 2;
 
             _canvas.Children.Clear();
