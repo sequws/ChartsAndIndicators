@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded"
-             MinWidth="20" Width="Auto">
+             MinWidth="100" MinHeight="100" Width="Auto">
     <Grid SizeChanged="Grid_SizeChanged">
-        <Border BorderBrush="Black" Background="Wheat" BorderThickness="2" CornerRadius="15" >
+        <Border BorderBrush="Black" Background="Wheat" BorderThickness="2" CornerRadius="15">
             <DockPanel  >
                 <Label DockPanel.Dock="Top" FontSize="14" FontWeight="Bold" Content="{Binding ChartName}" Margin="2"></Label>
-                <Canvas x:Name="MainCanvas"   MinWidth="40" MinHeight="40" />
+                <Canvas x:Name="MainCanvas" Margin="20" />
             </DockPanel>
         </Border>
     </Grid>

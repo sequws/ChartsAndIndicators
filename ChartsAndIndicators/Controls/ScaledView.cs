@@ -41,14 +41,14 @@ namespace Controls
             _canvas = canvas;
         }
 
-        public void Draw(Dictionary<string, double> barValues, int margin = 5)
+        public void Draw(Dictionary<string, double> barValues, int margin = 0)
         {
             if (barValues.Count == 0) return;
 
             ctrlHeight = _canvas.ActualHeight;
-            canvasHeight = ctrlHeight- 2*margin;
+            canvasHeight = ctrlHeight - 2*margin;
             ctrlWidth = _canvas.ActualWidth;
-            canvasWidth = ctrlWidth- 2*margin;
+            canvasWidth = ctrlWidth - 2*margin;
 
             maxH = Math.Max( barValues.Max(x => x.Value), 0);
             minH = Math.Min( barValues.Min(x => x.Value), 0);
