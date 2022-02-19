@@ -50,14 +50,15 @@ namespace Controls
             ctrlWidth = _canvas.ActualWidth;
             canvasWidth = ctrlWidth- 2*margin;
 
-            maxH = barValues.Max(x => x.Value);
-            minH = barValues.Min(x => x.Value);
+            maxH = Math.Max( barValues.Max(x => x.Value), 0);
+            minH = Math.Min( barValues.Min(x => x.Value), 0);
             viewMaxH = minH < 0 ? maxH + Math.Abs( minH) : maxH;
 
             Scale = canvasHeight / viewMaxH;
             var lineXratio = minH < 0 ? Math.Abs(( maxH + Math.Abs(minH)) / minH) : 1;
 
-            lineZeroY = lineXratio > 0 ? canvasHeight - (canvasHeight / lineXratio) : 0;
+            lineZeroY = lineXratio > 1 ? canvasHeight - (canvasHeight / lineXratio) : 
+                minH < 0 ? 0 : viewMaxH * Scale;
             centerX = ctrlWidth / 2;
 
             _canvas.Children.Clear();
