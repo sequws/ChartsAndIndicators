@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 namespace Sample.Views
 {
@@ -33,6 +34,18 @@ namespace Sample.Views
                 throw;
             }
             
+        }
+
+        private void RandomBarButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Random rnd = new Random();
+            MainBarChart.Reset();
+
+            int bars = rnd.Next(3, 10);
+            for(int i = 0; i < bars; i++)
+            {
+                MainBarChart.AddBar(BarNameTextBox.Text + i, rnd.Next(-200,200));
+            }
         }
     }
 }

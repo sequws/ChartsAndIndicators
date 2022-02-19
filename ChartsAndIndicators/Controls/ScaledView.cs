@@ -72,17 +72,6 @@ namespace Controls
             lineZero.StrokeThickness = 2;
 
             _canvas.Children.Add(lineZero);
-
-            Rectangle rect = new Rectangle();
-            rect.Height = 4;
-            rect.Width = 4;
-            rect.Stroke = Brushes.Red;
-            rect.StrokeThickness = 2;
-            Canvas.SetLeft(rect, 100);
-            Canvas.SetTop(rect, 100);
-
-            _canvas.Children.Add(rect);
-
             DrawScaledBars(barValues);
             DrawAxisY();
         }

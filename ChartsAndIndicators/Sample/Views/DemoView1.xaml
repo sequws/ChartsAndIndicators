@@ -14,9 +14,10 @@
             <!--<Label Content="{Binding Info}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>-->
             <Button x:Name="AddBarButton" Content="Add bar" Width="100" Margin="2" Click="AddBarButton_Click"></Button>
             <TextBox x:Name="BarNameTextBox" Text="bar" Width="100"></TextBox>
-            <TextBox x:Name="BarValueTextBox" Text="100" Width="100"></TextBox>            
+            <TextBox x:Name="BarValueTextBox" Text="100" Width="100"></TextBox>
+            <Button x:Name="RandomBarButton" Content="Random bars" Width="100" Margin="2" Click="RandomBarButton_Click"></Button>
         </StackPanel>
-       
+        <StackPanel Height="20" DockPanel.Dock="Bottom"></StackPanel>
         <controls:BarChart x:Name="MainBarChart"></controls:BarChart>
     </DockPanel>
 </UserControl>
