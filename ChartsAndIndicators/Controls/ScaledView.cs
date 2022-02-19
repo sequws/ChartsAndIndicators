@@ -14,13 +14,12 @@ namespace Controls
     {
         public double Scale { get; set; }
         public Point Center { get; set; }
+        public double FixedMinH { get; set; } = 100;
+        public double FixedMaxH { get; set; } = 100;
 
         private double ctrlWidth = 0;
         private double ctrlHeight = 0;
-        private double ctrlX = 0;
-        private double ctrlY = 0;
         double viewMaxH = 0;
-        double viewMaxW = 0;
         double lineZeroY = 0;
         double centerX = 0;
         Canvas _canvas;
@@ -33,8 +32,6 @@ namespace Controls
 
         double minH = 0;
         double maxH = 0;
-
-        Dictionary<string, double> barValues = new Dictionary<string, double>();
 
         public ScaledView(Canvas canvas)
         {
