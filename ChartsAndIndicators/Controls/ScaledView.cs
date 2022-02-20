@@ -19,7 +19,7 @@ namespace Controls
 
         private double ctrlWidth = 0;
         private double ctrlHeight = 0;
-        double viewMaxH = 0;
+        double viewFullHeight = 0;
         double lineZeroY = 0;
         double centerX = 0;
         Canvas _canvas;
@@ -49,13 +49,13 @@ namespace Controls
 
             maxH = Math.Max( barValues.Max(x => x.Value), 0);
             minH = Math.Min( barValues.Min(x => x.Value), 0);
-            viewMaxH = minH < 0 ? maxH + Math.Abs( minH) : maxH;
+            viewFullHeight = minH < 0 ? maxH + Math.Abs( minH) : maxH;
 
-            Scale = canvasHeight / viewMaxH;
+            Scale = canvasHeight / viewFullHeight;
             var lineXratio = minH < 0 ? Math.Abs(( maxH + Math.Abs(minH)) / minH) : 1;
 
             lineZeroY = lineXratio > 1 ? canvasHeight - (canvasHeight / lineXratio) : 
-                minH < 0 ? 0 : viewMaxH * Scale;
+                minH < 0 ? 0 : viewFullHeight * Scale;
             centerX = ctrlWidth / 2;
 
             _canvas.Children.Clear();
@@ -124,12 +124,48 @@ namespace Controls
             axisY.Stroke = Brushes.Black;
             axisY.StrokeThickness = 1;
 
-            axisY.X1 = 10;
-            axisY.X2 = 10;
+            axisY.X1 = 0;
+            axisY.X2 = 0;
             axisY.Y1 = lineZeroY -  minH * Scale;
             axisY.Y2 = lineZeroY - maxH * Scale;
 
+            // top and bottom line
+            Line stepTop = new Line();
+            stepTop.Stroke = Brushes.Black;
+            stepTop.StrokeThickness = 1;
+            stepTop.X1 = 0;
+            stepTop.X2 = 10;
+            stepTop.Y1 = lineZeroY - maxH * Scale;
+            stepTop.Y2 = stepTop.Y1;
+
+            Line stepBottom = new Line();
+            stepBottom.Stroke = Brushes.Black;
+            stepBottom.StrokeThickness = 1;
+            stepBottom.X1 = 0;
+            stepBottom.X2 = 10;
+            stepBottom.Y1 = lineZeroY - minH * Scale;
+            stepBottom.Y2 = stepBottom.Y1;
+
             _canvas.Children.Add(axisY);
+            _canvas.Children.Add(stepTop);
+            _canvas.Children.Add(stepBottom);
+
+            var steps = 10;
+            var stepH = (maxH - minH) * Scale / steps;
+            var stepBottomY = lineZeroY - minH * Scale;
+
+            for (int i = 1; i < steps; i++)
+            {
+                Line step = new Line();
+                step.Stroke = Brushes.Black;
+                step.StrokeThickness = 1;
+                step.X1 = 0;
+                step.X2 = 10;
+                step.Y1 = stepBottomY - i*stepH;
+                step.Y2 = step.Y1;
+
+                _canvas.Children.Add(step);
+            }
         }
     }
 }
