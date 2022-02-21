@@ -170,6 +170,24 @@ namespace Controls
 
                 _canvas.Children.Add(step);
             }
+
+            var text = new TextBlock();
+            text.TextWrapping = TextWrapping.Wrap;
+            text.Text = $"{ maxH.ToString("N1")}";
+            text.FontSize = textHeight;
+            Canvas.SetLeft(text, stepTop.X2);
+            Canvas.SetTop(text, stepTop.Y2 - textHeight /2);
+
+            var text2 = new TextBlock();
+            text2.TextWrapping = TextWrapping.Wrap;
+            text2.Text = $"{ minH.ToString("N1")}";
+            text2.FontSize = textHeight;
+            Canvas.SetLeft(text2, stepBottom.X2);
+            Canvas.SetTop(text2, stepBottom.Y2 - textHeight /2);
+
+            _canvas.Children.Add(text);
+            _canvas.Children.Add(text2);
+
         }
     }
 }
