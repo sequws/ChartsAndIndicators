@@ -14,8 +14,8 @@ namespace Controls
     {
         public double Scale { get; set; }
         public Point Center { get; set; }
-        public double FixedMinH { get; set; } = 100;
-        public double FixedMaxH { get; set; } = 100;
+        public double FixedMinH { get; set; } = -1;
+        public double FixedMaxH { get; set; } = 1;
 
         private double ctrlWidth = 0;
         private double ctrlHeight = 0;
@@ -47,8 +47,12 @@ namespace Controls
             ctrlWidth = _canvas.ActualWidth;
             canvasWidth = ctrlWidth - 2*margin;
 
-            maxH = Math.Max( barValues.Max(x => x.Value), 0);
-            minH = Math.Min( barValues.Min(x => x.Value), 0);
+            maxH = Math.Max( barValues.Max(x => x.Value), FixedMaxH);
+            minH = Math.Min( barValues.Min(x => x.Value), FixedMinH);
+
+            if (maxH == 0) maxH = 1;
+            if (minH == 0) minH = -1;
+
             viewFullHeight = minH < 0 ? maxH + Math.Abs( minH) : maxH;
 
             Scale = canvasHeight / viewFullHeight;
