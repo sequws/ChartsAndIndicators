@@ -154,6 +154,10 @@ namespace Controls
             _canvas.Children.Add(stepTop);
             _canvas.Children.Add(stepBottom);
 
+
+            var highTenthVal = GetYAxisMax(maxH);
+            var lowTenthVal = GetYAxisMin(minH);
+
             var steps = 10;
             var stepH = (maxH - minH) * Scale / steps;
             var stepBottomY = lineZeroY - minH * Scale;
@@ -174,13 +178,16 @@ namespace Controls
             var text = new TextBlock();
             text.TextWrapping = TextWrapping.Wrap;
             text.Text = $"{ maxH.ToString("N1")}";
+            text.Text = $"{ highTenthVal.ToString("N1")}";
+
             text.FontSize = textHeight;
             Canvas.SetLeft(text, stepTop.X2);
             Canvas.SetTop(text, stepTop.Y2 - textHeight /2);
 
             var text2 = new TextBlock();
             text2.TextWrapping = TextWrapping.Wrap;
-            text2.Text = $"{ minH.ToString("N1")}";
+            //text2.Text = $"{ minH.ToString("N1")}";
+            text2.Text = $"{ lowTenthVal.ToString("N1")}";
             text2.FontSize = textHeight;
             Canvas.SetLeft(text2, stepBottom.X2);
             Canvas.SetTop(text2, stepBottom.Y2 - textHeight /2);
@@ -188,6 +195,29 @@ namespace Controls
             _canvas.Children.Add(text);
             _canvas.Children.Add(text2);
 
+        }
+
+
+        /// <summary>
+        /// Returns first narest rounded to ten value
+        /// </summary>
+        private double GetYAxisMax(double barMax)
+        {
+            var maxTenth = (int)(barMax / 10) * 10;
+            if (barMax % 10 != 0) maxTenth += 10;
+
+            return maxTenth;
+        }
+
+        /// <summary>
+        /// Returns minimal first rounded to ten value
+        /// </summary>
+        private double GetYAxisMin(double barMin)
+        {
+            var minTenth = (int)(barMin / 10) * 10;
+            if (barMin % 10 != 0) minTenth -= 10;
+
+            return minTenth;
         }
     }
 }
