@@ -33,6 +33,9 @@ namespace Controls
         double minH = 0;
         double maxH = 0;
 
+        int yAxisSteps = 0;
+        int yStepMin = 0;
+
         public ScaledView(Canvas canvas)
         {
             _canvas = canvas;
@@ -47,15 +50,22 @@ namespace Controls
             ctrlWidth = _canvas.ActualWidth;
             canvasWidth = ctrlWidth - 2*margin;
 
-            maxH = Math.Max( barValues.Max(x => x.Value), FixedMaxH);
-            minH = Math.Min( barValues.Min(x => x.Value), FixedMinH);
+            var barMaxH = Math.Max(barValues.Max(x => x.Value), FixedMaxH);
+            var barMinH = Math.Min(barValues.Min(x => x.Value), FixedMinH);
+
+            maxH = GetYAxisMax(barMaxH); // Math.Max( barValues.Max(x => x.Value), FixedMaxH);
+            minH = GetYAxisMin(barMinH); // Math.Min( barValues.Min(x => x.Value), FixedMinH);
+            yAxisSteps = (int)((maxH + Math.Abs( minH)) / 10)+1;
+
+            yStepMin = (int)minH / 10;
 
             if (maxH == 0) maxH = 1;
             if (minH == 0) minH = -1;
 
             viewFullHeight = minH < 0 ? maxH + Math.Abs( minH) : maxH;
-
             Scale = canvasHeight / viewFullHeight;
+
+
             var lineXratio = minH < 0 ? Math.Abs(( maxH + Math.Abs(minH)) / minH) : 1;
 
             lineZeroY = lineXratio > 1 ? canvasHeight - (canvasHeight / lineXratio) : 
@@ -72,9 +82,9 @@ namespace Controls
             lineZero.Stroke = Brushes.Fuchsia;
             lineZero.StrokeThickness = 2;
 
-            _canvas.Children.Add(lineZero);
-            DrawScaledBars(barValues);
+            _canvas.Children.Add(lineZero);            
             DrawAxisY();
+            DrawScaledBars(barValues);
         }
 
         public void DrawScaledBars(Dictionary<string, double> barValues)
@@ -125,51 +135,31 @@ namespace Controls
         private void DrawAxisY()
         {
             Line axisY = new Line();
-            axisY.Stroke = Brushes.Black;
-            axisY.StrokeThickness = 1;
-
             axisY.X1 = 0;
             axisY.X2 = 0;
-            axisY.Y1 = lineZeroY -  minH * Scale;
+            axisY.Y1 = lineZeroY - minH * Scale;
             axisY.Y2 = lineZeroY - maxH * Scale;
-
-            // top and bottom line
-            Line stepTop = new Line();
-            stepTop.Stroke = Brushes.Black;
-            stepTop.StrokeThickness = 1;
-            stepTop.X1 = 0;
-            stepTop.X2 = 10;
-            stepTop.Y1 = lineZeroY - maxH * Scale;
-            stepTop.Y2 = stepTop.Y1;
-
-            Line stepBottom = new Line();
-            stepBottom.Stroke = Brushes.Black;
-            stepBottom.StrokeThickness = 1;
-            stepBottom.X1 = 0;
-            stepBottom.X2 = 10;
-            stepBottom.Y1 = lineZeroY - minH * Scale;
-            stepBottom.Y2 = stepBottom.Y1;
-
+            axisY.Stroke = Brushes.Black;
+            axisY.StrokeThickness = 1;            
             _canvas.Children.Add(axisY);
-            _canvas.Children.Add(stepTop);
-            _canvas.Children.Add(stepBottom);
 
+            var steps = yAxisSteps;
+            var stepH = viewFullHeight * Scale / (steps-1);
+            
+            var stepBottomY = lineZeroY - yStepMin * stepH;
 
-            var highTenthVal = GetYAxisMax(maxH);
-            var lowTenthVal = GetYAxisMin(minH);
-
-            var steps = 10;
-            var stepH = (maxH - minH) * Scale / steps;
-            var stepBottomY = lineZeroY - minH * Scale;
-
-            for (int i = 1; i < steps; i++)
+            for (int i = 0; i < steps; i++)
             {
                 Line step = new Line();
-                step.Stroke = Brushes.Black;
+                step.Stroke = Brushes.Gray;
                 step.StrokeThickness = 1;
+                var dashArray = new DoubleCollection();
+                dashArray.Add(2);
+                dashArray.Add(2);
+                step.StrokeDashArray = dashArray;
                 step.X1 = 0;
-                step.X2 = 10;
-                step.Y1 = stepBottomY - i*stepH;
+                step.X2 = canvasWidth;// 10;
+                step.Y1 = stepBottomY - i * stepH;
                 step.Y2 = step.Y1;
 
                 _canvas.Children.Add(step);
@@ -178,25 +168,22 @@ namespace Controls
             var text = new TextBlock();
             text.TextWrapping = TextWrapping.Wrap;
             text.Text = $"{ maxH.ToString("N1")}";
-            text.Text = $"{ highTenthVal.ToString("N1")}";
 
             text.FontSize = textHeight;
-            Canvas.SetLeft(text, stepTop.X2);
-            Canvas.SetTop(text, stepTop.Y2 - textHeight /2);
+            Canvas.SetLeft(text, 10);
+            Canvas.SetTop(text, lineZeroY - maxH * Scale - textHeight );
 
             var text2 = new TextBlock();
             text2.TextWrapping = TextWrapping.Wrap;
-            //text2.Text = $"{ minH.ToString("N1")}";
-            text2.Text = $"{ lowTenthVal.ToString("N1")}";
+            text2.Text = $"{ minH.ToString("N1")}";
+
             text2.FontSize = textHeight;
-            Canvas.SetLeft(text2, stepBottom.X2);
-            Canvas.SetTop(text2, stepBottom.Y2 - textHeight /2);
+            Canvas.SetLeft(text2, 10);
+            Canvas.SetTop(text2, lineZeroY - minH * Scale - textHeight );
 
             _canvas.Children.Add(text);
             _canvas.Children.Add(text2);
-
         }
-
 
         /// <summary>
         /// Returns first narest rounded to ten value
