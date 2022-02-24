@@ -34,7 +34,9 @@ namespace Controls
         double maxH = 0;
 
         int yAxisSteps = 0;
-        int yStepMin = 0;
+        int yLastStep = 0;
+
+        int stepHeightPix = 50;
 
         public ScaledView(Canvas canvas)
         {
@@ -53,11 +55,11 @@ namespace Controls
             var barMaxH = Math.Max(barValues.Max(x => x.Value), FixedMaxH);
             var barMinH = Math.Min(barValues.Min(x => x.Value), FixedMinH);
 
-            maxH = GetYAxisMax(barMaxH); // Math.Max( barValues.Max(x => x.Value), FixedMaxH);
-            minH = GetYAxisMin(barMinH); // Math.Min( barValues.Min(x => x.Value), FixedMinH);
-            yAxisSteps = (int)((maxH + Math.Abs( minH)) / 10)+1;
+            maxH = GetYAxisMax(barMaxH, stepHeightPix); 
+            minH = GetYAxisMin(barMinH, stepHeightPix); 
+            yAxisSteps = (int)((maxH + Math.Abs( minH)) / stepHeightPix) +1;
 
-            yStepMin = (int)minH / 10;
+            yLastStep = (int)minH / stepHeightPix;
 
             if (maxH == 0) maxH = 1;
             if (minH == 0) minH = -1;
@@ -145,13 +147,13 @@ namespace Controls
 
             var steps = yAxisSteps;
             var stepH = viewFullHeight * Scale / (steps-1);
-            
-            var stepBottomY = lineZeroY - yStepMin * stepH;
+
+            var stepBottomY = lineZeroY - yLastStep * stepH;
 
             for (int i = 0; i < steps; i++)
             {
                 Line step = new Line();
-                step.Stroke = Brushes.Gray;
+                step.Stroke = Brushes.LightGray;
                 step.StrokeThickness = 1;
                 var dashArray = new DoubleCollection();
                 dashArray.Add(2);
@@ -203,6 +205,28 @@ namespace Controls
         {
             var minTenth = (int)(barMin / 10) * 10;
             if (barMin % 10 != 0) minTenth -= 10;
+
+            return minTenth;
+        }
+
+        /// <summary>
+        /// Returns first narest rounded to ten value
+        /// </summary>
+        private double GetYAxisMax(double barMax, int roundedTo = 10)
+        {
+            var maxTenth = (int)(barMax / roundedTo) * roundedTo;
+            if (barMax % roundedTo != 0) maxTenth += roundedTo;
+
+            return maxTenth;
+        }
+
+        /// <summary>
+        /// Returns minimal first rounded to ten value
+        /// </summary>
+        private double GetYAxisMin(double barMin, int roundedTo = 10)
+        {
+            var minTenth = (int)(barMin / roundedTo) * roundedTo;
+            if (barMin % roundedTo != 0) minTenth -= roundedTo;
 
             return minTenth;
         }
