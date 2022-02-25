@@ -55,8 +55,10 @@ namespace Controls
             var barMaxH = Math.Max(barValues.Max(x => x.Value), FixedMaxH);
             var barMinH = Math.Min(barValues.Min(x => x.Value), FixedMinH);
 
-            maxH = GetYAxisMax(barMaxH, stepHeightPix); 
-            minH = GetYAxisMin(barMinH, stepHeightPix); 
+            stepHeightPix = CalcStepHeight(barMinH, barMaxH,20);
+
+            maxH = RoundToFirstPlus(barMaxH, stepHeightPix); 
+            minH = RoundToFirstMinus(barMinH, stepHeightPix); 
             yAxisSteps = (int)((maxH + Math.Abs( minH)) / stepHeightPix) +1;
 
             yLastStep = (int)minH / stepHeightPix;
@@ -209,10 +211,22 @@ namespace Controls
             return minTenth;
         }
 
+        private int CalcStepHeight(double min, double max, int maxSteps = 10)
+        {
+            int stepHeigh = 0;
+
+            var cmax = RoundToFirstPlus(max);
+            var cmin = RoundToFirstMinus(min);
+
+            stepHeigh = RoundToFirstPlus((cmax + Math.Abs(cmin)) / maxSteps);
+
+            return stepHeigh;
+        }
+
         /// <summary>
         /// Returns first narest rounded to ten value
         /// </summary>
-        private double GetYAxisMax(double barMax, int roundedTo = 10)
+        private int RoundToFirstPlus(double barMax, int roundedTo = 10)
         {
             var maxTenth = (int)(barMax / roundedTo) * roundedTo;
             if (barMax % roundedTo != 0) maxTenth += roundedTo;
@@ -223,7 +237,7 @@ namespace Controls
         /// <summary>
         /// Returns minimal first rounded to ten value
         /// </summary>
-        private double GetYAxisMin(double barMin, int roundedTo = 10)
+        private int RoundToFirstMinus(double barMin, int roundedTo = 10)
         {
             var minTenth = (int)(barMin / roundedTo) * roundedTo;
             if (barMin % roundedTo != 0) minTenth -= roundedTo;
