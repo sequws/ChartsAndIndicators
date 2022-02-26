@@ -89,6 +89,7 @@ namespace Controls
             _canvas.Children.Add(lineZero);            
             DrawAxisY();
             DrawScaledBars(barValues);
+            DrawAxisYText();
         }
 
         public void DrawScaledBars(Dictionary<string, double> barValues)
@@ -168,23 +169,33 @@ namespace Controls
 
                 _canvas.Children.Add(step);
             }
+        }
 
+        private void DrawAxisYText(int marginLeft = 10, int marginTop = 14)
+        {
             var text = new TextBlock();
             text.TextWrapping = TextWrapping.Wrap;
             text.Text = $"{ maxH.ToString("N1")}";
 
             text.FontSize = textHeight;
-            Canvas.SetLeft(text, 10);
-            Canvas.SetTop(text, lineZeroY - maxH * Scale - textHeight );
+            Canvas.SetLeft(text, marginLeft);
+            Canvas.SetTop(text, lineZeroY - maxH * Scale - marginTop);
 
             var text2 = new TextBlock();
             text2.TextWrapping = TextWrapping.Wrap;
             text2.Text = $"{ minH.ToString("N1")}";
 
             text2.FontSize = textHeight;
-            Canvas.SetLeft(text2, 10);
-            Canvas.SetTop(text2, lineZeroY - minH * Scale - textHeight );
+            Canvas.SetLeft(text2, marginLeft);
+            Canvas.SetTop(text2, lineZeroY - minH * Scale - marginTop);
 
+            var text0 = new TextBlock();
+            text0.Text = $"0";
+            text0.FontSize = textHeight;
+            Canvas.SetLeft(text0, marginLeft);
+            Canvas.SetTop(text0, lineZeroY - marginTop);
+
+            _canvas.Children.Add(text0);
             _canvas.Children.Add(text);
             _canvas.Children.Add(text2);
         }
