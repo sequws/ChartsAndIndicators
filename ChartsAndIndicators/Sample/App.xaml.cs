@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Regions;
 using Sample.Views;
 using System.Threading;
 using System.Windows;
@@ -20,10 +21,18 @@ namespace Sample
             return Container.Resolve<MainWindow>();
         }
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            var regionManager = Container.Resolve<IRegionManager>();
+            regionManager.RegisterViewWithRegion("ContentRegion", typeof(LineChartDemo));
+        }
+
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            //containerRegistry.RegisterForNavigation<DemoView1>("Demo1View"); register in MainWindow with region
-
+            containerRegistry.RegisterForNavigation<DemoView1>("Demo1View"); 
+            containerRegistry.RegisterForNavigation<LineChartDemo>("LineChartDemo");
         }
 
         protected override void OnStartup(StartupEventArgs e)

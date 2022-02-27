@@ -51,6 +51,9 @@
     <Compile Include="BarChart.xaml.cs">
       <DependentUpon>BarChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LineChart.xaml.cs">
+      <DependentUpon>LineChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -76,6 +79,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="BarChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LineChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
