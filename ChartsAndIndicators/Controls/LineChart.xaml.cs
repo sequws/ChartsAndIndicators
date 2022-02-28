@@ -29,16 +29,21 @@ namespace Controls
             set => SetField(ref _chartName, value);
         }
 
+        ScaleCalculator scaleCalculator;
+
         public LineChart()
         {
             InitializeComponent();
 
             DataContext = this;
+
+            scaleCalculator = new ScaleCalculator(MainCanvas);
+            scaleCalculator.CalculateScale(-50, 100, 2);
         }
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
+            scaleCalculator.CalculateScale(-50, 100, 2);
         }
 
         #region INotifyPropertyChanged
