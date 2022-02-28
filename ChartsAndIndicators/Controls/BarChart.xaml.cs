@@ -49,7 +49,7 @@ namespace Controls
         }
 
         ScaledView scaledView;
-        
+
         public BarChart()
         {
             InitializeComponent();
