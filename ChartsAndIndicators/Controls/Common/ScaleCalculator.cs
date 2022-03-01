@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Controls
+namespace Controls.Common
 {
     /// <summary>
     /// Scale Calculator - calculates scale, for given min/max. 
@@ -41,6 +41,7 @@ namespace Controls
         int stepHeightPix = 50;
 
         public int MaxStepsOnYAxis { get; set; } = 20;
+        public int TextHeight { get; set; } = 10;
 
         public ScaleCalculator(Canvas canvas, int margin = 0)
         {
@@ -87,6 +88,7 @@ namespace Controls
 
             DrawLineZero();
             DrawAxisY();
+            DrawAxisYText();
         }
 
         private void DrawLineZero()
@@ -138,6 +140,34 @@ namespace Controls
             }
         }
 
+        private void DrawAxisYText(int marginLeft = 10, int marginTop = 14)
+        {
+            var text = new TextBlock();
+            text.TextWrapping = TextWrapping.Wrap;
+            text.Text = $"{ maxH.ToString("N1")}";
+
+            text.FontSize = TextHeight;
+            Canvas.SetLeft(text, marginLeft);
+            Canvas.SetTop(text, lineZeroY - maxH * Scale - marginTop);
+
+            var text2 = new TextBlock();
+            text2.TextWrapping = TextWrapping.Wrap;
+            text2.Text = $"{ minH.ToString("N1")}";
+
+            text2.FontSize = TextHeight;
+            Canvas.SetLeft(text2, marginLeft);
+            Canvas.SetTop(text2, lineZeroY - minH * Scale - marginTop);
+
+            var text0 = new TextBlock();
+            text0.Text = $"0";
+            text0.FontSize = TextHeight;
+            Canvas.SetLeft(text0, marginLeft);
+            Canvas.SetTop(text0, lineZeroY - marginTop);
+
+            _canvas.Children.Add(text0);
+            _canvas.Children.Add(text);
+            _canvas.Children.Add(text2);
+        }
 
         #region helpers metod
 
