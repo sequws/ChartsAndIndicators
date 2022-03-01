@@ -24,16 +24,17 @@ namespace Controls.Common
         private double ctrlWidth = 0;
         private double ctrlHeight = 0;
         double viewFullHeight = 0;
-        double lineZeroY = 0;
-        double centerX = 0;
+        double _lineZeroY = 0;
 
         Canvas _canvas;
-        double _canvasMargin;
+        double _canvasMargin = 10;
+
+
         double canvasWidth;
         double canvasHeight;
 
-        double minH = 0;
-        double maxH = 0;
+        double _minH = 0;
+        double _maxH = 0;
 
         int yAxisSteps = 0;
         int yLastStep = 0;
@@ -42,6 +43,15 @@ namespace Controls.Common
 
         public int MaxStepsOnYAxis { get; set; } = 20;
         public int TextHeight { get; set; } = 10;
+
+        public double CanvasMargin => _canvasMargin;
+        public double LineZeroY => _lineZeroY;
+        public double MinH => _minH;
+        public double MaxH => _maxH;
+        public int LastStepY => yLastStep;
+        public int AxisYStepsNum => yAxisSteps;
+
+        public double ViewFullHeight => viewFullHeight;
 
         public ScaleCalculator(Canvas canvas, int margin = 0)
         {
@@ -68,106 +78,24 @@ namespace Controls.Common
             var barMinH = Math.Min(min, FixedMinH);
             stepHeightPix = CalcStepHeight(barMinH, barMaxH, MaxStepsOnYAxis);
 
-            maxH = RoundToFirstPlus(barMaxH, stepHeightPix);
-            minH = RoundToFirstMinus(barMinH, stepHeightPix);
-            yAxisSteps = (int)((maxH + Math.Abs(minH)) / stepHeightPix) + 1;
+            _maxH = RoundToFirstPlus(barMaxH, stepHeightPix);
+            _minH = RoundToFirstMinus(barMinH, stepHeightPix);
+            yAxisSteps = (int)((_maxH + Math.Abs(_minH)) / stepHeightPix) + 1;
 
-            yLastStep = (int)minH / stepHeightPix;
+            yLastStep = (int)_minH / stepHeightPix;
 
-            if (maxH == 0) maxH = 1;
-            if (minH == 0) minH = -1;
+            if (_maxH == 0) _maxH = 1;
+            if (_minH == 0) _minH = -1;
 
-            viewFullHeight = minH < 0 ? maxH + Math.Abs(minH) : maxH;
+            viewFullHeight = _minH < 0 ? _maxH + Math.Abs(_minH) : _maxH;
             Scale = canvasHeight / viewFullHeight;
 
-            var lineXratio = minH < 0 ? Math.Abs((maxH + Math.Abs(minH)) / minH) : 1;
+            var lineXratio = _minH < 0 ? Math.Abs((_maxH + Math.Abs(_minH)) / _minH) : 1;
 
-            lineZeroY = lineXratio > 1 ? canvasHeight - (canvasHeight / lineXratio) :
-                minH < 0 ? 0 : viewFullHeight * Scale;
-            centerX = ctrlWidth / 2;
-
-            DrawLineZero();
-            DrawAxisY();
-            DrawAxisYText();
+            _lineZeroY = lineXratio > 1 ? canvasHeight - (canvasHeight / lineXratio) :
+                _minH < 0 ? 0 : viewFullHeight * Scale;
         }
 
-        private void DrawLineZero()
-        {
-            _canvas.Children.Clear();
-
-            Line lineZero = new Line();
-            lineZero.X1 = _canvasMargin;
-            lineZero.X2 = canvasWidth + _canvasMargin;
-            lineZero.Y1 = lineZeroY;
-            lineZero.Y2 = lineZeroY;
-            lineZero.Stroke = Brushes.Fuchsia;
-            lineZero.StrokeThickness = 2;
-
-            _canvas.Children.Add(lineZero);
-        }
-
-        private void DrawAxisY()
-        {
-            Line axisY = new Line();
-            axisY.X1 = 0;
-            axisY.X2 = 0;
-            axisY.Y1 = lineZeroY - minH * Scale;
-            axisY.Y2 = lineZeroY - maxH * Scale;
-            axisY.Stroke = Brushes.Black;
-            axisY.StrokeThickness = 1;
-            _canvas.Children.Add(axisY);
-
-            var steps = yAxisSteps;
-            var stepH = viewFullHeight * Scale / (steps - 1);
-
-            var stepBottomY = lineZeroY - yLastStep * stepH;
-
-            for (int i = 0; i < steps; i++)
-            {
-                Line step = new Line();
-                step.Stroke = Brushes.LightGray;
-                step.StrokeThickness = 1;
-                var dashArray = new DoubleCollection();
-                dashArray.Add(2);
-                dashArray.Add(2);
-                step.StrokeDashArray = dashArray;
-                step.X1 = 0;
-                step.X2 = canvasWidth;
-                step.Y1 = stepBottomY - i * stepH;
-                step.Y2 = step.Y1;
-
-                _canvas.Children.Add(step);
-            }
-        }
-
-        private void DrawAxisYText(int marginLeft = 10, int marginTop = 14)
-        {
-            var text = new TextBlock();
-            text.TextWrapping = TextWrapping.Wrap;
-            text.Text = $"{ maxH.ToString("N1")}";
-
-            text.FontSize = TextHeight;
-            Canvas.SetLeft(text, marginLeft);
-            Canvas.SetTop(text, lineZeroY - maxH * Scale - marginTop);
-
-            var text2 = new TextBlock();
-            text2.TextWrapping = TextWrapping.Wrap;
-            text2.Text = $"{ minH.ToString("N1")}";
-
-            text2.FontSize = TextHeight;
-            Canvas.SetLeft(text2, marginLeft);
-            Canvas.SetTop(text2, lineZeroY - minH * Scale - marginTop);
-
-            var text0 = new TextBlock();
-            text0.Text = $"0";
-            text0.FontSize = TextHeight;
-            Canvas.SetLeft(text0, marginLeft);
-            Canvas.SetTop(text0, lineZeroY - marginTop);
-
-            _canvas.Children.Add(text0);
-            _canvas.Children.Add(text);
-            _canvas.Children.Add(text2);
-        }
 
         #region helpers metod
 
