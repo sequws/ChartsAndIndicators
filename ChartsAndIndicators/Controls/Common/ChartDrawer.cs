@@ -15,7 +15,7 @@ namespace Controls.Common
     /// </summary>
     public class ChartDrawer
     {
-        ScaleCalculator _scaleCakculator;
+        ScaleCalculator _scaleCalculator;
         Canvas _canvas;
 
         // chart
@@ -24,11 +24,11 @@ namespace Controls.Common
 
         public ChartDrawer(ScaleCalculator scaleCalculator, Canvas canvas)
         {
-            _scaleCakculator = scaleCalculator;
+            _scaleCalculator = scaleCalculator;
             _canvas = canvas;
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
             canvasWidth = _canvas.ActualWidth;
 
@@ -42,10 +42,10 @@ namespace Controls.Common
             _canvas.Children.Clear();
 
             Line lineZero = new Line();
-            lineZero.X1 = _scaleCakculator.CanvasMargin;
-            lineZero.X2 = canvasWidth + _scaleCakculator.CanvasMargin;
-            lineZero.Y1 = _scaleCakculator.LineZeroY;
-            lineZero.Y2 = _scaleCakculator.LineZeroY;
+            lineZero.X1 = _scaleCalculator.CanvasMargin;
+            lineZero.X2 = canvasWidth + _scaleCalculator.CanvasMargin;
+            lineZero.Y1 = _scaleCalculator.LineZeroY;
+            lineZero.Y2 = _scaleCalculator.LineZeroY;
             lineZero.Stroke = Brushes.Fuchsia;
             lineZero.StrokeThickness = 2;
 
@@ -57,16 +57,16 @@ namespace Controls.Common
             Line axisY = new Line();
             axisY.X1 = 0;
             axisY.X2 = 0;
-            axisY.Y1 = _scaleCakculator.LineZeroY - _scaleCakculator.MinH * _scaleCakculator.Scale;
-            axisY.Y2 = _scaleCakculator.LineZeroY - _scaleCakculator.MaxH * _scaleCakculator.Scale;
+            axisY.Y1 = _scaleCalculator.LineZeroY - _scaleCalculator.MinH * _scaleCalculator.Scale;
+            axisY.Y2 = _scaleCalculator.LineZeroY - _scaleCalculator.MaxH * _scaleCalculator.Scale;
             axisY.Stroke = Brushes.Black;
             axisY.StrokeThickness = 1;
             _canvas.Children.Add(axisY);
 
-            var steps = _scaleCakculator.AxisYStepsNum;
-            var stepH = _scaleCakculator.ViewFullHeight * _scaleCakculator.Scale / (steps - 1);
+            var steps = _scaleCalculator.AxisYStepsNum;
+            var stepH = _scaleCalculator.ViewFullHeight * _scaleCalculator.Scale / (steps - 1);
 
-            var stepBottomY = _scaleCakculator.LineZeroY - _scaleCakculator.LastStepY * stepH;
+            var stepBottomY = _scaleCalculator.LineZeroY - _scaleCalculator.LastStepY * stepH;
 
             for (int i = 0; i < steps; i++)
             {
@@ -90,25 +90,25 @@ namespace Controls.Common
         {
             var text = new TextBlock();
             text.TextWrapping = TextWrapping.Wrap;
-            text.Text = $"{ _scaleCakculator.MaxH.ToString("N1")}";
+            text.Text = $"{ _scaleCalculator.MaxH.ToString("N1")}";
 
             text.FontSize = TextHeight;
             Canvas.SetLeft(text, marginLeft);
-            Canvas.SetTop(text, _scaleCakculator.LineZeroY - _scaleCakculator.MaxH * _scaleCakculator.Scale - marginTop);
+            Canvas.SetTop(text, _scaleCalculator.LineZeroY - _scaleCalculator.MaxH * _scaleCalculator.Scale - marginTop);
 
             var text2 = new TextBlock();
             text2.TextWrapping = TextWrapping.Wrap;
-            text2.Text = $"{ _scaleCakculator.MinH.ToString("N1")}";
+            text2.Text = $"{ _scaleCalculator.MinH.ToString("N1")}";
 
             text2.FontSize = TextHeight;
             Canvas.SetLeft(text2, marginLeft);
-            Canvas.SetTop(text2, _scaleCakculator.LineZeroY - _scaleCakculator.MinH * _scaleCakculator.Scale - marginTop);
+            Canvas.SetTop(text2, _scaleCalculator.LineZeroY - _scaleCalculator.MinH * _scaleCalculator.Scale - marginTop);
 
             var text0 = new TextBlock();
             text0.Text = $"0";
             text0.FontSize = TextHeight;
             Canvas.SetLeft(text0, marginLeft);
-            Canvas.SetTop(text0, _scaleCakculator.LineZeroY - marginTop);
+            Canvas.SetTop(text0, _scaleCalculator.LineZeroY - marginTop);
 
             _canvas.Children.Add(text0);
             _canvas.Children.Add(text);

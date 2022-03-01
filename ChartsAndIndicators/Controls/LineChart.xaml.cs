@@ -31,7 +31,7 @@ namespace Controls
         }
 
         ScaleCalculator scaleCalculator;
-        ChartDrawer chartDrawer;
+        LineChartDrawer chartDrawer;
 
         public LineChart()
         {
@@ -40,7 +40,7 @@ namespace Controls
             DataContext = this;
 
             scaleCalculator = new ScaleCalculator(MainCanvas);
-            chartDrawer = new ChartDrawer(scaleCalculator, MainCanvas);
+            chartDrawer = new LineChartDrawer(scaleCalculator, MainCanvas);
         }
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
