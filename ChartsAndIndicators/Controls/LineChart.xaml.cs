@@ -41,13 +41,38 @@ namespace Controls
 
             scaleCalculator = new ScaleCalculator(MainCanvas);
             chartDrawer = new LineChartDrawer(scaleCalculator, MainCanvas);
+
+
+            var line1data = new Dictionary<int, double>();
+            line1data.Add(1, -12.06);
+            line1data.Add(2, -6.88);
+            line1data.Add(3, 8.22);
+            line1data.Add(4, 16.75);
+            line1data.Add(5, 42.12);
+
+
+            LinesData.Add("Line1", line1data);
         }
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            scaleCalculator.CalculateScale(-50, 100, 2);
+            //scaleCalculator.CalculateScale(-50, 100, 2);
+            
+            chartDrawer.DrawLines( LinesData);
             chartDrawer.Draw();
         }
+
+        private Dictionary<string, Dictionary<int,double>> _linesData = new Dictionary<string, Dictionary<int, double>>();
+
+        public Dictionary<string, Dictionary<int, double>> LinesData
+        {
+            get { return _linesData; }
+            set
+            {
+                SetField(ref _linesData, value);
+            }
+        }
+
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
