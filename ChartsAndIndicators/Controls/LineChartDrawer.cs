@@ -13,12 +13,10 @@ namespace Controls
     public class LineChartDrawer : ChartDrawer
     {
         Canvas canvas;
-        ScaleCalculator scaleCalculator;
 
-        public LineChartDrawer(ScaleCalculator scaleCalculator, Canvas canvas) : base(scaleCalculator, canvas)
+        public LineChartDrawer( Canvas canvas) : base( canvas)
         {
             this.canvas = canvas;
-            this.scaleCalculator = scaleCalculator;
         }
 
         public void DrawLines(Dictionary<string, Dictionary<int, double>> linesData)
@@ -39,7 +37,8 @@ namespace Controls
                 if (lineData.Value.Count > dataLength) dataLength = lineData.Value.Count;
             }
 
-            scaleCalculator.CalculateScale(min,max, dataLength);
+            CalculateScale(min,max, dataLength);
+            Draw();
         }
 
         public override void Draw()
@@ -49,8 +48,8 @@ namespace Controls
             Line line = new Line();
             line.X1 = 10;
             line.X2 = 100;
-            line.Y1 = 10 * scaleCalculator.Scale;
-            line.Y2 = 50 * scaleCalculator.Scale;
+            line.Y1 = 10 * ScaleCalculator.Scale;
+            line.Y2 = 50 * ScaleCalculator.Scale;
             line.Stroke = Brushes.OrangeRed;
             line.StrokeThickness = 2;
 

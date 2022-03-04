@@ -30,7 +30,6 @@ namespace Controls
             set => SetField(ref _chartName, value);
         }
 
-        ScaleCalculator scaleCalculator;
         LineChartDrawer chartDrawer;
 
         public LineChart()
@@ -39,8 +38,7 @@ namespace Controls
 
             DataContext = this;
 
-            scaleCalculator = new ScaleCalculator(MainCanvas);
-            chartDrawer = new LineChartDrawer(scaleCalculator, MainCanvas);
+            chartDrawer = new LineChartDrawer( MainCanvas);
 
 
             var line1data = new Dictionary<int, double>();
@@ -56,10 +54,7 @@ namespace Controls
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //scaleCalculator.CalculateScale(-50, 100, 2);
-            
             chartDrawer.DrawLines( LinesData);
-            chartDrawer.Draw();
         }
 
         private Dictionary<string, Dictionary<int,double>> _linesData = new Dictionary<string, Dictionary<int, double>>();

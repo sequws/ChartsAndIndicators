@@ -18,18 +18,39 @@ namespace Controls.Common
         ScaleCalculator _scaleCalculator;
         Canvas _canvas;
 
+        bool scaleCalculated = false;
+
         // chart
         double canvasWidth;
         double TextHeight = 10;
 
-        public ChartDrawer(ScaleCalculator scaleCalculator, Canvas canvas)
+        public ScaleCalculator ScaleCalculator
         {
-            _scaleCalculator = scaleCalculator;
+            get
+            {
+                return _scaleCalculator;
+            }
+        }
+
+        public ChartDrawer(Canvas canvas)
+        {
+            _scaleCalculator = new ScaleCalculator(canvas);
             _canvas = canvas;
+        }
+
+        public void CalculateScale(double min, double max, int dataLength)
+        {
+            _scaleCalculator.CalculateScale(min, max, dataLength);
+            scaleCalculated = true;
         }
 
         public virtual void Draw()
         {
+            if(!scaleCalculated)
+            {
+                throw new Exception("Have to invoke ScaleCalculator.CalculateScale before Draw!");
+            }
+
             canvasWidth = _canvas.ActualWidth;
 
             DrawLineZero();
