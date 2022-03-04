@@ -28,8 +28,8 @@
             </Menu>
         </DockPanel>
         <StackPanel DockPanel.Dock="Left" Width="140" Background="#EFEFEF">
-            <Button Content="DemoView" Margin="2" FontSize="12" mahc:ControlsHelper.ContentCharacterCasing="Normal"
-                     Command="{Binding NavigateCommand}" CommandParameter="Demo1View"></Button>
+            <Button Content="BarChart" Margin="2" FontSize="12" mahc:ControlsHelper.ContentCharacterCasing="Normal"
+                     Command="{Binding NavigateCommand}" CommandParameter="BarChartDemo"></Button>
             <Button Content="LineChart" Margin="2" FontSize="12" mahc:ControlsHelper.ContentCharacterCasing="Normal"
                      Command="{Binding NavigateCommand}" CommandParameter="LineChartDemo"></Button>
         </StackPanel>

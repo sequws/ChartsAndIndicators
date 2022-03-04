@@ -6,11 +6,11 @@ namespace Sample.Views
     /// <summary>
     /// Interaction logic for DemoView1
     /// </summary>
-    public partial class DemoView1 : UserControl
+    public partial class BarChartDemo : UserControl
     {
         int barId = 0;
 
-        public DemoView1()
+        public BarChartDemo()
         {
             InitializeComponent();
 

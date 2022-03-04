@@ -31,7 +31,7 @@ namespace Sample
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<DemoView1>("Demo1View"); 
+            containerRegistry.RegisterForNavigation<BarChartDemo>("BarChartDemo"); 
             containerRegistry.RegisterForNavigation<LineChartDemo>("LineChartDemo");
         }
 
