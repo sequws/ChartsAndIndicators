@@ -16,7 +16,7 @@ namespace Controls.Common
     public class ChartDrawer
     {
         ScaleCalculator _scaleCalculator;
-        Canvas _canvas;
+        Canvas canvas;
 
         bool scaleCalculated = false;
 
@@ -35,7 +35,7 @@ namespace Controls.Common
         public ChartDrawer(Canvas canvas)
         {
             _scaleCalculator = new ScaleCalculator(canvas);
-            _canvas = canvas;
+            this.canvas = canvas;
         }
 
         public void CalculateScale(double min, double max, int dataLength)
@@ -51,7 +51,7 @@ namespace Controls.Common
                 throw new Exception("Have to invoke ScaleCalculator.CalculateScale before Draw!");
             }
 
-            canvasWidth = _canvas.ActualWidth;
+            canvasWidth = canvas.ActualWidth;
 
             DrawLineZero();
             DrawAxisY();
@@ -60,7 +60,7 @@ namespace Controls.Common
 
         private void DrawLineZero()
         {
-            _canvas.Children.Clear();
+            canvas.Children.Clear();
 
             Line lineZero = new Line();
             lineZero.X1 = _scaleCalculator.CanvasMargin;
@@ -70,7 +70,7 @@ namespace Controls.Common
             lineZero.Stroke = Brushes.Fuchsia;
             lineZero.StrokeThickness = 2;
 
-            _canvas.Children.Add(lineZero);
+            canvas.Children.Add(lineZero);
         }
 
         private void DrawAxisY()
@@ -82,7 +82,7 @@ namespace Controls.Common
             axisY.Y2 = _scaleCalculator.LineZeroY - _scaleCalculator.MaxH * _scaleCalculator.Scale;
             axisY.Stroke = Brushes.Black;
             axisY.StrokeThickness = 1;
-            _canvas.Children.Add(axisY);
+            canvas.Children.Add(axisY);
 
             var steps = _scaleCalculator.AxisYStepsNum;
             var stepH = _scaleCalculator.ViewFullHeight * _scaleCalculator.Scale / (steps - 1);
@@ -103,7 +103,7 @@ namespace Controls.Common
                 step.Y1 = stepBottomY - i * stepH;
                 step.Y2 = step.Y1;
 
-                _canvas.Children.Add(step);
+                canvas.Children.Add(step);
             }
         }
 
@@ -131,9 +131,9 @@ namespace Controls.Common
             Canvas.SetLeft(text0, marginLeft);
             Canvas.SetTop(text0, _scaleCalculator.LineZeroY - marginTop);
 
-            _canvas.Children.Add(text0);
-            _canvas.Children.Add(text);
-            _canvas.Children.Add(text2);
+            canvas.Children.Add(text0);
+            canvas.Children.Add(text);
+            canvas.Children.Add(text2);
         }
     }
 }

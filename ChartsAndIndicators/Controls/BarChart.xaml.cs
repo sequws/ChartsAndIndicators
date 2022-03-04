@@ -13,6 +13,7 @@ namespace Controls
     /// </summary>
     public partial class BarChart : UserControl, INotifyPropertyChanged
     {
+        #region properties
         private string _chartName;
         public string ChartName
         {
@@ -24,7 +25,7 @@ namespace Controls
 
         public bool IsValueVisible
         {
-            get =>_isValueVIsible;
+            get => _isValueVIsible;
             set => SetField(ref _isValueVIsible, value);
         }
 
@@ -32,23 +33,23 @@ namespace Controls
 
         public bool IsDescVisible
         {
-            get =>_isDescVisible;
+            get => _isDescVisible;
             set => SetField(ref _isDescVisible, value);
         }
 
+        private Dictionary<string, double> _barValues = new Dictionary<string, double>();
 
-        private Dictionary<string,double> _barValues = new Dictionary<string, double>();
-
-        public Dictionary<string,double> BarValues
+        public Dictionary<string, double> BarValues
         {
             get { return _barValues; }
             set
             {
-                SetField(ref _barValues, value);                
+                SetField(ref _barValues, value);
             }
         }
+        #endregion
 
-        ScaledView scaledView;
+        BarChartDrawer barChartDrawer;
 
         public BarChart()
         {
@@ -63,7 +64,7 @@ namespace Controls
             BarValues.Add("NASDAQ", -80);
             BarValues.Add("GBPJPY", -15);
 
-            scaledView = new ScaledView(MainCanvas);
+            barChartDrawer = new BarChartDrawer(MainCanvas);
         }
 
         public void Reset()
@@ -73,29 +74,19 @@ namespace Controls
 
         public void AddBar(string name, double value)
         {
-            if(!BarValues.ContainsKey(name))
+            if (!BarValues.ContainsKey(name))
             {
                 BarValues.Add(name, value);
-                DrawMainRect();
+                barChartDrawer.Draw(BarValues);
             }
         }
 
-        private void DrawMainRect(int margin = 10)
-        {
-            MainCanvas.Children.Clear();
-
-            scaledView.Draw(BarValues, margin);
-        }
 
         #region events
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            DrawMainRect();
+            barChartDrawer.Draw(BarValues);
         }
 
         #endregion

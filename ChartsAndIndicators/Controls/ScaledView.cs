@@ -11,6 +11,9 @@ using System.Windows.Shapes;
 
 namespace Controls
 {
+    /// <summary>
+    /// DEPRACTED
+    /// </summary>
     public class ScaledView
     {
         public double Scale { get; set; }

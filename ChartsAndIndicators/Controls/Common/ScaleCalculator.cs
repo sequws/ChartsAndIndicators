@@ -25,6 +25,7 @@ namespace Controls.Common
         private double ctrlHeight = 0;
         double viewFullHeight = 0;
         double _lineZeroY = 0;
+        double centerX = 0;
 
         Canvas _canvas;
         double _canvasMargin = 10;
@@ -46,10 +47,13 @@ namespace Controls.Common
 
         public double CanvasMargin => _canvasMargin;
         public double LineZeroY => _lineZeroY;
+        public double CenterX => centerX;
         public double MinH => _minH;
         public double MaxH => _maxH;
         public int LastStepY => yLastStep;
         public int AxisYStepsNum => yAxisSteps;
+        public double CanvasWidth => canvasWidth;
+        public double CanvasHeight => canvasHeight;
 
         public double ViewFullHeight => viewFullHeight;
 
@@ -73,6 +77,7 @@ namespace Controls.Common
             canvasHeight = ctrlHeight - 2 * _canvasMargin;
             ctrlWidth = _canvas.ActualWidth;
             canvasWidth = ctrlWidth - 2 * _canvasMargin;
+            centerX = ctrlWidth / 2;
 
             var barMaxH = Math.Max(max, FixedMaxH);
             var barMinH = Math.Min(min, FixedMinH);
