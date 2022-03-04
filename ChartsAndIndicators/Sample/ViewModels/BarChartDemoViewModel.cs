@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Sample.ViewModels
 {
-    public class BarChartDemo : BindableBase
+    public class BarChartDemoViewModel : BindableBase
     {
         private string info = "Hello from View1";
         public string Info
@@ -15,7 +15,7 @@ namespace Sample.ViewModels
             set { SetProperty(ref info, value); }
         }
 
-        public BarChartDemo()
+        public BarChartDemoViewModel()
         {
 
         }

@@ -72,7 +72,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\BarChartDemo.cs" />
+    <Compile Include="ViewModels\BarChartDemoViewModel.cs" />
     <Compile Include="ViewModels\LineChartDemoViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\BarChartDemo.xaml.cs">
