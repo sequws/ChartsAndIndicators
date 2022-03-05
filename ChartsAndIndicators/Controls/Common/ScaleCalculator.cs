@@ -45,7 +45,7 @@ namespace Controls.Common
         public int MaxStepsOnYAxis { get; set; } = 20;
         public int TextHeight { get; set; } = 10;
 
-        public double CanvasMargin => _canvasMargin;
+
         public double LineZeroY => _lineZeroY;
         public double CenterX => centerX;
         public double MinH => _minH;
@@ -54,13 +54,13 @@ namespace Controls.Common
         public int AxisYStepsNum => yAxisSteps;
         public double CanvasWidth => canvasWidth;
         public double CanvasHeight => canvasHeight;
+        public double CanvasMargin => _canvasMargin;
 
         public double ViewFullHeight => viewFullHeight;
 
-        public ScaleCalculator(Canvas canvas, int margin = 0)
+        public ScaleCalculator(Canvas canvas)
         {
             _canvas = canvas;
-            _canvasMargin = margin;
         }
 
         /// <summary>
@@ -69,10 +69,11 @@ namespace Controls.Common
         /// <param name="min">Min value from all data</param>
         /// <param name="max">Max value from all data</param>
         /// <param name="dataLength">Numbers of points, bars etc.</param>
-        public void CalculateScale(double min, double max, int dataLength)
+        public void CalculateScale(double min, double max, int dataLength, int margin = 0)
         {
             if (dataLength == 0) return;
 
+            _canvasMargin = margin;
             ctrlHeight = _canvas.ActualHeight;
             canvasHeight = ctrlHeight - 2 * _canvasMargin;
             ctrlWidth = _canvas.ActualWidth;

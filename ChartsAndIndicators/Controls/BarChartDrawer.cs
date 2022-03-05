@@ -35,12 +35,12 @@ namespace Controls
             CalculateScale(barMinH, barMaxH, barValues.Count);
             Draw();
 
-            DrawBars(barValues);
+            DrawBars(barValues, margin);
         }
 
-        private void DrawBars(Dictionary<string, double> barValues)
+        private void DrawBars(Dictionary<string, double> barValues, int margin)
         {
-            var tmpW = (ScaleCalculator.CanvasWidth - barValues.Count * barMinMargin) / barValues.Count;
+            var tmpW = (ScaleCalculator.CanvasWidth - barValues.Count * barMinMargin -2*margin) / barValues.Count;
             var barW = Math.Min(tmpW, barMaxWidth);
 
             int i = 0;

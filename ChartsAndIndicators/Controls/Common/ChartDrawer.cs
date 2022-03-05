@@ -38,9 +38,9 @@ namespace Controls.Common
             this.canvas = canvas;
         }
 
-        public void CalculateScale(double min, double max, int dataLength)
+        public void CalculateScale(double min, double max, int dataLength, int margin = 10)
         {
-            _scaleCalculator.CalculateScale(min, max, dataLength);
+            _scaleCalculator.CalculateScale(min, max, dataLength, margin);
             scaleCalculated = true;
         }
 
@@ -63,8 +63,8 @@ namespace Controls.Common
             canvas.Children.Clear();
 
             Line lineZero = new Line();
-            lineZero.X1 = _scaleCalculator.CanvasMargin;
-            lineZero.X2 = canvasWidth + _scaleCalculator.CanvasMargin;
+            lineZero.X1 = 0;
+            lineZero.X2 = canvasWidth;
             lineZero.Y1 = _scaleCalculator.LineZeroY;
             lineZero.Y2 = _scaleCalculator.LineZeroY;
             lineZero.Stroke = Brushes.Fuchsia;
