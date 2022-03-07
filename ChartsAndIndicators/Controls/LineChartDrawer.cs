@@ -14,12 +14,12 @@ namespace Controls
     {
         Canvas canvas;
 
-        public LineChartDrawer( Canvas canvas) : base( canvas)
+        public LineChartDrawer(Canvas canvas) : base(canvas)
         {
             this.canvas = canvas;
         }
 
-        public void DrawLines(Dictionary<string, Dictionary<int, double>> linesData)
+        public void Draw(Dictionary<string, Dictionary<int, double>> linesData)
         {
             if (linesData.Count == 0) return;
 
@@ -37,14 +37,13 @@ namespace Controls
                 if (lineData.Value.Count > dataLength) dataLength = lineData.Value.Count;
             }
 
-            CalculateScale(min,max, dataLength);
+            CalculateScale(min, max, dataLength);
             Draw();
+            DrawLines(linesData);
         }
 
-        public override void Draw()
+        public void DrawLines(Dictionary<string, Dictionary<int, double>> linesData)
         {
-            base.Draw();
-
             Line line = new Line();
             line.X1 = 10;
             line.X2 = 100;
@@ -53,9 +52,7 @@ namespace Controls
             line.Stroke = Brushes.OrangeRed;
             line.StrokeThickness = 2;
 
-
             canvas.Children.Add(line);
-
         }
     }
 }

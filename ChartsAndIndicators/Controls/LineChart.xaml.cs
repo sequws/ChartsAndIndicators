@@ -23,12 +23,29 @@ namespace Controls
     /// </summary>
     public partial class LineChart : UserControl
     {
+
+        #region properties
         private string _chartName = "LineChart";
         public string ChartName
         {
             get => _chartName;
             set => SetField(ref _chartName, value);
         }
+
+        private string _axisXDesc;
+        public string AxisXDesc
+        {
+            get { return _axisXDesc; }
+            set { _axisXDesc = value; }
+        }
+
+        private string _axisYDesc;
+        public string AxisYDesc
+        {
+            get { return _axisYDesc; }
+            set { _axisYDesc = value; }
+        }
+        #endregion
 
         LineChartDrawer chartDrawer;
 
@@ -54,7 +71,7 @@ namespace Controls
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            chartDrawer.DrawLines( LinesData);
+            chartDrawer.Draw( LinesData);
         }
 
         private Dictionary<string, Dictionary<int,double>> _linesData = new Dictionary<string, Dictionary<int, double>>();
