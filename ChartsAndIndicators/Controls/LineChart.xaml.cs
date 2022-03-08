@@ -58,12 +58,12 @@ namespace Controls
             chartDrawer = new LineChartDrawer( MainCanvas);
 
 
-            var line1data = new Dictionary<int, double>();
-            line1data.Add(1, -12.06);
-            line1data.Add(2, -6.88);
-            line1data.Add(3, 8.22);
-            line1data.Add(4, 16.75);
-            line1data.Add(5, 42.12);
+            var line1data = new List<double>();
+            line1data.Add(-12.06);
+            line1data.Add( -6.88);
+            line1data.Add(8.22);
+            line1data.Add(16.75);
+            line1data.Add(42.12);
 
 
             LinesData.Add("Line1", line1data);
@@ -74,9 +74,9 @@ namespace Controls
             chartDrawer.Draw( LinesData);
         }
 
-        private Dictionary<string, Dictionary<int,double>> _linesData = new Dictionary<string, Dictionary<int, double>>();
+        private Dictionary<string, List<double>> _linesData = new Dictionary<string, List<double>>();
 
-        public Dictionary<string, Dictionary<int, double>> LinesData
+        public Dictionary<string, List<double>> LinesData
         {
             get { return _linesData; }
             set

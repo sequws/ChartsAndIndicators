@@ -19,7 +19,7 @@ namespace Controls
             this.canvas = canvas;
         }
 
-        public void Draw(Dictionary<string, Dictionary<int, double>> linesData)
+        public void Draw(Dictionary<string, List<double>> linesData)
         {
             if (linesData.Count == 0) return;
 
@@ -29,8 +29,8 @@ namespace Controls
 
             foreach (var lineData in linesData)
             {
-                var MaximumValue = lineData.Value.Max(x => x.Value);
-                var MinimumValue = lineData.Value.Min(x => x.Value);
+                var MaximumValue = lineData.Value.Max();
+                var MinimumValue = lineData.Value.Min();
 
                 max = MaximumValue > max ? MaximumValue : max;
                 min = MinimumValue < min ? MinimumValue : min;
@@ -42,7 +42,7 @@ namespace Controls
             DrawLines(linesData);
         }
 
-        public void DrawLines(Dictionary<string, Dictionary<int, double>> linesData)
+        public void DrawLines(Dictionary<string, List<double>> linesData)
         {
             Line line = new Line();
             line.X1 = 10;
@@ -53,6 +53,13 @@ namespace Controls
             line.StrokeThickness = 2;
 
             canvas.Children.Add(line);
+
+
+            foreach (var lineData in linesData)
+            {
+                
+            }
+
         }
     }
 }
