@@ -54,7 +54,7 @@ namespace Controls
             //line.StrokeThickness = 2;
             //canvas.Children.Add(line);
 
-            Brush[] brushes = { Brushes.Red, Brushes.Green, Brushes.Blue, Brushes.Orange, Brushes.DarkGray };
+            Brush[] brushes = { Brushes.Red, Brushes.Green , Brushes.Blue, Brushes.Yellow, Brushes.Orange, Brushes.DarkGray, Brushes.Fuchsia };
 
             int brushNum = 0;
             foreach (var lineData in linesData)
@@ -68,7 +68,7 @@ namespace Controls
                 }
 
                 Polyline polyline = new Polyline();
-                polyline.StrokeThickness = 1;
+                polyline.StrokeThickness = 2;
                 polyline.Stroke = brushes[brushNum % brushes.Count()];
                 polyline.Points = points;
 

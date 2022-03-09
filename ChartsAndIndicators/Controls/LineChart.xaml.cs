@@ -65,8 +65,29 @@ namespace Controls
             line1data.Add(16.75);
             line1data.Add(42.12);
 
+            var line2data = new List<double>();
+            line2data.Add(-10);
+            line2data.Add(5);
+            line2data.Add(13);
+            line2data.Add(11);
+            line2data.Add(2);
+            line2data.Add(12);
+            line2data.Add(-8);
+
+            var line3data = new List<double>();
+            line3data.Add(-5);
+            line3data.Add(5);
+            line3data.Add(-5);
+            line3data.Add(-5);
+            line3data.Add(5);
+            line3data.Add(5);
+            line3data.Add(5);
+            line3data.Add(-5);
+
 
             LinesData.Add("Line1", line1data);
+            LinesData.Add("Line2", line2data);
+            LinesData.Add("Line3", line3data);
         }
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
