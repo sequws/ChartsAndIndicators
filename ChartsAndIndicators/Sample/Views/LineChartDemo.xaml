@@ -9,8 +9,16 @@
              mc:Ignorable="d"
             d:DesignHeight="450" d:DesignWidth="600"
              >
-    <Grid>
-        <controls:LineChart />
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" Height="30" DockPanel.Dock="Top">
+            <!--<Label Content="{Binding Info}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>-->
+            <Label Content="Lines: "></Label>
+            <TextBox x:Name="BarNameTextBox" Text="3" Width="100" Margin="2"></TextBox>
+            <Label Content="Values: (from -/to +)"></Label>
+            <TextBox x:Name="BarValueTextBox" Text="100" Width="100" Margin="2"></TextBox>
+            <Button x:Name="RandomLinesButton" Content="Random lines" Width="100" Margin="2" Click="RandomLinesButton_Click" ></Button>
+        </StackPanel>
+        <controls:LineChart x:Name="MainLineChart" />
 
-    </Grid>
+    </DockPanel>
 </UserControl>
