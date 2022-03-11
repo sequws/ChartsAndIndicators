@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Sample.Views
@@ -14,17 +15,51 @@ namespace Sample.Views
         public LineChartDemo()
         {
             InitializeComponent();
+            GenerateNewLines();
         }
 
-        private void RandomLinesButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void RandomLinesButton_Click(object sender, RoutedEventArgs e)
+        {
+            GenerateNewLines();
+        }
+
+        private void GenerateNewLines()
         {
             Random rnd = new Random();
-            //MainLineChart.Reset();
-
-            int lines = rnd.Next(5, 10);
-            for (int i = 0; i < lines; i++)
+            Random rndDiff = new Random();
+            try
             {
-                //MainLineChart.AddBar(BarNameTextBox.Text + i, rnd.Next(-200, 200));
+                linesData = new Dictionary<string, List<double>>();
+
+                var linesNum = int.Parse(LinesTextBox.Text);
+                var linesLength = int.Parse(MaxLengthTextBox.Text);
+                var maxDiff = int.Parse(MaxDiffTextBox.Text);
+
+                if (linesNum <= 0) linesNum = 1;
+
+                for (int i = 0; i < linesNum; i++)
+                {
+                    double actVal = 0;
+                    string name = $"Line {i}";
+                    List<double> data = new List<double>();
+
+                    for (int x = 0; x < linesLength; x++)
+                    {
+                        double diff = rnd.NextDouble() * maxDiff;
+                        int dir = rndDiff.Next(-1, 1);
+                        actVal += dir >= 0 ? diff : -diff;
+
+                        data.Add(actVal);
+                    }
+
+                    linesData.Add(name, data);
+                }
+
+                MainLineChart.LinesData = linesData;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Wrong parameters!");
             }
         }
     }
