@@ -46,8 +46,8 @@ namespace Sample.Views
                     for (int x = 0; x < linesLength; x++)
                     {
                         double diff = rnd.NextDouble() * maxDiff;
-                        int dir = rndDiff.Next(-1, 1);
-                        actVal += dir >= 0 ? diff : -diff;
+                        double dir = rnd.NextDouble();  //rndDiff.Next(-1, 1);
+                        actVal += dir >= 0.4 ? diff : -diff;
 
                         data.Add(actVal);
                     }

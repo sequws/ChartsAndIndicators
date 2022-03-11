@@ -26,6 +26,7 @@ namespace Controls.Common
         double viewFullHeight = 0;
         double _lineZeroY = 0;
         double centerX = 0;
+        double dataLength = 0;
 
         Canvas _canvas;
         double _canvasMargin = 10;
@@ -57,6 +58,7 @@ namespace Controls.Common
         public double CanvasMargin => _canvasMargin;
 
         public double ViewFullHeight => viewFullHeight;
+        public double DataLength => dataLength;
 
         public ScaleCalculator(Canvas canvas)
         {
@@ -72,6 +74,7 @@ namespace Controls.Common
         public void CalculateScale(double min, double max, int dataLength, int margin = 0)
         {
             if (dataLength == 0) return;
+            this.dataLength = dataLength;
 
             _canvasMargin = margin;
             ctrlHeight = _canvas.ActualHeight;

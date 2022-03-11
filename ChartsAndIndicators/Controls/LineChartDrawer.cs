@@ -56,6 +56,8 @@ namespace Controls
 
             Brush[] brushes = { Brushes.Red, Brushes.Green , Brushes.Blue, Brushes.Yellow, Brushes.Orange, Brushes.DarkGray, Brushes.Fuchsia };
 
+            double stepX = ScaleCalculator.CanvasWidth / ScaleCalculator.DataLength;
+
             int brushNum = 0;
             foreach (var lineData in linesData)
             {
@@ -63,7 +65,7 @@ namespace Controls
                 int i = 0;
                 foreach(var data in lineData.Value)
                 {
-                    points.Add(new Point(i * 40, ScaleCalculator.LineZeroY - data * ScaleCalculator.Scale));
+                    points.Add(new Point(i * stepX, ScaleCalculator.LineZeroY - data * ScaleCalculator.Scale));
                     i++;
                 }
 
