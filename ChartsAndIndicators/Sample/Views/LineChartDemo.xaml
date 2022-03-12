@@ -13,11 +13,13 @@
         <StackPanel Orientation="Horizontal" Height="30" DockPanel.Dock="Top" Background="AliceBlue">
             <!--<Label Content="{Binding Info}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>-->
             <Label Content="Lines: "></Label>
-            <TextBox x:Name="LinesTextBox" Text="3" Width="100" Margin="2"></TextBox>
+            <TextBox x:Name="LinesTextBox" Text="3" Width="40" Margin="2"></TextBox>
             <Label Content="Max length: "></Label>
-            <TextBox x:Name="MaxLengthTextBox" Text="20" Width="100" Margin="2"></TextBox>
+            <TextBox x:Name="MaxLengthTextBox" Text="20" Width="60" Margin="2"></TextBox>
             <Label Content="Max diff: "></Label>
-            <TextBox x:Name="MaxDiffTextBox" Text="5" Width="100" Margin="2"></TextBox>
+            <TextBox x:Name="MaxDiffTextBox" Text="5" Width="40" Margin="2"></TextBox>
+            <Label Content="Win %: "></Label>
+            <TextBox x:Name="ProbsTextBox" Text="50" Width="100" Margin="2"></TextBox>
 
             <Button x:Name="RandomLinesButton" Content="Random lines" Width="100" Margin="2" Click="RandomLinesButton_Click" ></Button>
         </StackPanel>

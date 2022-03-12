@@ -34,7 +34,10 @@ namespace Sample.Views
                 var linesNum = int.Parse(LinesTextBox.Text);
                 var linesLength = int.Parse(MaxLengthTextBox.Text);
                 var maxDiff = int.Parse(MaxDiffTextBox.Text);
+                var prob = double.Parse(ProbsTextBox.Text);
 
+                if (prob > 100) prob = 100;
+                if (prob < 0) prob = 0;
                 if (linesNum <= 0) linesNum = 1;
 
                 for (int i = 0; i < linesNum; i++)
@@ -47,7 +50,7 @@ namespace Sample.Views
                     {
                         double diff = rnd.NextDouble() * maxDiff;
                         double dir = rnd.NextDouble();  //rndDiff.Next(-1, 1);
-                        actVal += dir >= 0.4 ? diff : -diff;
+                        actVal += dir >= (prob/100) ? -diff : diff;
 
                         data.Add(actVal);
                     }
