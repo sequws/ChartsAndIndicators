@@ -55,7 +55,7 @@ namespace Controls.Common
 
             DrawLineZero();
             DrawAxisY();
-            DrawAxisYText();
+            //DrawAxisYText();
         }
 
         private void DrawLineZero()
@@ -73,7 +73,7 @@ namespace Controls.Common
             canvas.Children.Add(lineZero);
         }
 
-        private void DrawAxisY()
+        private void DrawAxisY(int marginLeft = 10, int marginTop = 12)
         {
             Line axisY = new Line();
             axisY.X1 = 0;
@@ -104,6 +104,18 @@ namespace Controls.Common
                 step.Y2 = step.Y1;
 
                 canvas.Children.Add(step);
+
+                // lines desc between min max
+                var stepSize = (Math.Abs( _scaleCalculator.MinH) + _scaleCalculator.MaxH) / (steps-1);
+
+                var text = new TextBlock();
+                text.TextWrapping = TextWrapping.Wrap;
+                text.Text = $"{ _scaleCalculator.MinH + i * stepSize}";
+
+                text.FontSize = TextHeight;
+                Canvas.SetLeft(text, marginLeft);
+                Canvas.SetTop(text, stepBottomY - i * stepH - marginTop);
+                canvas.Children.Add(text);
             }
         }
 
