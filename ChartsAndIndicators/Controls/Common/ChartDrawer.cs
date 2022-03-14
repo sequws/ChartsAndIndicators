@@ -24,6 +24,8 @@ namespace Controls.Common
         double canvasWidth;
         double TextHeight = 10;
 
+        public bool DrawYAxisDesc { get; set; } = true;
+
         public ScaleCalculator ScaleCalculator
         {
             get
@@ -46,7 +48,7 @@ namespace Controls.Common
 
         public virtual void Draw()
         {
-            if(!scaleCalculated)
+            if (!scaleCalculated)
             {
                 throw new Exception("Have to invoke ScaleCalculator.CalculateScale before Draw!");
             }
@@ -55,7 +57,15 @@ namespace Controls.Common
 
             DrawLineZero();
             DrawAxisY();
-            //DrawAxisYText();
+
+            if (DrawYAxisDesc)
+            {
+                DrawYAxisStepDesc();
+            }
+            else
+            {
+                DrawAxisYText();
+            }
         }
 
         private void DrawLineZero()
@@ -104,9 +114,19 @@ namespace Controls.Common
                 step.Y2 = step.Y1;
 
                 canvas.Children.Add(step);
+            }
+        }
 
+        private void DrawYAxisStepDesc(int marginLeft = 10, int marginTop = 12)
+        {
+            var steps = _scaleCalculator.AxisYStepsNum;
+            var stepH = _scaleCalculator.ViewFullHeight * _scaleCalculator.Scale / (steps - 1);
+            var stepBottomY = _scaleCalculator.LineZeroY - _scaleCalculator.LastStepY * stepH;
+
+            for (int i = 0; i < _scaleCalculator.AxisYStepsNum; i++)
+            {
                 // lines desc between min max
-                var stepSize = (Math.Abs( _scaleCalculator.MinH) + _scaleCalculator.MaxH) / (steps-1);
+                var stepSize = (Math.Abs(_scaleCalculator.MinH) + _scaleCalculator.MaxH) / (steps - 1);
 
                 var text = new TextBlock();
                 text.TextWrapping = TextWrapping.Wrap;
