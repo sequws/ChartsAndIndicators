@@ -45,15 +45,6 @@ namespace Controls
 
         public void DrawLines(Dictionary<string, List<double>> linesData)
         {
-            //Line line = new Line();
-            //line.X1 = 10;
-            //line.X2 = 100;
-            //line.Y1 = 10 * ScaleCalculator.Scale;
-            //line.Y2 = 50 * ScaleCalculator.Scale;
-            //line.Stroke = Brushes.OrangeRed;
-            //line.StrokeThickness = 2;
-            //canvas.Children.Add(line);
-
             Brush[] brushes = { Brushes.Red, Brushes.Green , Brushes.Blue, Brushes.Yellow, Brushes.Orange, Brushes.DarkGray, Brushes.Fuchsia };
 
             double stepX = ScaleCalculator.CanvasWidth / ScaleCalculator.DataLength;
