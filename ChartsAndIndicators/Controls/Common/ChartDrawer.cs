@@ -94,12 +94,7 @@ namespace Controls.Common
             axisY.StrokeThickness = 1;
             canvas.Children.Add(axisY);
 
-            var steps = _scaleCalculator.AxisYStepsNum;
-            var stepH = _scaleCalculator.ViewFullHeight * _scaleCalculator.Scale / (steps - 1);
-
-            var stepBottomY = _scaleCalculator.LineZeroY - _scaleCalculator.LastStepY * stepH;
-
-            for (int i = 0; i < steps; i++)
+            for (int i = 0; i < _scaleCalculator.AxisYStepsNum; i++)
             {
                 Line step = new Line();
                 step.Stroke = Brushes.LightGray;
@@ -110,7 +105,7 @@ namespace Controls.Common
                 step.StrokeDashArray = dashArray;
                 step.X1 = 0;
                 step.X2 = canvasWidth;
-                step.Y1 = stepBottomY - i * stepH;
+                step.Y1 = _scaleCalculator.StepBottomY - i * _scaleCalculator.StepHeight;
                 step.Y2 = step.Y1;
 
                 canvas.Children.Add(step);
@@ -119,14 +114,10 @@ namespace Controls.Common
 
         private void DrawYAxisStepDesc(int marginLeft = 10, int marginTop = 12)
         {
-            var steps = _scaleCalculator.AxisYStepsNum;
-            var stepH = _scaleCalculator.ViewFullHeight * _scaleCalculator.Scale / (steps - 1);
-            var stepBottomY = _scaleCalculator.LineZeroY - _scaleCalculator.LastStepY * stepH;
-
             for (int i = 0; i < _scaleCalculator.AxisYStepsNum; i++)
             {
                 // lines desc between min max
-                var stepSize = (Math.Abs(_scaleCalculator.MinH) + _scaleCalculator.MaxH) / (steps - 1);
+                var stepSize = (Math.Abs(_scaleCalculator.MinH) + _scaleCalculator.MaxH) / (_scaleCalculator.AxisYStepsNum - 1);
 
                 var text = new TextBlock();
                 text.TextWrapping = TextWrapping.Wrap;
@@ -134,7 +125,7 @@ namespace Controls.Common
 
                 text.FontSize = TextHeight;
                 Canvas.SetLeft(text, marginLeft);
-                Canvas.SetTop(text, stepBottomY - i * stepH - marginTop);
+                Canvas.SetTop(text, _scaleCalculator.StepBottomY - i * _scaleCalculator.StepHeight - marginTop);
                 canvas.Children.Add(text);
             }
         }

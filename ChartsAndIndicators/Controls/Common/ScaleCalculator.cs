@@ -31,7 +31,6 @@ namespace Controls.Common
         Canvas _canvas;
         double _canvasMargin = 10;
 
-
         double canvasWidth;
         double canvasHeight;
 
@@ -40,6 +39,8 @@ namespace Controls.Common
 
         int yAxisSteps = 0;
         int yLastStep = 0;
+        double stepHeight = 0;
+        double stepBottomY = 0;
 
         int stepHeightPix = 50;
 
@@ -53,6 +54,8 @@ namespace Controls.Common
         public double MaxH => _maxH;
         public int LastStepY => yLastStep;
         public int AxisYStepsNum => yAxisSteps;
+        public double StepHeight => stepHeight;
+        public double StepBottomY => stepBottomY;
         public double CanvasWidth => canvasWidth;
         public double CanvasHeight => canvasHeight;
         public double CanvasMargin => _canvasMargin;
@@ -103,6 +106,9 @@ namespace Controls.Common
 
             _lineZeroY = lineXratio > 1 ? canvasHeight - (canvasHeight / lineXratio) :
                 _minH < 0 ? 0 : viewFullHeight * Scale;
+
+            stepHeight = ViewFullHeight * Scale / (yAxisSteps - 1);
+            stepBottomY = LineZeroY - LastStepY * stepHeight;
         }
 
 
