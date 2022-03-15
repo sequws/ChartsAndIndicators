@@ -41,12 +41,12 @@ namespace Controls.Common
         int yLastStep = 0;
         double stepHeight = 0;
         double stepBottomY = 0;
+        double stepSizeVal = 0;
 
         int stepHeightPix = 50;
 
         public int MaxStepsOnYAxis { get; set; } = 20;
         public int TextHeight { get; set; } = 10;
-
 
         public double LineZeroY => _lineZeroY;
         public double CenterX => centerX;
@@ -56,6 +56,7 @@ namespace Controls.Common
         public int AxisYStepsNum => yAxisSteps;
         public double StepHeight => stepHeight;
         public double StepBottomY => stepBottomY;
+        public double StepSizeVal => stepSizeVal;   // size of step in scale
         public double CanvasWidth => canvasWidth;
         public double CanvasHeight => canvasHeight;
         public double CanvasMargin => _canvasMargin;
@@ -109,6 +110,8 @@ namespace Controls.Common
 
             stepHeight = ViewFullHeight * Scale / (yAxisSteps - 1);
             stepBottomY = LineZeroY - LastStepY * stepHeight;
+
+            stepSizeVal = (Math.Abs(MinH) + MaxH) / (AxisYStepsNum - 1);
         }
 
 

@@ -117,11 +117,10 @@ namespace Controls.Common
             for (int i = 0; i < _scaleCalculator.AxisYStepsNum; i++)
             {
                 // lines desc between min max
-                var stepSize = (Math.Abs(_scaleCalculator.MinH) + _scaleCalculator.MaxH) / (_scaleCalculator.AxisYStepsNum - 1);
-
+                
                 var text = new TextBlock();
                 text.TextWrapping = TextWrapping.Wrap;
-                text.Text = $"{ _scaleCalculator.MinH + i * stepSize}";
+                text.Text = $"{ _scaleCalculator.MinH + i * _scaleCalculator.StepSizeVal}";
 
                 text.FontSize = TextHeight;
                 Canvas.SetLeft(text, marginLeft);
