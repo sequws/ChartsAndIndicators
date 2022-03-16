@@ -10,7 +10,7 @@
         <Border BorderBrush="Black" Background="Wheat" BorderThickness="2" CornerRadius="15">
             <DockPanel  >
                 <Label DockPanel.Dock="Top" FontSize="14" FontWeight="Bold" Content="{Binding ChartName}" Margin="2"></Label>
-                <Canvas x:Name="MainCanvas" Margin="20" />
+                <Canvas x:Name="MainCanvas" Margin="10" />
             </DockPanel>
         </Border>
     </Grid>

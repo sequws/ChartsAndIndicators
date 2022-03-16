@@ -73,8 +73,8 @@ namespace Controls.Common
             canvas.Children.Clear();
 
             Line lineZero = new Line();
-            lineZero.X1 = 0;
-            lineZero.X2 = canvasWidth;
+            lineZero.X1 = _scaleCalculator.CanvasMargin;
+            lineZero.X2 = canvasWidth - _scaleCalculator.CanvasMargin;
             lineZero.Y1 = _scaleCalculator.LineZeroY;
             lineZero.Y2 = _scaleCalculator.LineZeroY;
             lineZero.Stroke = Brushes.Fuchsia;
@@ -83,11 +83,11 @@ namespace Controls.Common
             canvas.Children.Add(lineZero);
         }
 
-        private void DrawAxisY(int marginLeft = 10, int marginTop = 12)
+        private void DrawAxisY()
         {
             Line axisY = new Line();
-            axisY.X1 = 0;
-            axisY.X2 = 0;
+            axisY.X1 = _scaleCalculator.CanvasMargin;
+            axisY.X2 = _scaleCalculator.CanvasMargin;
             axisY.Y1 = _scaleCalculator.LineZeroY - _scaleCalculator.MinH * _scaleCalculator.Scale;
             axisY.Y2 = _scaleCalculator.LineZeroY - _scaleCalculator.MaxH * _scaleCalculator.Scale;
             axisY.Stroke = Brushes.Black;
@@ -103,8 +103,8 @@ namespace Controls.Common
                 dashArray.Add(2);
                 dashArray.Add(2);
                 step.StrokeDashArray = dashArray;
-                step.X1 = 0;
-                step.X2 = canvasWidth;
+                step.X1 = _scaleCalculator.CanvasMargin;
+                step.X2 = canvasWidth - _scaleCalculator.CanvasMargin;
                 step.Y1 = _scaleCalculator.StepBottomY - i * _scaleCalculator.StepHeight;
                 step.Y2 = step.Y1;
 
@@ -112,7 +112,7 @@ namespace Controls.Common
             }
         }
 
-        private void DrawYAxisStepDesc(int marginLeft = 10, int marginTop = 12)
+        private void DrawYAxisStepDesc(double marginLeft = 10, int marginTop = 12)
         {
             for (int i = 0; i < _scaleCalculator.AxisYStepsNum; i++)
             {
@@ -123,20 +123,20 @@ namespace Controls.Common
                 text.Text = $"{ _scaleCalculator.MinH + i * _scaleCalculator.StepSizeVal}";
 
                 text.FontSize = TextHeight;
-                Canvas.SetLeft(text, marginLeft);
+                Canvas.SetLeft(text, _scaleCalculator.CanvasMargin + marginLeft);
                 Canvas.SetTop(text, _scaleCalculator.StepBottomY - i * _scaleCalculator.StepHeight - marginTop);
                 canvas.Children.Add(text);
             }
         }
 
-        private void DrawAxisYText(int marginLeft = 10, int marginTop = 14)
+        private void DrawAxisYText(double marginLeft = 10, int marginTop = 14)
         {
             var text = new TextBlock();
             text.TextWrapping = TextWrapping.Wrap;
             text.Text = $"{ _scaleCalculator.MaxH.ToString("N1")}";
 
             text.FontSize = TextHeight;
-            Canvas.SetLeft(text, marginLeft);
+            Canvas.SetLeft(text, _scaleCalculator.CanvasMargin + marginLeft);
             Canvas.SetTop(text, _scaleCalculator.LineZeroY - _scaleCalculator.MaxH * _scaleCalculator.Scale - marginTop);
 
             var text2 = new TextBlock();
@@ -144,13 +144,13 @@ namespace Controls.Common
             text2.Text = $"{ _scaleCalculator.MinH.ToString("N1")}";
 
             text2.FontSize = TextHeight;
-            Canvas.SetLeft(text2, marginLeft);
+            Canvas.SetLeft(text2, _scaleCalculator.CanvasMargin + marginLeft);
             Canvas.SetTop(text2, _scaleCalculator.LineZeroY - _scaleCalculator.MinH * _scaleCalculator.Scale - marginTop);
 
             var text0 = new TextBlock();
             text0.Text = $"0";
             text0.FontSize = TextHeight;
-            Canvas.SetLeft(text0, marginLeft);
+            Canvas.SetLeft(text0, _scaleCalculator.CanvasMargin + marginLeft);
             Canvas.SetTop(text0, _scaleCalculator.LineZeroY - marginTop);
 
             canvas.Children.Add(text0);

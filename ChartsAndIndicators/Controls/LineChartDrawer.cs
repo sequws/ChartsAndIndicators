@@ -56,7 +56,7 @@ namespace Controls
                 int i = 0;
                 foreach(var data in lineData.Value)
                 {
-                    points.Add(new Point(i * stepX, ScaleCalculator.LineZeroY - data * ScaleCalculator.Scale));
+                    points.Add(new Point(i * stepX + ScaleCalculator.CanvasMargin, ScaleCalculator.LineZeroY - data * ScaleCalculator.Scale));
                     i++;
                 }
 
