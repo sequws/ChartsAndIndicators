@@ -40,7 +40,7 @@ namespace Controls.Common
             this.canvas = canvas;
         }
 
-        public void CalculateScale(double min, double max, int dataLength, int margin = 10)
+        public void CalculateScale(double min, double max, int dataLength, int margin = 0)
         {
             _scaleCalculator.CalculateScale(min, max, dataLength, margin);
             scaleCalculated = true;

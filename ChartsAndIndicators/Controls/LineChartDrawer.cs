@@ -38,7 +38,7 @@ namespace Controls
                 if (lineData.Value.Count > dataLength) dataLength = lineData.Value.Count;
             }
 
-            CalculateScale(min, max, dataLength);
+            CalculateScale(min, max, dataLength,10);
             Draw();
             DrawLines(linesData);
         }

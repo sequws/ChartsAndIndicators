@@ -107,6 +107,7 @@ namespace Controls.Common
 
             _lineZeroY = lineXratio > 1 ? canvasHeight - (canvasHeight / lineXratio) :
                 _minH < 0 ? 0 : viewFullHeight * Scale;
+            _lineZeroY += margin;
 
             stepHeight = ViewFullHeight * Scale / (yAxisSteps - 1);
             stepBottomY = LineZeroY - LastStepY * stepHeight;
