@@ -24,7 +24,7 @@ namespace Controls
             this.canvas = canvas;
         }
 
-        public void Draw(Dictionary<string, double> barValues, int margin = 0)
+        public void Draw(Dictionary<string, double> barValues, int margin = 10)
         {
             if (barValues.Count == 0) return;
 
@@ -40,7 +40,7 @@ namespace Controls
 
         private void DrawBars(Dictionary<string, double> barValues, int margin)
         {
-            var tmpW = (ScaleCalculator.CanvasWidth - barValues.Count * barMinMargin -2*margin) / barValues.Count;
+            var tmpW = (ScaleCalculator.CanvasWidth - barValues.Count * barMinMargin - 2*margin) / barValues.Count;
             var barW = Math.Min(tmpW, barMaxWidth);
 
             int i = 0;
@@ -57,9 +57,9 @@ namespace Controls
                 rect.Fill = bar.Value >= 0 ? Brushes.DarkGreen : Brushes.DarkRed;
 
                 // seriesW
-                var barSeriesW = barValues.Count * (barW + barMinMargin);
+                var barSeriesW = barValues.Count * (barW + barMinMargin) + barMinMargin;
 
-                var barX = ScaleCalculator.CenterX - (0.5 * barSeriesW) + i * (barW + barMinMargin);
+                var barX = ScaleCalculator.CanvasMargin + barMinMargin + ScaleCalculator.CenterX + i * (barW + barMinMargin) - (0.5 * barSeriesW);
                 var barY = bar.Value > 0 ? ScaleCalculator.LineZeroY - barH : ScaleCalculator.LineZeroY;
 
                 Canvas.SetLeft(rect, barX);

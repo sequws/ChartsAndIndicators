@@ -85,7 +85,7 @@ namespace Controls.Common
             canvasHeight = ctrlHeight - 2 * _canvasMargin;
             ctrlWidth = _canvas.ActualWidth;
             canvasWidth = ctrlWidth - 2 * _canvasMargin;
-            centerX = ctrlWidth / 2;
+            centerX = canvasWidth / 2;
 
             var barMaxH = Math.Max(max, FixedMaxH);
             var barMinH = Math.Min(min, FixedMinH);

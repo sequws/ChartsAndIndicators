@@ -17,7 +17,7 @@
             <TextBox x:Name="BarValueTextBox" Text="100" Width="100"></TextBox>
             <Button x:Name="RandomBarButton" Content="Random bars" Width="100" Margin="2" Click="RandomBarButton_Click"></Button>
         </StackPanel>
-        <StackPanel Height="20" DockPanel.Dock="Bottom"></StackPanel>
+        <StackPanel DockPanel.Dock="Bottom"></StackPanel>
         <controls:BarChart x:Name="MainBarChart"></controls:BarChart>
     </DockPanel>
 </UserControl>
