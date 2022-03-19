@@ -54,9 +54,12 @@ namespace Controls
             {
                 PointCollection points = new PointCollection();
                 int i = 0;
+                // first point - point zero, line Y
+                points.Add(new Point(ScaleCalculator.CanvasMargin, ScaleCalculator.LineZeroY));
+
                 foreach(var data in lineData.Value)
                 {
-                    points.Add(new Point(i * stepX + ScaleCalculator.CanvasMargin, ScaleCalculator.LineZeroY - data * ScaleCalculator.Scale));
+                    points.Add(new Point((i+1) * stepX + ScaleCalculator.CanvasMargin, ScaleCalculator.LineZeroY - data * ScaleCalculator.Scale));
                     i++;
                 }
 
