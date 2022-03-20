@@ -58,12 +58,6 @@ namespace Controls
             DataContext = this;
             ChartName = "Bar Chart";
 
-            //BarValues.Add("EURJPY", 0);
-            BarValues.Add("GBPUSD", 20);
-            BarValues.Add("EURUSD", 40);
-            BarValues.Add("NASDAQ", -80);
-            BarValues.Add("GBPJPY", -15);
-
             barChartDrawer = new BarChartDrawer(MainCanvas);
         }
 

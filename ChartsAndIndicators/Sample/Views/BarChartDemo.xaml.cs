@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace Sample.Views
@@ -9,18 +10,22 @@ namespace Sample.Views
     public partial class BarChartDemo : UserControl
     {
         int barId = 0;
+        private Dictionary<string, double> barValues = new Dictionary<string, double>();
 
         public BarChartDemo()
         {
             InitializeComponent();
 
-            //MainBarChart.BarValues.Add("foo", 20);
-            //MainBarChart.BarValues.Add("bar", 40);
+            barValues.Add("GBPUSD", 20);
+            barValues.Add("EURUSD", 40);
+            barValues.Add("NASDAQ", -80);
+            barValues.Add("GBPJPY", -15);
+
+            MainBarChart.BarValues = barValues;
         }
 
         private void AddBarButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            
             try
             {
                 //MainBarChart.BarValues.Add( BarNameTextBox.Text,  int.Parse(BarValueTextBox.Text));
@@ -33,7 +38,6 @@ namespace Sample.Views
             {
                 throw;
             }
-            
         }
 
         private void RandomBarButton_Click(object sender, System.Windows.RoutedEventArgs e)
