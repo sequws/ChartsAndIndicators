@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Sample.Views
 {
@@ -22,6 +23,7 @@ namespace Sample.Views
             barValues.Add("GBPJPY", -15);
 
             MainBarChart.BarValues = barValues;
+            MainBarChart.ChartBackground = new SolidColorBrush(Colors.Wheat);
         }
 
         private void AddBarButton_Click(object sender, System.Windows.RoutedEventArgs e)

@@ -37,6 +37,14 @@ namespace Controls
             set => SetField(ref _isDescVisible, value);
         }
 
+        private SolidColorBrush _chartBackground = new SolidColorBrush( Colors.AliceBlue);
+
+        public SolidColorBrush ChartBackground
+        {
+            get => _chartBackground;
+            set => SetField(ref _chartBackground, value);
+        }
+
         private Dictionary<string, double> _barValues = new Dictionary<string, double>();
 
         public Dictionary<string, double> BarValues

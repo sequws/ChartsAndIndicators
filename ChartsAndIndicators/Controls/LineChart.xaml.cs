@@ -45,6 +45,14 @@ namespace Controls
             get { return _axisYDesc; }
             set { _axisYDesc = value; }
         }
+
+        private SolidColorBrush _chartBackground = new SolidColorBrush(Colors.AliceBlue);
+
+        public SolidColorBrush ChartBackground
+        {
+            get => _chartBackground;
+            set => SetField(ref _chartBackground, value);
+        }
         #endregion
 
         LineChartDrawer chartDrawer;
