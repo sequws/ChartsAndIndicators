@@ -18,7 +18,7 @@ namespace Sample.Views
             InitializeComponent();
             GenerateNewLines();
 
-            MainLineChart.ChartBackground = new SolidColorBrush(Colors.YellowGreen);
+            MainLineChart.ChartBackground = new SolidColorBrush(Colors.AliceBlue);
         }
 
         private void RandomLinesButton_Click(object sender, RoutedEventArgs e)

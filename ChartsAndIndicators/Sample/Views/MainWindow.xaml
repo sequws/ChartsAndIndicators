@@ -32,6 +32,8 @@
                      Command="{Binding NavigateCommand}" CommandParameter="BarChartDemo"></Button>
             <Button Content="LineChart" Margin="2" FontSize="12" mahc:ControlsHelper.ContentCharacterCasing="Normal"
                      Command="{Binding NavigateCommand}" CommandParameter="LineChartDemo"></Button>
+            <Button Content="OhlcChart" Margin="2" FontSize="12" mahc:ControlsHelper.ContentCharacterCasing="Normal"
+                     Command="{Binding NavigateCommand}" CommandParameter="OhlcChartDemo"></Button>
         </StackPanel>
         <ContentControl prism:RegionManager.RegionName="ContentRegion"/>
     </DockPanel>

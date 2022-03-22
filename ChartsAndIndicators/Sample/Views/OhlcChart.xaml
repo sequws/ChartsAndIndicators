@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Sample.Views.OhlcChartDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:controls="clr-namespace:Controls;assembly=Controls"
+             mc:Ignorable="d"
+            d:DesignHeight="450" d:DesignWidth="600">
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" Height="30" DockPanel.Dock="Top" Background="AliceBlue">
+            <!--<Label Content="{Binding Info}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>-->
+            <Label Content="Candles: "></Label>
+            <TextBox x:Name="LinesTextBox" Text="20" Width="40" Margin="2"></TextBox>
+            <Label Content="Max diff: "></Label>
+            <TextBox x:Name="MaxDiffTextBox" Text="5" Width="40" Margin="2"></TextBox>
+            <Button x:Name="RandomCandlesButton" Content="Random candles" Width="120" Margin="2"></Button>
+        </StackPanel>
+        
+    </DockPanel>
+</UserControl>
