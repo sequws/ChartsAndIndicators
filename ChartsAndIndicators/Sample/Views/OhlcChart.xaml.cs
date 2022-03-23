@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using Controls.Models;
+using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace Sample.Views
 {
@@ -7,9 +9,13 @@ namespace Sample.Views
     /// </summary>
     public partial class OhlcChartDemo : UserControl
     {
+        List<Ohlc> ohlcCandles = new List<Ohlc>();
+
         public OhlcChartDemo()
         {
             InitializeComponent();
+
+
         }
     }
 }
