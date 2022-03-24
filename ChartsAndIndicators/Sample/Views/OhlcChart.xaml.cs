@@ -15,7 +15,7 @@ namespace Sample.Views
         {
             InitializeComponent();
 
-
+            DataContext = this;
         }
     }
 }

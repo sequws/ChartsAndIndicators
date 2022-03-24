@@ -57,6 +57,10 @@
       <DependentUpon>LineChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="LineChartDrawer.cs" />
+    <Compile Include="Models\Ohlc.cs" />
+    <Compile Include="OhlcChart.xaml.cs">
+      <DependentUpon>OhlcChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -87,6 +91,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LineChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OhlcChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
