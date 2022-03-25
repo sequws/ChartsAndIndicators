@@ -23,21 +23,11 @@ namespace Controls
         {
             if (ohlcCandles.Count == 0) return;
 
-            double max = 100;
-            double min = 0;
             int dataLength = ohlcCandles.Count;
+            var max = ohlcCandles.Max(x => x.High);
+            var min = ohlcCandles.Min(x => x.Low);
 
-            //foreach (var lineData in linesData)
-            //{
-            //    var MaximumValue = lineData.Value.Max();
-            //    var MinimumValue = lineData.Value.Min();
-
-            //    max = MaximumValue > max ? MaximumValue : max;
-            //    min = MinimumValue < min ? MinimumValue : min;
-            //    if (lineData.Value.Count > dataLength) dataLength = lineData.Value.Count;
-            //}
-
-            CalculateScale(min, max, dataLength, 10);
+            CalculateScale(min, max, dataLength, 10);  // Cant properly calculate without Zero on chart!
             Draw();
             DrawCandles(ohlcCandles);
         }
