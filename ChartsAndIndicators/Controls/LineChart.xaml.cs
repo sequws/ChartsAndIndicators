@@ -55,6 +55,18 @@ namespace Controls
         }
         #endregion
 
+        private Dictionary<string, List<double>> _linesData = new Dictionary<string, List<double>>();
+
+        public Dictionary<string, List<double>> LinesData
+        {
+            get { return _linesData; }
+            set
+            {
+                SetField(ref _linesData, value);
+                chartDrawer.Draw(LinesData);
+            }
+        }
+
         LineChartDrawer chartDrawer;
 
         public LineChart()
@@ -69,19 +81,6 @@ namespace Controls
         {
             chartDrawer.Draw( LinesData);
         }
-
-        private Dictionary<string, List<double>> _linesData = new Dictionary<string, List<double>>();
-
-        public Dictionary<string, List<double>> LinesData
-        {
-            get { return _linesData; }
-            set
-            {
-                SetField(ref _linesData, value);
-                chartDrawer.Draw(LinesData);
-            }
-        }
-
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

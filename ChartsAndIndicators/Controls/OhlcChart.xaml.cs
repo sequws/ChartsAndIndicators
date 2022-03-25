@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Controls.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -53,16 +54,30 @@ namespace Controls
         }
         #endregion
 
+        private List<Ohlc> _ohlcData = new List<Ohlc>();
+
+        public List<Ohlc> OhlcData
+        {
+            get { return _ohlcData; }
+            set { 
+                SetField(ref _ohlcData , value);
+                ohlcChartDrawer.Draw(OhlcData);
+            }
+        }
+
+        OhlcChartDrawer ohlcChartDrawer;
+
         public OhlcChart()
         {
             InitializeComponent();
 
             DataContext = this;
+            ohlcChartDrawer = new OhlcChartDrawer(MainCanvas);
         }
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
+            ohlcChartDrawer.Draw(OhlcData);
         }
 
 

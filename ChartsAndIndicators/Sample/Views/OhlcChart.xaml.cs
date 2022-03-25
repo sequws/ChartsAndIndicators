@@ -1,4 +1,5 @@
-﻿using Controls.Models;
+﻿using Controls;
+using Controls.Models;
 using System.Collections.Generic;
 using System.Windows.Controls;
 
@@ -16,6 +17,16 @@ namespace Sample.Views
             InitializeComponent();
 
             DataContext = this;
+
+            ohlcCandles.Add(new Ohlc
+            {
+                Open = 121,
+                High = 128,
+                Low = 112,
+                Close = 115
+            });
+
+            MainOhlcChart.OhlcData = ohlcCandles;
         }
     }
 }

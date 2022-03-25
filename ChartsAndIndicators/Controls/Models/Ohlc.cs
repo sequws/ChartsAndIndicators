@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Controls.Models
 {
-    public  class Ohlc
+    public class Ohlc
     {
         public double Open { get; set; }
         public double High { get; set; }
@@ -20,6 +20,11 @@ namespace Controls.Models
             High = high;
             Low = low;
             Close = close;
+        }
+
+        public Ohlc()
+        {
+
         }
     }
 }

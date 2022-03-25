@@ -61,6 +61,7 @@
     <Compile Include="OhlcChart.xaml.cs">
       <DependentUpon>OhlcChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OhlcChartDrawer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
