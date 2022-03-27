@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="BarChartDrawer.cs" />
     <Compile Include="Common\ChartDrawer.cs" />
+    <Compile Include="Common\ScalableChartDrawer.cs" />
     <Compile Include="LineChart.xaml.cs">
       <DependentUpon>LineChart.xaml</DependentUpon>
     </Compile>
