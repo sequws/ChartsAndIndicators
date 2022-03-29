@@ -12,6 +12,7 @@ namespace Controls.Common
     {
         public double Scale { get; set; }
         public Point Center { get; set; }
+        private double startedScale = 0;    // Scale calculated on start to best fit data 
 
         // without canvas reference
         private double ctrlWidth = 0;
@@ -25,6 +26,6 @@ namespace Controls.Common
         private double dataHigh;
         private double dataLow;
         private double dataLength;
-
+        private double stepSizeVal;
     }
 }
