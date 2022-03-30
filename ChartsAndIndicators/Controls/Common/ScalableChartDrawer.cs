@@ -18,5 +18,13 @@ namespace Controls.Common
         public double ViewWidth { get; set; }
 
         Canvas canvas;
+
+        public ScalableScaleCalculator Calculator { get; private set; }
+
+        public ScalableChartDrawer(Canvas canvas)
+        {
+            this.canvas = canvas;
+                
+        }
     }
 }

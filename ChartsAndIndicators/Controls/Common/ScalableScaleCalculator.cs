@@ -12,7 +12,10 @@ namespace Controls.Common
     {
         public double Scale { get; set; }
         public Point Center { get; set; }
-        private double startedScale = 0;    // Scale calculated on start to best fit data 
+        private double initialScale = 0;    // Scale calculated on start to best fit data 
+
+        // zooming eg mouse scroll
+        private double zoom { get; set; }
 
         // without canvas reference
         private double ctrlWidth = 0;
@@ -27,5 +30,22 @@ namespace Controls.Common
         private double dataLow;
         private double dataLength;
         private double stepSizeVal;
+
+        public ScalableScaleCalculator()
+        {
+        }
+
+        public void CalculateInitialScale(double ctrlW, double ctrlH, double dataH, double dataL)
+        {
+            ctrlWidth = ctrlW;
+            ctrlHeight = ctrlH;
+            dataHigh = dataH;
+            dataLow = dataL;
+        }
+
+        public void CalculateScale(double zoom)
+        {
+            this.zoom = zoom;
+        }
     }
 }
