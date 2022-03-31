@@ -24,7 +24,12 @@ namespace Controls.Common
         public ScalableChartDrawer(Canvas canvas)
         {
             this.canvas = canvas;
-                
+
+        }
+
+        public void CalculateInitialScale(Canvas canvas, double min, double max, int dataLength)
+        {
+            Calculator.CalculateInitialScale(canvas.ActualWidth, canvas.ActualHeight, min, max, dataLength);
         }
     }
 }

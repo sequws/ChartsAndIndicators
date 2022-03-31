@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace Controls
 {
-    public class OhlcChartDrawer : ChartDrawer
+    public class OhlcChartDrawer : ScalableChartDrawer
     {
         Canvas canvas;
         List<Ohlc> ohlcCandles = new List<Ohlc>();
@@ -27,9 +27,9 @@ namespace Controls
             var max = ohlcCandles.Max(x => x.High);
             var min = ohlcCandles.Min(x => x.Low);
 
-            CalculateScale(min, max, dataLength, 10);  // Cant properly calculate without Zero on chart!
-            Draw();
-            DrawCandles(ohlcCandles);
+            CalculateInitialScale(canvas, min, max, dataLength);  // Cant properly calculate without Zero on chart!
+            //Draw();
+            //DrawCandles(ohlcCandles);
         }
 
         private void DrawCandles(List<Ohlc> ohlcCandles)

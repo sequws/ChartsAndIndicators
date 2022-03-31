@@ -35,8 +35,11 @@ namespace Controls.Common
         {
         }
 
-        public void CalculateInitialScale(double ctrlW, double ctrlH, double dataH, double dataL)
+        public void CalculateInitialScale(double ctrlW, double ctrlH, double dataH, double dataL, int dataLength)
         {
+            this.dataLength = dataLength;
+            if (dataLength == 0) return;
+            
             ctrlWidth = ctrlW;
             ctrlHeight = ctrlH;
             dataHigh = dataH;
