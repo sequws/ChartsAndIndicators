@@ -26,6 +26,13 @@ namespace Sample.Views
                 Close = 115
             });
 
+            ohlcCandles.Add(new Ohlc(115, 117, 112, 116));
+            ohlcCandles.Add(new Ohlc(116, 118, 114, 118));
+            ohlcCandles.Add(new Ohlc(118, 122, 117, 120));
+            ohlcCandles.Add(new Ohlc(120, 126, 120, 124));
+            ohlcCandles.Add(new Ohlc(120, 126, 120, 124));
+            ohlcCandles.Add(new Ohlc(124, 126, 115, 116));
+
             MainOhlcChart.OhlcData = ohlcCandles;
         }
     }
