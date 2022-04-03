@@ -29,12 +29,18 @@ namespace Controls
 
             CalculateInitialScale(canvas, min, max, dataLength);  // Cant properly calculate without Zero on chart!
             //Draw();
-            //DrawCandles(ohlcCandles);
+            DrawCandles(ohlcCandles);
         }
 
         private void DrawCandles(List<Ohlc> ohlcCandles)
         {
-            
+
+            foreach (var ohlc in ohlcCandles)
+            {
+
+
+
+            }
         }
     }
 }
