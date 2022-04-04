@@ -34,12 +34,26 @@ namespace Controls.Common
         }
 
         /// <summary>
-        /// Returns minimal first rounded to ten value
+        /// Returns minimal first rounded to ten value - for minus values
         /// </summary>
         public static int RoundToFirstMinus(double barMin, int roundedTo = 10)
         {
             var minTenth = (int)(barMin / roundedTo) * roundedTo;
             if (barMin % roundedTo != 0) minTenth -= roundedTo;
+
+            return minTenth;
+        }
+
+        /// <summary>
+        /// Returns minimal first rounded to ten value for both plus and minus values
+        /// </summary>
+        public static int RoundToFirstMininimum(double valMin, int roundedTo = 10)
+        {
+            var minTenth = (int)(valMin / roundedTo) * roundedTo;
+            if (valMin % roundedTo != 0)
+            {
+                minTenth = valMin < 0 ? minTenth -= roundedTo : minTenth;
+            }
 
             return minTenth;
         }

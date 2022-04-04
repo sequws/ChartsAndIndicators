@@ -49,7 +49,7 @@ namespace Controls.Common
 
             // calculate view size
             viewMax = CalculatorHelpers.RoundToFirstPlus(dataHigh, 10);
-            viewMin = CalculatorHelpers.RoundToFirstMinus(dataLow, 10);
+            viewMin = CalculatorHelpers.RoundToFirstMininimum(dataLow, 10);
             viewHeight = viewMin < 0 ? viewMax + Math.Abs(viewMin) : viewMax - viewMin;
             
         }
