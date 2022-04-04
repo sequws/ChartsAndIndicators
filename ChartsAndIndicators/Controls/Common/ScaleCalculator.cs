@@ -89,10 +89,10 @@ namespace Controls.Common
 
             var barMaxH = Math.Max(max, FixedMaxH);
             var barMinH = Math.Min(min, FixedMinH);
-            stepHeightPix = CalcStepHeight(barMinH, barMaxH, MaxStepsOnYAxis);
+            stepHeightPix = CalculatorHelpers.CalcStepHeight(barMinH, barMaxH, MaxStepsOnYAxis);
 
-            _maxH = RoundToFirstPlus(barMaxH, stepHeightPix);
-            _minH = RoundToFirstMinus(barMinH, stepHeightPix);
+            _maxH = CalculatorHelpers.RoundToFirstPlus(barMaxH, stepHeightPix);
+            _minH = CalculatorHelpers.RoundToFirstMinus(barMinH, stepHeightPix);
             yAxisSteps = (int)((_maxH + Math.Abs(_minH)) / stepHeightPix) + 1;
 
             yLastStep = (int)_minH / stepHeightPix;
@@ -116,42 +116,5 @@ namespace Controls.Common
         }
 
 
-        #region helpers metod
-
-        public static int CalcStepHeight(double min, double max, int maxSteps = 10)
-        {
-            int stepHeigh = 0;
-
-            var cmax = RoundToFirstPlus(max);
-            var cmin = RoundToFirstMinus(min);
-
-            stepHeigh = RoundToFirstPlus((cmax + Math.Abs(cmin)) / maxSteps);
-
-            return stepHeigh;
-        }
-
-        /// <summary>
-        /// Returns first narest rounded to ten value
-        /// </summary>
-        public static int RoundToFirstPlus(double barMax, int roundedTo = 10)
-        {
-            var maxTenth = (int)(barMax / roundedTo) * roundedTo;
-            if (barMax % roundedTo != 0) maxTenth += roundedTo;
-
-            return maxTenth;
-        }
-
-        /// <summary>
-        /// Returns minimal first rounded to ten value
-        /// </summary>
-        public static int RoundToFirstMinus(double barMin, int roundedTo = 10)
-        {
-            var minTenth = (int)(barMin / roundedTo) * roundedTo;
-            if (barMin % roundedTo != 0) minTenth -= roundedTo;
-
-            return minTenth;
-        }
-
-        #endregion
     }
 }

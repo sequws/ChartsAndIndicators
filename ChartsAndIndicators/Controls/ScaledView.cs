@@ -59,10 +59,10 @@ namespace Controls
             var barMaxH = Math.Max(barValues.Max(x => x.Value), FixedMaxH);
             var barMinH = Math.Min(barValues.Min(x => x.Value), FixedMinH);
 
-            stepHeightPix = ScaleCalculator.CalcStepHeight(barMinH, barMaxH,20);
+            stepHeightPix = CalculatorHelpers.CalcStepHeight(barMinH, barMaxH,20);
 
-            maxH = ScaleCalculator.RoundToFirstPlus(barMaxH, stepHeightPix); 
-            minH = ScaleCalculator.RoundToFirstMinus(barMinH, stepHeightPix); 
+            maxH = CalculatorHelpers.RoundToFirstPlus(barMaxH, stepHeightPix); 
+            minH = CalculatorHelpers.RoundToFirstMinus(barMinH, stepHeightPix); 
             yAxisSteps = (int)((maxH + Math.Abs( minH)) / stepHeightPix) +1;
 
             yLastStep = (int)minH / stepHeightPix;

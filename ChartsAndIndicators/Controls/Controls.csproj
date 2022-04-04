@@ -52,6 +52,7 @@
       <DependentUpon>BarChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="BarChartDrawer.cs" />
+    <Compile Include="Common\CalculatorHelpers.cs" />
     <Compile Include="Common\ChartDrawer.cs" />
     <Compile Include="Common\ScalableChartDrawer.cs" />
     <Compile Include="Common\ScalableScaleCalculator.cs" />
