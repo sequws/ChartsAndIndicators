@@ -24,6 +24,8 @@ namespace Controls.Common
         // visible area on chart
         private double viewHeight = 0;
         private double viewWidth = 0;
+        private double viewMax = 0;
+        private double viewMin = 0;
 
         // highest and lowest point from data
         private double dataHigh;
@@ -35,7 +37,7 @@ namespace Controls.Common
         {
         }
 
-        public void CalculateInitialScale(double ctrlW, double ctrlH, double dataH, double dataL, int dataLength)
+        public void CalculateInitialScale(double ctrlW, double ctrlH, double dataL, double dataH, int dataLength)
         {
             this.dataLength = dataLength;
             if (dataLength == 0) return;
@@ -44,6 +46,12 @@ namespace Controls.Common
             ctrlHeight = ctrlH;
             dataHigh = dataH;
             dataLow = dataL;
+
+            // calculate view size
+            viewMax = CalculatorHelpers.RoundToFirstPlus(dataHigh, 10);
+            viewMin = CalculatorHelpers.RoundToFirstMinus(dataLow, 10);
+            viewHeight = viewMin < 0 ? viewMax + Math.Abs(viewMin) : viewMax - viewMin;
+            
         }
 
         public void CalculateScale(double zoom)
