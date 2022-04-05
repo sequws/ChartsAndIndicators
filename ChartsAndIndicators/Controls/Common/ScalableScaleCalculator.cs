@@ -26,12 +26,19 @@ namespace Controls.Common
         private double viewWidth = 0;
         private double viewMax = 0;
         private double viewMin = 0;
+        private double viewCenterY = 0;
 
         // highest and lowest point from data
         private double dataHigh;
         private double dataLow;
         private double dataLength;
         private double stepSizeVal;
+
+        public double InitialScale => initialScale;
+        public double DataLow => dataLow;
+        public double DataHigh => dataHigh;
+        public double ViewMax => viewMax;
+        public double ViewMin => viewMin;
 
         public ScalableScaleCalculator()
         {
@@ -51,7 +58,9 @@ namespace Controls.Common
             viewMax = CalculatorHelpers.RoundToFirstPlus(dataHigh, 10);
             viewMin = CalculatorHelpers.RoundToFirstMininimum(dataLow, 10);
             viewHeight = viewMin < 0 ? viewMax + Math.Abs(viewMin) : viewMax - viewMin;
-            
+            viewCenterY = viewMin < 0 ? (viewMax + Math.Abs(viewMin)) / 2 : (viewMax - viewMin) / 2;
+
+            initialScale = ctrlHeight / viewHeight;
         }
 
         public void CalculateScale(double zoom)
