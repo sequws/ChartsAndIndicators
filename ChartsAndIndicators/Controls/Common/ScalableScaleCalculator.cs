@@ -40,19 +40,25 @@ namespace Controls.Common
         public double ViewMax => viewMax;
         public double ViewMin => viewMin;
 
+        // axis data
+        int maxStepsOnYAxis = 20;
+        double yAxisStepHeightPix = 0;
+        int yAxisSteps = 0;
+
         public ScalableScaleCalculator()
         {
         }
 
         public void CalculateInitialScale(double ctrlW, double ctrlH, double dataL, double dataH, int dataLength)
         {
-            this.dataLength = dataLength;
+            if (ctrlH == 0 || ctrlW == 0) return;
             if (dataLength == 0) return;
-            
+
             ctrlWidth = ctrlW;
             ctrlHeight = ctrlH;
             dataHigh = dataH;
             dataLow = dataL;
+            this.dataLength = dataLength;
 
             // calculate view size
             viewMax = CalculatorHelpers.RoundToFirstPlus(dataHigh, 10);
@@ -61,6 +67,10 @@ namespace Controls.Common
             viewCenterY = viewMin < 0 ? (viewMax + Math.Abs(viewMin)) / 2 : (viewMax - viewMin) / 2;
 
             initialScale = ctrlHeight / viewHeight;
+
+            // calculate steps on Y axis
+            //yAxisStepHeightPix = CalculatorHelpers.RoundToFirstPlus(viewHeight / maxStepsOnYAxis);
+            //yAxisSteps = (int)((viewMax + Math.Abs(viewMin)) / yAxisStepHeightPix) + 1;
         }
 
         public void CalculateScale(double zoom)
