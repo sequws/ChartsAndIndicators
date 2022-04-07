@@ -32,7 +32,8 @@ namespace Controls.Common
         public void CalculateInitialScale(Canvas canvas, double min, double max, int dataLength)
         {
             Calculator.CalculateInitialScale(canvas.ActualWidth, canvas.ActualHeight, min, max, dataLength);
-
+            
+            canvas.Children.Clear();
             DrawAxisY();
         }
 
@@ -42,12 +43,32 @@ namespace Controls.Common
 
             axisY.X1 = 10;
             axisY.X2 = 10;
-            axisY.Y1 = (Calculator.DataLow - Calculator.ViewMin) * Calculator.InitialScale;
-            axisY.Y2 = (Calculator.DataHigh - Calculator.ViewMin) * Calculator.InitialScale;
+            //axisY.Y1 = (Calculator.DataLow - Calculator.ViewMin) * Calculator.InitialScale;
+            //axisY.Y2 = (Calculator.DataHigh - Calculator.ViewMin) * Calculator.InitialScale;
+            axisY.Y1 = Calculator.CalcY(Calculator.DataLow);
+            axisY.Y2 = Calculator.CalcY(Calculator.DataHigh);
 
             axisY.Stroke = Brushes.Fuchsia;
             axisY.StrokeThickness = 2;
             canvas.Children.Add(axisY);
+
+            // axis Y steps
+            for (int i = 0; i <= Calculator.MaxStepsOnYAxis; i++)
+            {
+                Line step = new Line();
+                step.Stroke = Brushes.Black;
+                step.StrokeThickness = 1;
+                //var dashArray = new DoubleCollection();
+                //dashArray.Add(2);
+                //dashArray.Add(2);
+                //step.StrokeDashArray = dashArray;
+                step.X1 = 5;
+                step.X2 = 15;
+                step.Y1 = Calculator.CalcY( Calculator.DataLow + i * Calculator.StepHeightOnYAxis);
+                step.Y2 = step.Y1;
+
+                canvas.Children.Add(step);
+            }
         }
     }
 }

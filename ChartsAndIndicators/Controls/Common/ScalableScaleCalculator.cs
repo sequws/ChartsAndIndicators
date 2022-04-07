@@ -27,6 +27,8 @@ namespace Controls.Common
         private double viewMax = 0;
         private double viewMin = 0;
         private double viewCenterY = 0;
+        private double viewMarginPercent = 10; // top =10, bottom =10
+        private double viewMarginPix = 0;
 
         // highest and lowest point from data
         private double dataHigh;
@@ -39,10 +41,12 @@ namespace Controls.Common
         public double DataHigh => dataHigh;
         public double ViewMax => viewMax;
         public double ViewMin => viewMin;
+        public double MaxStepsOnYAxis => maxStepsOnYAxis;
+        public double StepHeightOnYAxis => stepHeighOnYAxis;
 
         // axis data
-        int maxStepsOnYAxis = 20;
-        double yAxisStepHeightPix = 0;
+        int maxStepsOnYAxis = 10;
+        double stepHeighOnYAxis = 0;
         int yAxisSteps = 0;
 
         public ScalableScaleCalculator()
@@ -61,16 +65,28 @@ namespace Controls.Common
             this.dataLength = dataLength;
 
             // calculate view size
-            viewMax = CalculatorHelpers.RoundToFirstPlus(dataHigh, 10);
-            viewMin = CalculatorHelpers.RoundToFirstMininimum(dataLow, 10);
-            viewHeight = viewMin < 0 ? viewMax + Math.Abs(viewMin) : viewMax - viewMin;
-            viewCenterY = viewMin < 0 ? (viewMax + Math.Abs(viewMin)) / 2 : (viewMax - viewMin) / 2;
+            viewMax = dataHigh;
+            viewMin = dataLow;
+            var height = viewMin < 0 ? viewMax + Math.Abs(viewMin) : viewMax - viewMin;
 
+            viewMarginPix = viewMarginPercent / 100 * height;
+            viewHeight = height + (viewMarginPercent * 2 / 100) * height;
             initialScale = ctrlHeight / viewHeight;
 
+            //viewHeight = viewMin < 0 ? viewMax + Math.Abs(viewMin) : viewMax - viewMin;
+            //viewCenterY = viewMin < 0 ? (viewMax + Math.Abs(viewMin)) / 2 : (viewMax - viewMin) / 2;
+
             // calculate steps on Y axis
-            //yAxisStepHeightPix = CalculatorHelpers.RoundToFirstPlus(viewHeight / maxStepsOnYAxis);
-            //yAxisSteps = (int)((viewMax + Math.Abs(viewMin)) / yAxisStepHeightPix) + 1;
+            stepHeighOnYAxis = height / maxStepsOnYAxis;  // split full height 
+            //stepHeighOnYAxis = height / (maxStepsOnYAxis+1);  // split between min/max  
+        }
+
+        public double CalcY(double val)
+        {
+            double valInScale = 0;
+            valInScale = (val- viewMin + viewMarginPix) * initialScale;
+
+            return valInScale;
         }
 
         public void CalculateScale(double zoom)

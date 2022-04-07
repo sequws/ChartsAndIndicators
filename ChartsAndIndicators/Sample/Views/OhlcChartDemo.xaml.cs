@@ -2,6 +2,7 @@
 using Controls.Models;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Sample.Views
 {
@@ -34,6 +35,7 @@ namespace Sample.Views
             ohlcCandles.Add(new Ohlc(124, 126, 115, 116));
 
             MainOhlcChart.OhlcData = ohlcCandles;
+            MainOhlcChart.ChartBackground = new SolidColorBrush(Colors.WhiteSmoke);
         }
     }
 }
