@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -35,6 +36,7 @@ namespace Controls.Common
             
             canvas.Children.Clear();
             DrawAxisY();
+            DrawYAxisStepDesc();
         }
 
         private void DrawAxisY()
@@ -77,6 +79,23 @@ namespace Controls.Common
 
                 canvas.Children.Add(step);
                 canvas.Children.Add(stepLine);
+            }
+        }
+
+        private void DrawYAxisStepDesc(double marginLeft = 10, int marginTop = 12)
+        {
+            for (int i = 0; i <= Calculator.MaxStepsOnYAxis; i++)
+            {
+                // lines desc between min max
+
+                var text = new TextBlock();
+                text.TextWrapping = TextWrapping.Wrap;
+                text.Text = $"{ Calculator.DataLow + i * Calculator.StepHeightOnYAxis}";
+
+                text.FontSize = 8;
+                Canvas.SetLeft(text, 15 + marginLeft);
+                Canvas.SetTop(text, Calculator.CalcY(Calculator.DataLow + i * Calculator.StepHeightOnYAxis));
+                canvas.Children.Add(text);
             }
         }
     }
