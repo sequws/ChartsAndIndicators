@@ -94,7 +94,7 @@ namespace Controls.Common
 
                 text.FontSize = 8;
                 Canvas.SetLeft(text, 15 + marginLeft);
-                Canvas.SetTop(text, Calculator.CalcY(Calculator.DataLow + i * Calculator.StepHeightOnYAxis));
+                Canvas.SetTop(text, Calculator.CalcY(Calculator.DataLow + i * Calculator.StepHeightOnYAxis) - text.FontSize);
                 canvas.Children.Add(text);
             }
         }

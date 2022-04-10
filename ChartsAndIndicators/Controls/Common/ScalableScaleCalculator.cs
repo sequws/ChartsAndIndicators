@@ -84,7 +84,8 @@ namespace Controls.Common
         public double CalcY(double val)
         {
             double valInScale = 0;
-            valInScale = (val- viewMin + viewMarginPix) * initialScale;
+            //valInScale = (val- viewMin + viewMarginPix) * initialScale;
+            valInScale = (viewMax - val + viewMarginPix) * initialScale;
 
             return valInScale;
         }
