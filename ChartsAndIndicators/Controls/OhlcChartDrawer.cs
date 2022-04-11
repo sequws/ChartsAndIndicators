@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace Controls
 {
@@ -22,6 +24,7 @@ namespace Controls
         public void Draw( List<Ohlc> ohlcCandles)
         {
             if (ohlcCandles.Count == 0) return;
+            if (canvas.ActualWidth == 0 || canvas.ActualHeight == 0) return;
 
             int dataLength = ohlcCandles.Count;
             var max = ohlcCandles.Max(x => x.High);
@@ -34,12 +37,36 @@ namespace Controls
 
         private void DrawCandles(List<Ohlc> ohlcCandles)
         {
-
+            int i = 0;
             foreach (var ohlc in ohlcCandles)
             {
+                var height = Math.Abs(ohlc.Open - ohlc.Close) * Calculator.InitialScale;
+                if (height == 0) height = 2;
 
+                Rectangle rect = new Rectangle();
+                rect.Width = 20;
+                rect.Height = height;
+                rect.Stroke = Brushes.Black;
+                rect.StrokeThickness = 2;
+                rect.Fill = ohlc.Open <= ohlc.Close ? Brushes.DarkGreen : Brushes.DarkRed;
 
+                var ohlcX = 30 + 20 * i;
 
+                Canvas.SetLeft(rect, ohlcX);
+
+                var top = ohlc.Close >= ohlc.Open ? ohlc.Close : ohlc.Open;
+                Canvas.SetTop(rect, Calculator.CalcY( top));
+
+                Line line = new Line();
+                line.X1 = 30 + 20 * i + 10;
+                line.X2 = line.X1;
+                line.Stroke = ohlc.Open <= ohlc.Close ? Brushes.DarkGreen : Brushes.DarkRed;
+                line.Y1 = Calculator.CalcY(ohlc.Low);
+                line.Y2 = Calculator.CalcY(ohlc.High);
+
+                canvas.Children.Add(line);
+                canvas.Children.Add(rect);
+                i++;
             }
         }
     }

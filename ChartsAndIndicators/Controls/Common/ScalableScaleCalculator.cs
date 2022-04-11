@@ -81,6 +81,9 @@ namespace Controls.Common
             //stepHeighOnYAxis = height / (maxStepsOnYAxis+1);  // split between min/max  
         }
 
+        /// <summary>
+        /// Returns pos Y in chart after scalling
+        /// </summary>
         public double CalcY(double val)
         {
             double valInScale = 0;
