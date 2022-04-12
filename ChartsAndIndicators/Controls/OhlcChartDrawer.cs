@@ -16,6 +16,10 @@ namespace Controls
         Canvas canvas;
         List<Ohlc> ohlcCandles = new List<Ohlc>();
 
+        public double ChartMargin { get; set; } = 70;
+        public double CandleMargin { get; set; } = 2;
+        public double CandleWidth { get; set; } = 20;
+
         public OhlcChartDrawer(Canvas canvas) : base(canvas)
         {
             this.canvas = canvas;
@@ -44,21 +48,20 @@ namespace Controls
                 if (height == 0) height = 2;
 
                 Rectangle rect = new Rectangle();
-                rect.Width = 20;
+                rect.Width = CandleWidth;
                 rect.Height = height;
                 rect.Stroke = Brushes.Black;
                 rect.StrokeThickness = 2;
                 rect.Fill = ohlc.Open <= ohlc.Close ? Brushes.DarkGreen : Brushes.DarkRed;
 
-                var ohlcX = 30 + 20 * i;
-
-                Canvas.SetLeft(rect, ohlcX);
+                var ohlcCenter = ChartMargin + (CandleMargin*2 + CandleWidth) * i;
+                Canvas.SetLeft(rect, ohlcCenter - CandleMargin - 0.5*CandleWidth);
 
                 var top = ohlc.Close >= ohlc.Open ? ohlc.Close : ohlc.Open;
                 Canvas.SetTop(rect, Calculator.CalcY( top));
 
                 Line line = new Line();
-                line.X1 = 30 + 20 * i + 10;
+                line.X1 = ohlcCenter - CandleMargin;
                 line.X2 = line.X1;
                 line.Stroke = ohlc.Open <= ohlc.Close ? Brushes.DarkGreen : Brushes.DarkRed;
                 line.Y1 = Calculator.CalcY(ohlc.Low);
