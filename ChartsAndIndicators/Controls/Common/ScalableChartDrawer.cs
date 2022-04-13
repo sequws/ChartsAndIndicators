@@ -24,6 +24,9 @@ namespace Controls.Common
 
         public ScalableScaleCalculator Calculator { get; private set; }
 
+        private double descWidth = 70;
+        private double axisYStepWidth = 5;
+
         public ScalableChartDrawer(Canvas canvas)
         {
             this.canvas = canvas;
@@ -43,8 +46,8 @@ namespace Controls.Common
         {
             Line axisY = new Line();
 
-            axisY.X1 = 10;
-            axisY.X2 = 10;
+            axisY.X1 = canvas.ActualWidth - descWidth;
+            axisY.X2 = axisY.X1;
             axisY.Y1 = Calculator.CalcY(Calculator.DataLow);
             axisY.Y2 = Calculator.CalcY(Calculator.DataHigh);
 
@@ -58,8 +61,8 @@ namespace Controls.Common
                 Line step = new Line();
                 step.Stroke = Brushes.Black;
                 step.StrokeThickness = 1;
-                step.X1 = 5;
-                step.X2 = 15;
+                step.X1 = axisY.X1 - axisYStepWidth;
+                step.X2 = axisY.X1 + axisYStepWidth;
                 step.Y1 = Calculator.CalcY( Calculator.DataLow + i * Calculator.StepHeightOnYAxis);
                 step.Y2 = step.Y1;
 
@@ -72,8 +75,8 @@ namespace Controls.Common
                 dashArray.Add(2);
                 dashArray.Add(2);
                 stepLine.StrokeDashArray = dashArray;
-                stepLine.X1 = 15;
-                stepLine.X2 = canvas.ActualWidth - 5;
+                stepLine.X1 = axisYStepWidth;  // margin?
+                stepLine.X2 = canvas.ActualWidth - descWidth - axisYStepWidth;
                 stepLine.Y1 = Calculator.CalcY(Calculator.DataLow + i * Calculator.StepHeightOnYAxis);
                 stepLine.Y2 = stepLine.Y1;
 
@@ -93,7 +96,7 @@ namespace Controls.Common
                 text.Text = $"{ Calculator.DataLow + i * Calculator.StepHeightOnYAxis}";
 
                 text.FontSize = 8;
-                Canvas.SetLeft(text, 15 + marginLeft);
+                Canvas.SetLeft(text, canvas.ActualWidth - descWidth + axisYStepWidth);
                 Canvas.SetTop(text, Calculator.CalcY(Calculator.DataLow + i * Calculator.StepHeightOnYAxis) - text.FontSize);
                 canvas.Children.Add(text);
             }
