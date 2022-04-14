@@ -34,6 +34,12 @@ namespace Sample.Views
             ohlcCandles.Add(new Ohlc(124, 126, 120, 124));
             ohlcCandles.Add(new Ohlc(124, 126, 115, 116));
 
+            ohlcCandles.Add(new Ohlc(116, 134, 116, 128));
+            ohlcCandles.Add(new Ohlc(128, 138, 126, 136));
+            ohlcCandles.Add(new Ohlc(136, 138, 130, 134));
+            ohlcCandles.Add(new Ohlc(134, 140, 134, 140));
+            ohlcCandles.Add(new Ohlc(140, 140, 124, 126));
+
             MainOhlcChart.OhlcData = ohlcCandles;
             MainOhlcChart.ChartBackground = new SolidColorBrush(Colors.WhiteSmoke);
         }
