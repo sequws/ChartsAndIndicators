@@ -1,6 +1,8 @@
 ﻿using Controls;
 using Controls.Models;
+using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -42,6 +44,31 @@ namespace Sample.Views
 
             MainOhlcChart.OhlcData = ohlcCandles;
             MainOhlcChart.ChartBackground = new SolidColorBrush(Colors.WhiteSmoke);
+        }
+
+        private void RandomCandlesButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            GenerateRandomCandles();
+        }
+
+        void GenerateRandomCandles()
+        {
+            Random rnd = new Random();
+            Random rndDiff = new Random();
+
+            try
+            {
+                List<Ohlc> ohlcCandles = new List<Ohlc>();
+
+                ohlcCandles.Add(new Ohlc(115, 117, 112, 116));
+
+                MainOhlcChart.OhlcData = ohlcCandles;
+                MainOhlcChart.ChartBackground = new SolidColorBrush(Colors.WhiteSmoke);
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("Wrong parameters!");
+            }
         }
     }
 }
