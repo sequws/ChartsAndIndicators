@@ -56,11 +56,25 @@ namespace Sample.Views
             Random rnd = new Random();
             Random rndDiff = new Random();
 
+
             try
             {
                 List<Ohlc> ohlcCandles = new List<Ohlc>();
 
-                ohlcCandles.Add(new Ohlc(115, 117, 112, 116));
+                //ohlcCandles.Add(new Ohlc(115, 117, 112, 116));
+                var numCandles = int.Parse(LinesTextBox.Text);
+                double start = rnd.Next(0, 200);
+                var maxDiff = double.Parse( MaxDiffTextBox.Text);
+
+                for (int i = 0; i < numCandles;i++)
+                {
+                    var diff = rndDiff.NextDouble() * maxDiff;
+                    var dir = rnd.Next(0, 3);
+
+                    var nextStart = diff >= 1 ? start + diff : start - diff;
+                    ohlcCandles.Add(new Ohlc(start, nextStart+diff, start+diff , nextStart));
+                    start = nextStart;
+                }
 
                 MainOhlcChart.OhlcData = ohlcCandles;
                 MainOhlcChart.ChartBackground = new SolidColorBrush(Colors.WhiteSmoke);
