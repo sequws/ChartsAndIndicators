@@ -90,7 +90,6 @@ namespace Controls.Common
             for (int i = 0; i <= Calculator.MaxStepsOnYAxis; i++)
             {
                 // lines desc between min max
-
                 var text = new TextBlock();
                 text.TextWrapping = TextWrapping.Wrap;
                 text.Text = $"{ Calculator.DataLow + i * Calculator.StepHeightOnYAxis}";
