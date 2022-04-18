@@ -19,6 +19,7 @@ namespace Controls.Common
         public double CenterY { get; set; }
         public double ViewHeight { get; set; }
         public double ViewWidth { get; set; }
+        public int DecimalPlaces { get; set; } = 5;
 
         Canvas canvas;
 
@@ -92,7 +93,8 @@ namespace Controls.Common
                 // lines desc between min max
                 var text = new TextBlock();
                 text.TextWrapping = TextWrapping.Wrap;
-                text.Text = $"{ Calculator.DataLow + i * Calculator.StepHeightOnYAxis}";
+                var val = Calculator.DataLow + i * Calculator.StepHeightOnYAxis;
+                text.Text = $"{ string.Format("{0:N" + DecimalPlaces + "}", val)}";
 
                 text.FontSize = 8;
                 Canvas.SetLeft(text, canvas.ActualWidth - descWidth + axisYStepWidth);

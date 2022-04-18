@@ -20,9 +20,10 @@ namespace Controls
         public double CandleMargin { get; set; } = 2;
         public double CandleWidth { get; set; } = 20;
 
-        public OhlcChartDrawer(Canvas canvas) : base(canvas)
+        public OhlcChartDrawer(Canvas canvas, int decimalPlaces = 5) : base(canvas)
         {
             this.canvas = canvas;
+            DecimalPlaces = decimalPlaces;
         }
 
         public void Draw( List<Ohlc> ohlcCandles)
