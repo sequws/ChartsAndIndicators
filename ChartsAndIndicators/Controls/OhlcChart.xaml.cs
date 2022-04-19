@@ -45,6 +45,19 @@ namespace Controls
             set { _axisYDesc = value; }
         }
 
+        private int _decimalPlaces;
+
+        public int DecimalPlaces
+        {
+            get => _decimalPlaces;
+            set
+            {
+                SetField(ref _decimalPlaces, value);
+                ohlcChartDrawer.DecimalPlaces = value;
+            }
+        }
+
+
         private SolidColorBrush _chartBackground = new SolidColorBrush(Colors.AliceBlue);
 
         public SolidColorBrush ChartBackground

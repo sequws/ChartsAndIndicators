@@ -44,6 +44,8 @@ namespace Sample.Views
 
             MainOhlcChart.OhlcData = ohlcCandles;
             MainOhlcChart.ChartBackground = new SolidColorBrush(Colors.WhiteSmoke);
+
+            MainOhlcChart.DecimalPlaces = 2;
         }
 
         private void RandomCandlesButton_Click(object sender, System.Windows.RoutedEventArgs e)
