@@ -21,6 +21,16 @@ namespace Sample.Views
 
             DataContext = this;
 
+            GenerateData();
+
+            MainOhlcChart.OhlcData = ohlcCandles;
+            MainOhlcChart.ChartBackground = new SolidColorBrush(Colors.WhiteSmoke);
+
+            MainOhlcChart.DecimalPlaces = 2;
+        }
+
+        private void GenerateData()
+        {
             ohlcCandles.Add(new Ohlc
             {
                 Open = 121,
@@ -41,11 +51,6 @@ namespace Sample.Views
             ohlcCandles.Add(new Ohlc(136, 138, 130, 134));
             ohlcCandles.Add(new Ohlc(134, 140, 134, 140));
             ohlcCandles.Add(new Ohlc(140, 140, 124, 126));
-
-            MainOhlcChart.OhlcData = ohlcCandles;
-            MainOhlcChart.ChartBackground = new SolidColorBrush(Colors.WhiteSmoke);
-
-            MainOhlcChart.DecimalPlaces = 2;
         }
 
         private void RandomCandlesButton_Click(object sender, System.Windows.RoutedEventArgs e)
