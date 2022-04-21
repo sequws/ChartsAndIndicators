@@ -73,9 +73,6 @@ namespace Controls.Common
             viewHeight = height + (viewMarginPercent * 2 / 100) * height;
             initialScale = ctrlHeight / viewHeight;
 
-            //viewHeight = viewMin < 0 ? viewMax + Math.Abs(viewMin) : viewMax - viewMin;
-            //viewCenterY = viewMin < 0 ? (viewMax + Math.Abs(viewMin)) / 2 : (viewMax - viewMin) / 2;
-
             // calculate steps on Y axis
             stepHeighOnYAxis = height / maxStepsOnYAxis;  // split full height 
             //stepHeighOnYAxis = height / (maxStepsOnYAxis+1);  // split between min/max  
@@ -86,10 +83,7 @@ namespace Controls.Common
         /// </summary>
         public double CalcY(double val)
         {
-            double valInScale = 0;
-            //valInScale = (val- viewMin + viewMarginPix) * initialScale;
-            valInScale = (viewMax - val + viewMarginPix) * initialScale;
-
+            double valInScale = (viewMax - val + viewMarginPix) * initialScale;
             return valInScale;
         }
 
