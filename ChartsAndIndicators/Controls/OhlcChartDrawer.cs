@@ -42,6 +42,8 @@ namespace Controls
 
         private void DrawCandles(List<Ohlc> ohlcCandles)
         {
+            var candleSeriesWidth = ohlcCandles.Count * (CandleMargin * 2 + CandleWidth);
+
             int i = 0;
             foreach (var ohlc in ohlcCandles)
             {
@@ -55,7 +57,8 @@ namespace Controls
                 rect.StrokeThickness = 2;
                 rect.Fill = ohlc.Open <= ohlc.Close ? Brushes.DarkGreen : Brushes.DarkRed;
 
-                var ohlcCenter = ChartMargin + (CandleMargin*2 + CandleWidth) * i;
+                // center of candle
+                var ohlcCenter = AxisYPosX - candleSeriesWidth - ChartMargin + (CandleMargin*2 + CandleWidth) * i;
                 Canvas.SetLeft(rect, ohlcCenter - CandleMargin - 0.5*CandleWidth);
 
                 var top = ohlc.Close >= ohlc.Open ? ohlc.Close : ohlc.Open;

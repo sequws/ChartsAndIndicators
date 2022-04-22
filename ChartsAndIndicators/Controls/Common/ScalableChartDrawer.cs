@@ -20,6 +20,7 @@ namespace Controls.Common
         public double ViewHeight { get; set; }
         public double ViewWidth { get; set; }
         public int DecimalPlaces { get; set; } = 5;
+        public double AxisYPosX => axisYPosX;
 
         Canvas canvas;
 
@@ -27,6 +28,7 @@ namespace Controls.Common
 
         private double descWidth = 70;
         private double axisYStepWidth = 5;
+        private double axisYPosX = 0;
 
         public ScalableChartDrawer(Canvas canvas)
         {
@@ -46,9 +48,10 @@ namespace Controls.Common
         private void DrawAxisY()
         {
             Line axisY = new Line();
+            axisYPosX = canvas.ActualWidth - descWidth;
 
-            axisY.X1 = canvas.ActualWidth - descWidth;
-            axisY.X2 = axisY.X1;
+            axisY.X1 = axisYPosX;
+            axisY.X2 = axisYPosX;
             axisY.Y1 = Calculator.CalcY(Calculator.DataLow);
             axisY.Y2 = Calculator.CalcY(Calculator.DataHigh);
 
