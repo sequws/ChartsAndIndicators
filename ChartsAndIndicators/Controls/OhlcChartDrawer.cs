@@ -59,7 +59,15 @@ namespace Controls
 
                 // center of candle
                 var ohlcCenter = AxisYPosX - candleSeriesWidth - ChartMargin + (CandleMargin*2 + CandleWidth) * i;
-                Canvas.SetLeft(rect, ohlcCenter - CandleMargin - 0.5*CandleWidth);
+                var left = ohlcCenter - CandleMargin - 0.5 * CandleWidth;
+                Canvas.SetLeft(rect,left);
+
+                // if the candle is off the chart
+                if (left <= 0)
+                {
+                    i++;
+                    continue;
+                }
 
                 var top = ohlc.Close >= ohlc.Open ? ohlc.Close : ohlc.Open;
                 Canvas.SetTop(rect, Calculator.CalcY( top));
