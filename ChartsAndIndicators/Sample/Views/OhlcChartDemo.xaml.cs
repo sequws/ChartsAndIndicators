@@ -65,7 +65,7 @@ namespace Sample.Views
 
             try
             {
-                List<Ohlc> ohlcCandles = new List<Ohlc>();
+                ohlcCandles = new List<Ohlc>();
                 var numCandles = int.Parse(LinesTextBox.Text);
                 double start = rnd.Next(0, 200);
                 var maxDiff = double.Parse( MaxDiffTextBox.Text);
@@ -87,6 +87,24 @@ namespace Sample.Views
             {
                 MessageBox.Show("Wrong parameters!");
             }
+        }
+
+        private void AddCandleButton_Click(object sender, RoutedEventArgs e)
+        {
+            Random rnd = new Random();
+            Random rndDiff = new Random();
+
+            if (ohlcCandles.Count == 0) return;
+
+            var maxDiff = double.Parse(MaxDiffTextBox.Text);
+            var diff = rndDiff.NextDouble() * maxDiff;
+            var dir = rnd.NextDouble();
+            var start = ohlcCandles[ohlcCandles.Count - 1].Close;
+
+            var nextStart = dir > 0.5 ? start + diff : start - diff;
+            ohlcCandles.Add(new Ohlc(start, nextStart + diff, start - diff, nextStart));
+
+            MainOhlcChart.OhlcData = ohlcCandles;
         }
     }
 }

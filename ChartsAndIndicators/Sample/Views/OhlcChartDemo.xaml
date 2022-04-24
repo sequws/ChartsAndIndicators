@@ -16,6 +16,7 @@
             <Label Content="Max diff: "></Label>
             <TextBox x:Name="MaxDiffTextBox" Text="5" Width="40" Margin="2"></TextBox>
             <Button x:Name="RandomCandlesButton" Content="Random candles" Width="120" Margin="2" Click="RandomCandlesButton_Click"></Button>
+            <Button x:Name="AddCandleButton" Content="Add Candle" Width="120" Margin="2" Click="AddCandleButton_Click"></Button>
         </StackPanel>
         <controls:OhlcChart x:Name="MainOhlcChart" />
     </DockPanel>
