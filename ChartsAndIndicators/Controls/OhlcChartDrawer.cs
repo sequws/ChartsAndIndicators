@@ -35,6 +35,15 @@ namespace Controls
             var max = ohlcCandles.Max(x => x.High);
             var min = ohlcCandles.Min(x => x.Low);
 
+            var candleFullSeriesWidth = ohlcCandles.Count * (CandleMargin * 2 + CandleWidth);
+            if(candleFullSeriesWidth > canvas.ActualWidth)
+            {
+                dataLength = (int)(canvas.ActualWidth / (CandleMargin * 2 + CandleWidth));
+
+                max = ohlcCandles.Skip(ohlcCandles.Count - dataLength).Max(x => x.High);
+                min = ohlcCandles.Skip(ohlcCandles.Count - dataLength).Min(x => x.Low);
+            }
+
             CalculateInitialScale(canvas, min, max, dataLength);  // Cant properly calculate without Zero on chart!
             //Draw();
             DrawCandles(ohlcCandles);
