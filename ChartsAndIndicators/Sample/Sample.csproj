@@ -60,6 +60,9 @@
     <Compile Include="Views\OhlcChartDemo.xaml.cs">
       <DependentUpon>OhlcChartDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PieChartDemo.xaml.cs">
+      <DependentUpon>PieChartDemo.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\BarChartDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -90,6 +93,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\OhlcChartDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PieChartDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

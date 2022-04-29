@@ -34,6 +34,7 @@ namespace Sample
             containerRegistry.RegisterForNavigation<BarChartDemo>("BarChartDemo"); 
             containerRegistry.RegisterForNavigation<LineChartDemo>("LineChartDemo");
             containerRegistry.RegisterForNavigation<OhlcChartDemo>("OhlcChartDemo");
+            containerRegistry.RegisterForNavigation<PieChartDemo>("PieChartDemo");
         }
 
         protected override void OnStartup(StartupEventArgs e)
