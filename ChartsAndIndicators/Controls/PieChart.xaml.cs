@@ -22,6 +22,8 @@ namespace Controls
     /// </summary>
     public partial class PieChart : UserControl, INotifyPropertyChanged
     {
+        PieChartDrawer pieChartDrawer;
+
         public PieChart()
         {
             InitializeComponent();
