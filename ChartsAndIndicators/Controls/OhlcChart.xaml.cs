@@ -57,9 +57,7 @@ namespace Controls
             }
         }
 
-
         private SolidColorBrush _chartBackground = new SolidColorBrush(Colors.AliceBlue);
-
         public SolidColorBrush ChartBackground
         {
             get => _chartBackground;

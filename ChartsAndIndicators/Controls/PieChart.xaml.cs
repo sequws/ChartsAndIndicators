@@ -22,11 +22,29 @@ namespace Controls
     /// </summary>
     public partial class PieChart : UserControl, INotifyPropertyChanged
     {
+        #region properties
+        private string _chartName = "PieChart";
+        public string ChartName
+        {
+            get => _chartName;
+            set => SetField(ref _chartName, value);
+        }
+
+        private SolidColorBrush _chartBackground = new SolidColorBrush(Colors.AliceBlue);
+        public SolidColorBrush ChartBackground
+        {
+            get => _chartBackground;
+            set => SetField(ref _chartBackground, value);
+        }
+        #endregion
+
         PieChartDrawer pieChartDrawer;
 
         public PieChart()
         {
             InitializeComponent();
+
+            DataContext = this;
         }
 
         #region INotifyPropertyChanged

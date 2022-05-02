@@ -7,6 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label Content="Pie chart demo"></Label>
+        <Border BorderBrush="Black" Background="{Binding ChartBackground}" BorderThickness="2" CornerRadius="15">
+            <DockPanel  >
+                <Label DockPanel.Dock="Top" FontSize="14" FontWeight="Bold" Content="{Binding ChartName}" Margin="2"></Label>
+                <Canvas x:Name="MainCanvas" Margin="10 10 10 0" Background="AliceBlue" />
+            </DockPanel>
+        </Border>
     </Grid>
 </UserControl>
