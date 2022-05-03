@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Controls.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace Controls
 
         }
 
-        public void Draw(Dictionary<string, double> data)
+        public void Draw(List<PiePart> data)
         {
 
         }

@@ -1,17 +1,7 @@
-﻿using System;
+﻿using Controls.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Sample.Views
 {
@@ -23,6 +13,19 @@ namespace Sample.Views
         public PieChartDemo()
         {
             InitializeComponent();
+
+            FillExampleData();
+        }
+
+        List<PiePart> FillExampleData()
+        {
+            List<PiePart> pieParts = new List<PiePart>();
+
+            pieParts.Add(new PiePart(1, "Hungary", 9.75, new SolidColorBrush(Colors.Blue)));
+            pieParts.Add(new PiePart(1, "Poland", 37.8, new SolidColorBrush(Colors.Red)));
+            pieParts.Add(new PiePart(1, "Germany", 83.78, new SolidColorBrush(Colors.Brown)));
+
+            return pieParts;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Controls.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -35,6 +36,18 @@ namespace Controls
         {
             get => _chartBackground;
             set => SetField(ref _chartBackground, value);
+        }
+
+        private List<PiePart> _pieData = new List<PiePart>();
+
+        public List<PiePart> PieData
+        {
+            get { return _pieData; }
+            set
+            {
+                SetField(ref _pieData, value);
+                // todo refresh chart
+            }
         }
         #endregion
 

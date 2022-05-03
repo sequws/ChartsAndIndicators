@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="LineChartDrawer.cs" />
     <Compile Include="Models\Ohlc.cs" />
+    <Compile Include="Models\PiePart.cs" />
     <Compile Include="OhlcChart.xaml.cs">
       <DependentUpon>OhlcChart.xaml</DependentUpon>
     </Compile>
