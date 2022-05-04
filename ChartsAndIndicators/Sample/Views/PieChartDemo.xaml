@@ -10,11 +10,9 @@
     <DockPanel>
 
         <StackPanel Orientation="Horizontal" Height="30" DockPanel.Dock="Top" Background="AliceBlue">
-            <!--<Label Content="{Binding Info}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>-->
             <Label Content="Parts: "/>
             <TextBox x:Name="PartsTextBox" Text="6" Width="40" Margin="2"/>
             <Button x:Name="RandomPartsButton" Content="Random pie chart" Width="120" Margin="2"/>
-            <!--<Button x:Name="AddCandleButton" Content="Add Candle" Width="120" Margin="2"></Button>-->
         </StackPanel>
         <Controls:PieChart x:Name="MainChart"/>
     </DockPanel>
