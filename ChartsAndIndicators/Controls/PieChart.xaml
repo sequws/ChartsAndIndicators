@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid SizeChanged="Grid_SizeChanged">
         <Border BorderBrush="Black" Background="{Binding ChartBackground}" BorderThickness="2" CornerRadius="15">
             <DockPanel  >
                 <Label DockPanel.Dock="Top" FontSize="14" FontWeight="Bold" Content="{Binding ChartName}" Margin="2"></Label>

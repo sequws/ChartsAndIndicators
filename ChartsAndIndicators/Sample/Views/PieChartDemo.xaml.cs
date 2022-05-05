@@ -13,8 +13,8 @@ namespace Sample.Views
         public PieChartDemo()
         {
             InitializeComponent();
-
-            FillExampleData();
+                  
+            MainChart.PieData = FillExampleData();
         }
 
         List<PiePart> FillExampleData()

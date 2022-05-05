@@ -46,7 +46,7 @@ namespace Controls
             set
             {
                 SetField(ref _pieData, value);
-                // todo refresh chart
+                pieChartDrawer.Draw(_pieData);
             }
         }
         #endregion
@@ -58,6 +58,7 @@ namespace Controls
             InitializeComponent();
 
             DataContext = this;
+            pieChartDrawer = new PieChartDrawer(MainCanvas);
         }
 
         #region INotifyPropertyChanged
@@ -76,5 +77,10 @@ namespace Controls
             return true;
         }
         #endregion
+
+        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            pieChartDrawer.Draw(PieData);
+        }
     }
 }

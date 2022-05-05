@@ -12,16 +12,19 @@ namespace Controls
     {
         public double ChartMargin { get; set; } = 20;
 
+
         Canvas canvas;
 
-        public PieChartDrawer()
+        public PieChartDrawer(Canvas canvas)
         {
-
+            this.canvas = canvas;
         }
 
         public void Draw(List<PiePart> data)
         {
+            if (data.Count == 0) return;
 
+            var sum = data.Sum(x => x.Value);
         }
     }
 }
