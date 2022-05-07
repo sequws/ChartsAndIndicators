@@ -28,9 +28,71 @@ namespace Controls
             if (data.Count == 0) return;
             canvas.Children.Clear();
 
-            var sum = data.Sum(x => x.Value);
-            CreateArcSegment(canvas);
+            //CalculatePartPercentage(data);
+            //CreateArcSegment(canvas);
+            PercentPie(canvas, 25);
+        }
 
+        private void CalculatePartPercentage(List<PiePart> data)
+        {
+            List<double> percentParts = new List<double>();
+            var sum = data.Sum(x => x.Value);
+
+            foreach( var part in data)
+            {
+                double percent = part.Value / sum;
+                percentParts.Add(percent);
+            }
+        }
+
+        private void PercentPie(Canvas canvas, double percent)
+        {
+            var controlWidth = canvas.ActualWidth;
+            var controlHeight = canvas.ActualHeight;
+            
+            var width = controlWidth;
+            var height = controlHeight;
+
+            var drawingImage = new DrawingImage();
+            var drawingGroup = new DrawingGroup();
+
+            drawingImage.Drawing = drawingGroup;
+
+            var angle = 360 * (percent / 100);
+            var radians = (Math.PI / 180) * angle;
+            var endPointX = Math.Sin(radians) * height / 2 + height / 2;
+            var endPointY = width / 2 - Math.Cos(radians) * width / 2;
+            var endPoint = new Point(endPointX, endPointY);
+
+            var startPoint = new Point(controlWidth / 2, 0);
+            var centerPoint = new Point(controlWidth / 2, controlHeight / 2);
+
+            var drawing = new GeometryDrawing { Brush = new SolidColorBrush(Colors.Red) };
+            var pathGeometry = new PathGeometry();
+            var pathFigure = new PathFigure { StartPoint = centerPoint };
+
+            var ls1 = new LineSegment(startPoint, false);
+            var arc = new ArcSegment
+            {
+                SweepDirection = SweepDirection.Clockwise,
+                Size = new Size(width / 2, height / 2),
+                Point = endPoint,
+                IsLargeArc = percent > 50
+            };
+            var ls2 = new LineSegment(centerPoint, false);
+
+            drawing.Geometry = pathGeometry;
+            pathGeometry.Figures.Add(pathFigure);
+            pathFigure.Segments.Add(ls1);
+            pathFigure.Segments.Add(arc);
+            pathFigure.Segments.Add(ls2);
+
+            drawingGroup.Children.Add(drawing);
+
+            Image img = new Image();
+            img.Source = drawingImage;
+
+            canvas.Children.Add( img);
         }
 
         private void CreateArcSegment(Canvas canvas)
@@ -47,7 +109,7 @@ namespace Controls
             arcSeg.Size = new Size(50, 50);
             arcSeg.IsLargeArc = true;
             arcSeg.SweepDirection = SweepDirection.Counterclockwise;
-            arcSeg.RotationAngle = 0;
+            arcSeg.RotationAngle = 30;
 
             PathSegmentCollection myPathSegmentCollection = new PathSegmentCollection();
             myPathSegmentCollection.Add(arcSeg);
