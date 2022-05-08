@@ -45,27 +45,53 @@ namespace Controls
             }
         }
 
+        public static void DrawCircle(Canvas canvas, double x, double y, double r, SolidColorBrush color)
+        {
+            Ellipse circle = new Ellipse()
+            {
+                Width = r,
+                Height = r,
+                Stroke = color,
+                StrokeThickness = 6
+            };
+
+            canvas.Children.Add(circle);
+
+            circle.SetValue(Canvas.LeftProperty, (double)x);
+            circle.SetValue(Canvas.TopProperty, (double)y);
+        }
+
         private void PercentPie(Canvas canvas, double percent)
         {
             var controlWidth = canvas.ActualWidth;
             var controlHeight = canvas.ActualHeight;
-            
-            var width = controlWidth;
-            var height = controlHeight;
+
+            canvas.Background = new SolidColorBrush(Colors.Yellow);
+
+            var width = 400; // controlWidth;
+            var height = 400; // controlHeight;
 
             var drawingImage = new DrawingImage();
             var drawingGroup = new DrawingGroup();
 
             drawingImage.Drawing = drawingGroup;
 
+            var centerPoint = new Point(controlWidth/ 2 , (controlHeight) / 2);
+            var startPoint = new Point(centerPoint.X, centerPoint.Y + 200);
+
+            DrawCircle(canvas, centerPoint.X, centerPoint.Y, 5, Brushes.Red);
+            DrawCircle(canvas, startPoint.X, startPoint.Y, 5, Brushes.Green);
+
             var angle = 360 * (percent / 100);
             var radians = (Math.PI / 180) * angle;
-            var endPointX = Math.Sin(radians) * height / 2 + height / 2;
-            var endPointY = width / 2 - Math.Cos(radians) * width / 2;
+            var endPointX = Math.Sin(radians) * height / 2 + centerPoint.X;
+            var endPointY = centerPoint.Y - Math.Cos(radians) * width / 2;
             var endPoint = new Point(endPointX, endPointY);
 
-            var startPoint = new Point(controlWidth / 2, 0);
-            var centerPoint = new Point(controlWidth / 2, controlHeight / 2);
+            DrawCircle(canvas, endPoint.X, endPoint.Y, 5, Brushes.Blue);
+
+
+
 
             var drawing = new GeometryDrawing { Brush = new SolidColorBrush(Colors.Red) };
             var pathGeometry = new PathGeometry();
@@ -77,7 +103,7 @@ namespace Controls
                 SweepDirection = SweepDirection.Clockwise,
                 Size = new Size(width / 2, height / 2),
                 Point = endPoint,
-                IsLargeArc = percent > 50
+                IsLargeArc = percent < 50
             };
             var ls2 = new LineSegment(centerPoint, false);
 
