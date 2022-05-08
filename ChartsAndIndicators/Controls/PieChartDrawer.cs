@@ -77,7 +77,7 @@ namespace Controls
             drawingImage.Drawing = drawingGroup;
 
             var centerPoint = new Point(controlWidth/ 2 , (controlHeight) / 2);
-            var startPoint = new Point(centerPoint.X, centerPoint.Y + 200);
+            var startPoint = new Point(centerPoint.X, centerPoint.Y - 200);
 
             DrawCircle(canvas, centerPoint.X, centerPoint.Y, 5, Brushes.Red);
             DrawCircle(canvas, startPoint.X, startPoint.Y, 5, Brushes.Green);
@@ -103,7 +103,7 @@ namespace Controls
                 SweepDirection = SweepDirection.Clockwise,
                 Size = new Size(width / 2, height / 2),
                 Point = endPoint,
-                IsLargeArc = percent < 50
+                IsLargeArc = percent > 50
             };
             var ls2 = new LineSegment(centerPoint, false);
 
