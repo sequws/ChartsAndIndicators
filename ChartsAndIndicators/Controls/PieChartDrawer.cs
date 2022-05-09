@@ -30,7 +30,7 @@ namespace Controls
 
             //CalculatePartPercentage(data);
             //CreateArcSegment(canvas);
-            PercentPie(canvas, 25);
+            PercentPie(canvas, 90);
         }
 
         private void CalculatePartPercentage(List<PiePart> data)
@@ -68,8 +68,8 @@ namespace Controls
 
             canvas.Background = new SolidColorBrush(Colors.Yellow);
 
-            var width = 400; // controlWidth;
-            var height = 400; // controlHeight;
+            var width = 200; // controlWidth;
+            var height = 200; // controlHeight;
 
             var drawingImage = new DrawingImage();
             var drawingGroup = new DrawingGroup();
@@ -77,7 +77,7 @@ namespace Controls
             drawingImage.Drawing = drawingGroup;
 
             var centerPoint = new Point(controlWidth/ 2 , (controlHeight) / 2);
-            var startPoint = new Point(centerPoint.X, centerPoint.Y - 200);
+            var startPoint = new Point(centerPoint.X, centerPoint.Y - height /2);
 
             DrawCircle(canvas, centerPoint.X, centerPoint.Y, 5, Brushes.Red);
             DrawCircle(canvas, startPoint.X, startPoint.Y, 5, Brushes.Green);
@@ -89,9 +89,6 @@ namespace Controls
             var endPoint = new Point(endPointX, endPointY);
 
             DrawCircle(canvas, endPoint.X, endPoint.Y, 5, Brushes.Blue);
-
-
-
 
             var drawing = new GeometryDrawing { Brush = new SolidColorBrush(Colors.Red) };
             var pathGeometry = new PathGeometry();
@@ -117,6 +114,9 @@ namespace Controls
 
             Image img = new Image();
             img.Source = drawingImage;
+
+            img.SetValue(Canvas.LeftProperty, (double)centerPoint.X - width /4);
+            img.SetValue(Canvas.TopProperty, (double)centerPoint.Y - width /4);
 
             canvas.Children.Add( img);
         }
