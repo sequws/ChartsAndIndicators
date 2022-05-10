@@ -27,5 +27,15 @@ namespace Sample.Views
 
             return pieParts;
         }
+
+        private void PercentSlider_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            var val = PercentSlider.Value;
+            PiePart piePart = new PiePart(0, "test", val, new SolidColorBrush(Colors.Blue));
+            if(MainChart != null)
+            {
+                MainChart.PieData = new List<PiePart> { piePart };
+            }
+        }            
     }
 }

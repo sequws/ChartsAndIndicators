@@ -30,7 +30,8 @@ namespace Controls
 
             //CalculatePartPercentage(data);
             //CreateArcSegment(canvas);
-            PercentPie(canvas, 90);
+            PercentPie(canvas, data[0].Value);
+
         }
 
         private void CalculatePartPercentage(List<PiePart> data)
