@@ -35,7 +35,8 @@ namespace Sample.Views
             if(MainChart != null)
             {
                 MainChart.PieData = new List<PiePart> { piePart };
+                PercentValueLabel.Content = $"{val.ToString("F2")}%";
             }
-        }            
+        }
     }
 }

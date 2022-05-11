@@ -14,6 +14,7 @@
             <Button x:Name="RandomPartsButton" Content="Random pie chart" Width="120" Margin="2"/>
             <Label Content="Draw percent pie: "  Margin="2"/>
             <Slider Name="PercentSlider" Minimum="0" Maximum="100" SmallChange="0.5" Value="23" Width="200" ValueChanged="PercentSlider_ValueChanged"></Slider>
+            <Label x:Name="PercentValueLabel" Content="0%"  Margin="2"/>
         </StackPanel>
         <Controls:PieChart x:Name="MainChart"/>
     </DockPanel>

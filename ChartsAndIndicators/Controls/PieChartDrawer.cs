@@ -71,6 +71,7 @@ namespace Controls
 
             var width = 200; // controlWidth;
             var height = 200; // controlHeight;
+            var r = 100;
 
             var drawingImage = new DrawingImage();
             var drawingGroup = new DrawingGroup();
@@ -78,15 +79,15 @@ namespace Controls
             drawingImage.Drawing = drawingGroup;
 
             var centerPoint = new Point(controlWidth/ 2 , (controlHeight) / 2);
-            var startPoint = new Point(centerPoint.X, centerPoint.Y - height /2);
+            var startPoint = new Point(centerPoint.X, centerPoint.Y - r);
 
             DrawCircle(canvas, centerPoint.X, centerPoint.Y, 5, Brushes.Red);
             DrawCircle(canvas, startPoint.X, startPoint.Y, 5, Brushes.Green);
 
             var angle = 360 * (percent / 100);
             var radians = (Math.PI / 180) * angle;
-            var endPointX = Math.Sin(radians) * height / 2 + centerPoint.X;
-            var endPointY = centerPoint.Y - Math.Cos(radians) * width / 2;
+            var endPointX = Math.Sin(radians) * r + centerPoint.X;
+            var endPointY = centerPoint.Y - Math.Cos(radians) * r;
             var endPoint = new Point(endPointX, endPointY);
 
             DrawCircle(canvas, endPoint.X, endPoint.Y, 5, Brushes.Blue);
@@ -99,7 +100,7 @@ namespace Controls
             var arc = new ArcSegment
             {
                 SweepDirection = SweepDirection.Clockwise,
-                Size = new Size(width / 2, height / 2),
+                Size = new Size(r, r),
                 Point = endPoint,
                 IsLargeArc = percent > 50
             };
@@ -112,12 +113,12 @@ namespace Controls
             pathFigure.Segments.Add(ls2);
 
             drawingGroup.Children.Add(drawing);
-
+                        
             Image img = new Image();
             img.Source = drawingImage;
 
-            img.SetValue(Canvas.LeftProperty, (double)centerPoint.X - width /4);
-            img.SetValue(Canvas.TopProperty, (double)centerPoint.Y - width /4);
+            img.SetValue(Canvas.LeftProperty, (double)centerPoint.X - width /2);
+            img.SetValue(Canvas.TopProperty, (double)centerPoint.Y - width /2);
 
             canvas.Children.Add( img);
         }
