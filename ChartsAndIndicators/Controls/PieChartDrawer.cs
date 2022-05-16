@@ -72,7 +72,7 @@ namespace Controls
             canvas.Children.Add(img);
         }
 
-        private void CalculatePartPercentage(List<PiePart> data)
+        private List<double> CalculatePartPercentage(List<PiePart> data)
         {
             List<double> percentParts = new List<double>();
             var sum = data.Sum(x => x.Value);
@@ -82,24 +82,9 @@ namespace Controls
                 double percent = part.Value / sum;
                 percentParts.Add(percent);
             }
+
+            return percentParts;
         }
-
-        public static void DrawCircle(Canvas canvas, double x, double y, double r, SolidColorBrush color)
-        {
-            Ellipse circle = new Ellipse()
-            {
-                Width = r,
-                Height = r,
-                Stroke = color,
-                StrokeThickness = 6
-            };
-
-            canvas.Children.Add(circle);
-
-            circle.SetValue(Canvas.LeftProperty, (double)x);
-            circle.SetValue(Canvas.TopProperty, (double)y);
-        }
-
 
         private void PercentPieTest(Canvas canvas, double percent)
         {
@@ -153,7 +138,7 @@ namespace Controls
             var pathGeometry2 = new PathGeometry();
             var pathFigure2 = new PathFigure { StartPoint = centerPoint };
 
-            var angle2 = 360;// - angle; //360 * (360-percent / 100);
+            var angle2 = 360; 
             var radians2 = (Math.PI / 180) * angle2;
             var endPointX2 = Math.Sin(radians2) * r + r;
             var endPointY2 = r - Math.Cos(radians2) * r;
@@ -176,30 +161,38 @@ namespace Controls
             pathFigure2.Segments.Add(ls22);
 
             drawingGroup.Children.Add(drawing2);
-
             DrawCircle(canvas, endPoint.X, endPoint.Y, 5, Brushes.Blue);
-            //drawingGroup.Children.Add(CreatePathGeometry(r, new SolidColorBrush(Colors.Green), new Point(r, r), endPoint, percent > 0.5));
-            //drawingGroup.Children.Add(CreatePathGeometry(new SolidColorBrush(Colors.Gray), endPoint, new Point(controlWidth / 2, 0), percent <= 0.5));
 
             img.Source = drawingImage;
             canvas.Children.Add(img);
         }
 
+        public static void DrawCircle(Canvas canvas, double x, double y, double r, SolidColorBrush color)
+        {
+            Ellipse circle = new Ellipse()
+            {
+                Width = r,
+                Height = r,
+                Stroke = color,
+                StrokeThickness = 6
+            };
 
+            canvas.Children.Add(circle);
+
+            circle.SetValue(Canvas.LeftProperty, (double)x);
+            circle.SetValue(Canvas.TopProperty, (double)y);
+        }
 
         private void PercentPieFullCircle(Canvas canvas, double percent)
         {
-            //var controlWidth = canvas.ActualWidth;
-            //var controlHeight = canvas.ActualHeight;
-
             Image img = new Image();
             img.Width = 400;
             img.Height = 400;
 
             canvas.Background = new SolidColorBrush(Colors.Yellow);
 
-            var width = img.Width; // controlWidth;
-            var height = img.Height; // controlHeight;++
+            var width = img.Width;
+            var height = img.Height;
             var r = width / 2;
 
             var drawingImage = new DrawingImage();
@@ -219,7 +212,6 @@ namespace Controls
             img.Source = drawingImage;
             canvas.Children.Add(img);
         }
-
 
         private GeometryDrawing CreatePathGeometry(double r, Brush brush, Point startPoint, Point arcPoint, bool isLargeArc)
         {
@@ -247,8 +239,6 @@ namespace Controls
 
             return drawing;
         }
-
-
 
         private void PercentPie(Canvas canvas, double percent)
         {
