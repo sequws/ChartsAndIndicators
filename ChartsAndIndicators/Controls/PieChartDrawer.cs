@@ -17,7 +17,6 @@ namespace Controls
 
         Canvas canvas;
 
-
         public PieChartDrawer(Canvas canvas)
         {
             this.canvas = canvas;
@@ -28,10 +27,7 @@ namespace Controls
             if (data.Count == 0) return;
             canvas.Children.Clear();
 
-            //CalculatePartPercentage(data);
-            //CreateArcSegment(canvas);
-            //PercentPie(canvas, data[0].Value);
-            //PercentPieFullCircle(canvas, data[0].Value);
+            //DrawMultiPieChart(canvas, data[0].Value);
 
             var roundedVal = Math.Round(data[0].Value);
             if (roundedVal == 0 || roundedVal == 100)
@@ -40,7 +36,7 @@ namespace Controls
             }
             else
             {
-                PercentPieTest(canvas, data[0].Value);
+                DrawSinglePieChart(canvas, data[0].Value);
             }
         }
 
@@ -86,7 +82,7 @@ namespace Controls
             return percentParts;
         }
 
-        private void PercentPieTest(Canvas canvas, double percent)
+        private void DrawSinglePieChart(Canvas canvas, double percent)
         {
             Image img = new Image();
             img.Width = 400;
@@ -164,6 +160,19 @@ namespace Controls
             DrawCircle(canvas, endPoint.X, endPoint.Y, 5, Brushes.Blue);
 
             img.Source = drawingImage;
+            canvas.Children.Add(img);
+        }
+
+        private void DrawMultiPieChart(Canvas canvas, List<PiePart> data)
+        {
+            var percents = CalculatePartPercentage(data);
+
+            Image img = new Image();
+            img.Width = 400;
+            img.Height = 400;
+
+            canvas.Background = new SolidColorBrush(Colors.GreenYellow);
+
             canvas.Children.Add(img);
         }
 
