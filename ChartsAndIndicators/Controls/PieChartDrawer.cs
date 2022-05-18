@@ -27,17 +27,17 @@ namespace Controls
             if (data.Count == 0) return;
             canvas.Children.Clear();
 
-            //DrawMultiPieChart(canvas, data[0].Value);
+            DrawMultiPieChart(canvas, data);
 
-            var roundedVal = Math.Round(data[0].Value);
-            if (roundedVal == 0 || roundedVal == 100)
-            {
-                DrawFullCirce(canvas, roundedVal);
-            }
-            else
-            {
-                DrawSinglePieChart(canvas, data[0].Value);
-            }
+            //var roundedVal = Math.Round(data[0].Value);
+            //if (roundedVal == 0 || roundedVal == 100)
+            //{
+            //    DrawFullCirce(canvas, roundedVal);
+            //}
+            //else
+            //{
+            //    DrawSinglePieChart(canvas, data[0].Value);
+            //}
         }
 
         private void DrawFullCirce(Canvas canvas, double roundedVal)
@@ -75,7 +75,7 @@ namespace Controls
 
             foreach (var part in data)
             {
-                double percent = part.Value / sum;
+                double percent = (part.Value / sum)*100;
                 percentParts.Add(percent);
             }
 
@@ -173,6 +173,61 @@ namespace Controls
 
             canvas.Background = new SolidColorBrush(Colors.GreenYellow);
 
+            var width = img.Width; // controlWidth;
+            var height = img.Height; // controlHeight;++
+            var r = width / 2;
+
+            var drawingImage = new DrawingImage();
+            var drawingGroup = new DrawingGroup();
+
+            drawingImage.Drawing = drawingGroup;
+
+            var centerPoint = new Point(r, r);
+            var startPoint = new Point(centerPoint.X, 0);
+
+            double angle = 0;
+
+            int i = 0;
+            foreach (var item in data)
+            {
+                var percent = percents[i];
+                angle = angle + 360 * (percent / 100); // must add previous value
+
+                if (i == data.Count - 1) angle = 360;
+
+                var radians = (Math.PI / 180) * angle;
+                var endPointX = Math.Sin(radians) * r + r;
+                var endPointY = r - Math.Cos(radians) * r;
+                var endPoint = new Point(endPointX, endPointY);
+                i++;
+
+
+                var drawing = new GeometryDrawing { Brush = item.Color };
+                var pathGeometry = new PathGeometry();
+                var pathFigure = new PathFigure { StartPoint = centerPoint };
+
+                var ls1 = new LineSegment(startPoint, false);
+                var arc = new ArcSegment
+                {
+                    SweepDirection = SweepDirection.Clockwise,
+                    Size = new Size(r, r),
+                    Point = endPoint,
+                    IsLargeArc = angle > 180
+                };
+                var ls2 = new LineSegment(centerPoint, false);
+
+                drawing.Geometry = pathGeometry;
+                pathGeometry.Figures.Add(pathFigure);
+                pathFigure.Segments.Add(ls1);
+                pathFigure.Segments.Add(arc);
+                pathFigure.Segments.Add(ls2);
+
+                drawingGroup.Children.Add(drawing);
+
+                startPoint = endPoint;
+            }
+
+            img.Source = drawingImage;
             canvas.Children.Add(img);
         }
 
