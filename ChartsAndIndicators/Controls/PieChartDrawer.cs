@@ -186,16 +186,18 @@ namespace Controls
             var startPoint = new Point(centerPoint.X, 0);
 
             double angle = 0;
+            double sumAngle = 0;
 
             int i = 0;
             foreach (var item in data)
             {
                 var percent = percents[i];
-                angle = angle + 360 * (percent / 100); // must add previous value
+                angle = 360 * (percent / 100); // must add previous value
+                sumAngle += angle;
 
-                if (i == data.Count - 1) angle = 360;
+                if (i == data.Count - 1) sumAngle = 360;
 
-                var radians = (Math.PI / 180) * angle;
+                var radians = (Math.PI / 180) * sumAngle;
                 var endPointX = Math.Sin(radians) * r + r;
                 var endPointY = r - Math.Cos(radians) * r;
                 var endPoint = new Point(endPointX, endPointY);
