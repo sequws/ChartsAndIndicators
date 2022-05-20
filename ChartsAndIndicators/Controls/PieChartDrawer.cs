@@ -29,15 +29,21 @@ namespace Controls
 
             DrawMultiPieChart(canvas, data);
 
-            //var roundedVal = Math.Round(data[0].Value);
-            //if (roundedVal == 0 || roundedVal == 100)
-            //{
-            //    DrawFullCirce(canvas, roundedVal);
-            //}
-            //else
-            //{
-            //    DrawSinglePieChart(canvas, data[0].Value);
-            //}
+
+        }
+
+        public void DrawPercentChart(double percent)
+        {
+            canvas.Children.Clear();
+            var roundedVal = Math.Round(percent);
+            if (roundedVal == 0 || roundedVal == 100)
+            {
+                DrawFullCirce(canvas, roundedVal);
+            }
+            else
+            {
+                DrawSinglePieChart(canvas, percent);
+            }
         }
 
         private void DrawFullCirce(Canvas canvas, double roundedVal)

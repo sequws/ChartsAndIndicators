@@ -31,7 +31,7 @@ namespace Controls
             var barMaxH = barValues.Max(x => x.Value);
             var barMinH = barValues.Min(x => x.Value);
 
-            // from base
+            // from base-
             CalculateScale(barMinH, barMaxH, barValues.Count, 10);
             Draw();
 

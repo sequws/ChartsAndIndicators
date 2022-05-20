@@ -14,7 +14,7 @@ namespace Sample.Views
         {
             InitializeComponent();
                   
-            MainChart.PieData = FillExampleData();
+            MainPercentChart.PieData = FillExampleData();
         }
 
         List<PiePart> FillExampleData()
@@ -42,9 +42,9 @@ namespace Sample.Views
         {
             var val = PercentSlider.Value;
             PiePart piePart = new PiePart(0, "test", val, new SolidColorBrush(Colors.Blue));
-            if(MainChart != null)
+            if(MainPercentChart != null)
             {
-                MainChart.PieData = new List<PiePart> { piePart };
+                MainPercentChart.PercentData = piePart.Value; //new List<PiePart> { piePart };
                 PercentValueLabel.Content = $"{val.ToString("F2")}%";
             }
         }

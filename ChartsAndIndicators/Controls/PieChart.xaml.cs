@@ -49,6 +49,17 @@ namespace Controls
                 pieChartDrawer.Draw(_pieData);
             }
         }
+
+        private double _percentData;
+        public double PercentData
+        {
+            get { return _percentData; }
+            set
+            {
+                SetField(ref _percentData, value);
+                pieChartDrawer.DrawPercentChart(_percentData);
+            }
+        }
         #endregion
 
         PieChartDrawer pieChartDrawer;
