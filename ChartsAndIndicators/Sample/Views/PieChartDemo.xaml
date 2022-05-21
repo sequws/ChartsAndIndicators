@@ -12,7 +12,7 @@
             <DockPanel>
                 <StackPanel Orientation="Horizontal" Height="30" DockPanel.Dock="Top" Background="AliceBlue">
                     <Label Content="Parts: "/>
-                    <Button x:Name="RandomPercentButton" Content="Random pie chart" Width="120" Margin="2"/>
+                    <Button x:Name="RandomPercentButton" Content="Random pie chart" Width="120" Margin="2" Click="RandomPercentButton_Click"/>
                     <Label Content="Draw percent pie: "  Margin="2"/>
                     <Slider Name="PercentSlider" Minimum="0" Maximum="100" SmallChange="0.5" Value="23" Width="200" ValueChanged="PercentSlider_ValueChanged"></Slider>
                     <Label x:Name="PercentValueLabel" Content="0%"  Margin="2"/>

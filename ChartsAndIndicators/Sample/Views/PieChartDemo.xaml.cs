@@ -1,4 +1,5 @@
 ﻿using Controls.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -45,6 +46,18 @@ namespace Sample.Views
             if(MainPercentChart != null)
             {
                 MainPercentChart.PercentData = piePart.Value; //new List<PiePart> { piePart };
+                PercentValueLabel.Content = $"{val.ToString("F2")}%";
+            }
+        }
+
+        private void RandomPercentButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
+            var val = rnd.NextDouble() * 100;
+            PiePart piePart = new PiePart(0, "test", val, new SolidColorBrush(Colors.Blue));
+            if (MainPercentChart != null)
+            {
+                MainPercentChart.PercentData = piePart.Value; 
                 PercentValueLabel.Content = $"{val.ToString("F2")}%";
             }
         }
