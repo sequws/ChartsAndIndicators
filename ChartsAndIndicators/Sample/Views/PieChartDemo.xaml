@@ -24,8 +24,8 @@
             <DockPanel>
                 <StackPanel Orientation="Horizontal" Height="30" DockPanel.Dock="Top" Background="AliceBlue">
                     <Label Content="Parts: "/>
-                    <TextBox x:Name="PartsTextBox" Text="6" Width="40" Margin="2"/>
-                    <Button x:Name="RandomMultiPartsButton" Content="Random pie chart" Width="120" Margin="2"/>
+                    <TextBox x:Name="PartsTextBox" Text="3" Width="40" Margin="2"/>
+                    <Button x:Name="RandomMultiPartsButton" Content="Random pie chart" Width="120" Margin="2" Click="RandomMultiPartsButton_Click"/>
                 </StackPanel>
                 <Controls:PieChart x:Name="MainMultiChart"/>
             </DockPanel>

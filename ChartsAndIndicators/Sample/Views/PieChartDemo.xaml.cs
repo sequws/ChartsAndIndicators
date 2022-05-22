@@ -15,7 +15,8 @@ namespace Sample.Views
         {
             InitializeComponent();
                   
-            MainPercentChart.PieData = FillExampleData();
+            MainPercentChart.PercentData = 32;
+            MainMultiChart.PieData = FillExampleData();
         }
 
         List<PiePart> FillExampleData()
@@ -34,7 +35,7 @@ namespace Sample.Views
             pieParts.Add(new PiePart(1, "Hungary", 9.75, new SolidColorBrush(Colors.Blue)));
             pieParts.Add(new PiePart(2, "Poland", 37.8, new SolidColorBrush(Colors.Red)));
             pieParts.Add(new PiePart(3, "Germany", 83.78, new SolidColorBrush(Colors.LightSalmon)));
-            pieParts.Add(new PiePart(3, "India", 112.78, new SolidColorBrush(Colors.Orange)));
+            pieParts.Add(new PiePart(4, "India", 112.78, new SolidColorBrush(Colors.Orange)));
 
             return pieParts;
         }
@@ -60,6 +61,20 @@ namespace Sample.Views
                 MainPercentChart.PercentData = piePart.Value; 
                 PercentValueLabel.Content = $"{val.ToString("F2")}%";
             }
+        }
+
+        private void RandomMultiPartsButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Brush[] brushes = { Brushes.Red, Brushes.Green, Brushes.Blue, Brushes.Yellow, Brushes.Orange, Brushes.DarkGray, Brushes.Fuchsia };
+
+            List<PiePart> pieParts = new List<PiePart>();
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
+
+            var parts = rnd.Next(0, 6);
+
+            PiePart piePart = new PiePart(0, "test", 15, brushes[2]);
+
+            // todo - generate random pie parts
         }
     }
 }

@@ -12,9 +12,9 @@ namespace Controls.Models
         public int Id { get; set; }
         public string Description { get; set; }
         public double Value { get; set; }
-        public SolidColorBrush Color { get; set; }
+        public Brush Color { get; set; }
 
-        public PiePart(int id, string desc, double value, SolidColorBrush color)
+        public PiePart(int id, string desc, double value, Brush color)
         {
             Id = id;
             Description = desc;
