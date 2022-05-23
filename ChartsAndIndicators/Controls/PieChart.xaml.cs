@@ -50,8 +50,8 @@ namespace Controls
             }
         }
 
-        private double _percentData;
-        public double PercentData
+        private PiePart _percentData;
+        public PiePart PercentData
         {
             get { return _percentData; }
             set

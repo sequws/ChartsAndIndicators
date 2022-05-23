@@ -15,7 +15,7 @@ namespace Sample.Views
         {
             InitializeComponent();
                   
-            MainPercentChart.PercentData = 32;
+            MainPercentChart.PercentData = new PiePart(0, "test", 25, new SolidColorBrush(Colors.Blue)); ;
             MainMultiChart.PieData = FillExampleData();
         }
 
@@ -46,7 +46,7 @@ namespace Sample.Views
             PiePart piePart = new PiePart(0, "test", val, new SolidColorBrush(Colors.Blue));
             if(MainPercentChart != null)
             {
-                MainPercentChart.PercentData = piePart.Value; //new List<PiePart> { piePart };
+                MainPercentChart.PercentData = piePart; //new List<PiePart> { piePart };
                 PercentValueLabel.Content = $"{val.ToString("F2")}%";
             }
         }
@@ -58,7 +58,7 @@ namespace Sample.Views
             PiePart piePart = new PiePart(0, "test", val, new SolidColorBrush(Colors.Blue));
             if (MainPercentChart != null)
             {
-                MainPercentChart.PercentData = piePart.Value; 
+                MainPercentChart.PercentData = piePart; 
                 PercentValueLabel.Content = $"{val.ToString("F2")}%";
             }
         }

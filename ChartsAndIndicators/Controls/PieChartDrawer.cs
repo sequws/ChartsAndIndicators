@@ -28,25 +28,23 @@ namespace Controls
             canvas.Children.Clear();
 
             DrawMultiPieChart(canvas, data);
-
-
         }
 
-        public void DrawPercentChart(double percent)
+        public void DrawPercentChart(PiePart percentPart)
         {
             canvas.Children.Clear();
-            var roundedVal = Math.Round(percent);
+            var roundedVal = Math.Round(percentPart.Value);
             if (roundedVal == 0 || roundedVal == 100)
             {
-                DrawFullCirce(canvas, roundedVal);
+                DrawFullCirce(canvas, percentPart);
             }
             else
             {
-                DrawSinglePieChart(canvas, percent);
+                DrawSinglePieChart(canvas, percentPart);
             }
         }
 
-        private void DrawFullCirce(Canvas canvas, double roundedVal)
+        private void DrawFullCirce(Canvas canvas, PiePart percentPart)
         {
             Image img = new Image();
             img.Width = 400;
@@ -58,7 +56,8 @@ namespace Controls
 
             drawingImage.Drawing = drawingGroup;
 
-            var brush = roundedVal == 0 ? new SolidColorBrush(Colors.Gray) : new SolidColorBrush(Colors.Red);
+            var roundedVal = Math.Round(percentPart.Value);
+            var brush = roundedVal == 0 ? new SolidColorBrush(Colors.Gray) : percentPart.Color;
 
             var drawing = new GeometryDrawing { Brush = brush };
             var pathGeometry = new PathGeometry();
@@ -88,7 +87,7 @@ namespace Controls
             return percentParts;
         }
 
-        private void DrawSinglePieChart(Canvas canvas, double percent)
+        private void DrawSinglePieChart(Canvas canvas, PiePart percentPart)
         {
             Image img = new Image();
             img.Width = 400;
@@ -105,7 +104,7 @@ namespace Controls
 
             drawingImage.Drawing = drawingGroup;
 
-            var angle = 360 * (percent / 100);
+            var angle = 360 * (percentPart.Value / 100);
             var radians = (Math.PI / 180) * angle;
             var endPointX = Math.Sin(radians) * r + r;
             var endPointY = r - Math.Cos(radians) * r;
@@ -114,7 +113,7 @@ namespace Controls
             var centerPoint = new Point(r, r);
             var startPoint = new Point(centerPoint.X, 0);
 
-            var drawing = new GeometryDrawing { Brush = new SolidColorBrush(Colors.Red) };
+            var drawing = new GeometryDrawing { Brush = percentPart.Color };
             var pathGeometry = new PathGeometry();
             var pathFigure = new PathFigure { StartPoint = centerPoint };
 
