@@ -70,11 +70,15 @@ namespace Sample.Views
             List<PiePart> pieParts = new List<PiePart>();
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
 
-            var parts = rnd.Next(0, 6);
+            var parts = rnd.Next(1, 6);
 
-            PiePart piePart = new PiePart(0, "test", 15, brushes[2]);
+            for (int i = 0; i < parts; i++)
+            {
+                var val = rnd.Next(0, 100);
+                pieParts.Add(new PiePart(i, $"Part {i}", val, brushes[i]));
+            }
 
-            // todo - generate random pie parts
+            MainMultiChart.PieData = pieParts;
         }
     }
 }
