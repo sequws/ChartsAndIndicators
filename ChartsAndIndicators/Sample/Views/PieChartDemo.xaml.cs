@@ -1,6 +1,7 @@
 ﻿using Controls.Models;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -63,22 +64,29 @@ namespace Sample.Views
             }
         }
 
-        private void RandomMultiPartsButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void RandomMultiPartsButton_Click(object sender,RoutedEventArgs e)
         {
             Brush[] brushes = { Brushes.Red, Brushes.Green, Brushes.Blue, Brushes.Yellow, Brushes.Orange, Brushes.DarkGray, Brushes.Fuchsia };
 
-            List<PiePart> pieParts = new List<PiePart>();
-            Random rnd = new Random(Guid.NewGuid().GetHashCode());
-
-            var parts = rnd.Next(1, 6);
-
-            for (int i = 0; i < parts; i++)
+            try
             {
-                var val = rnd.Next(0, 100);
-                pieParts.Add(new PiePart(i, $"Part {i}", val, brushes[i]));
-            }
+                List<PiePart> pieParts = new List<PiePart>();
+                Random rnd = new Random(Guid.NewGuid().GetHashCode());
 
-            MainMultiChart.PieData = pieParts;
+                var parts = int.Parse(PartsTextBox.Text);
+
+                for (int i = 0; i < parts; i++)
+                {
+                    var val = rnd.Next(0, 100);
+                    pieParts.Add(new PiePart(i, $"Part {i}", val, brushes[i % brushes.Length]));
+                }
+
+                MainMultiChart.PieData = pieParts;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Wrong parameters!");
+            }
         }
     }
 }
