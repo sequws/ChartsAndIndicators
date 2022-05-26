@@ -61,7 +61,6 @@ namespace Controls
 
             var drawing = new GeometryDrawing { Brush = brush };
             var pathGeometry = new PathGeometry();
-            //var pathFigure = new PathFigure { StartPoint = centerPoint };
 
             drawing.Geometry = pathGeometry;
             var eclipe = new EllipseGeometry(new Point(r, r), r, r);
@@ -201,14 +200,13 @@ namespace Controls
                 sumAngle += angle;
 
                 if (i == data.Count - 1) sumAngle = 360;
+                i++;
 
                 var radians = (Math.PI / 180) * sumAngle;
                 var endPointX = Math.Sin(radians) * r + r;
                 var endPointY = r - Math.Cos(radians) * r;
+
                 var endPoint = new Point(endPointX, endPointY);
-                i++;
-
-
                 var drawing = new GeometryDrawing { Brush = item.Color };
                 var pathGeometry = new PathGeometry();
                 var pathFigure = new PathFigure { StartPoint = centerPoint };
@@ -252,170 +250,6 @@ namespace Controls
 
             circle.SetValue(Canvas.LeftProperty, (double)x);
             circle.SetValue(Canvas.TopProperty, (double)y);
-        }
-
-        private void PercentPieFullCircle(Canvas canvas, double percent)
-        {
-            Image img = new Image();
-            img.Width = 400;
-            img.Height = 400;
-
-            canvas.Background = new SolidColorBrush(Colors.Yellow);
-
-            var width = img.Width;
-            var height = img.Height;
-            var r = width / 2;
-
-            var drawingImage = new DrawingImage();
-            var drawingGroup = new DrawingGroup();
-
-            drawingImage.Drawing = drawingGroup;
-
-            var angle = 360 * (percent / 100);
-            var radians = (Math.PI / 180) * angle;
-            var endPointX = Math.Sin(radians) * r + r;
-            var endPointY = r - Math.Cos(radians) * r;
-            var endPoint = new Point(endPointX, endPointY);
-
-            drawingGroup.Children.Add(CreatePathGeometry(r, new SolidColorBrush(Colors.Green), new Point(r, r), endPoint, percent > 0.5));
-            //drawingGroup.Children.Add(CreatePathGeometry(new SolidColorBrush(Colors.Gray), endPoint, new Point(controlWidth / 2, 0), percent <= 0.5));
-
-            img.Source = drawingImage;
-            canvas.Children.Add(img);
-        }
-
-        private GeometryDrawing CreatePathGeometry(double r, Brush brush, Point startPoint, Point arcPoint, bool isLargeArc)
-        {
-            var midPoint = new Point(r, r);
-            var drawing = new GeometryDrawing { Brush = brush };
-            var pathGeometry = new PathGeometry();
-            var pathFigure = new PathFigure { StartPoint = midPoint };
-
-            var ls1 = new LineSegment(startPoint, false);
-            var arc = new ArcSegment
-            {
-                SweepDirection = SweepDirection.Clockwise,
-                Size = new Size(r, r),
-                Point = arcPoint,
-                IsLargeArc = isLargeArc
-            };
-            var ls2 = new LineSegment(midPoint, false);
-
-            drawing.Geometry = pathGeometry;
-            pathGeometry.Figures.Add(pathFigure);
-
-            pathFigure.Segments.Add(ls1);
-            pathFigure.Segments.Add(arc);
-            pathFigure.Segments.Add(ls2);
-
-            return drawing;
-        }
-
-        private void PercentPie(Canvas canvas, double percent)
-        {
-            var controlWidth = canvas.ActualWidth;
-            var controlHeight = canvas.ActualHeight;
-
-            canvas.Background = new SolidColorBrush(Colors.Yellow);
-
-            var width = 200; // controlWidth;
-            var height = 200; // controlHeight;++
-            var r = 100;
-
-            var drawingImage = new DrawingImage();
-            var drawingGroup = new DrawingGroup();
-
-            drawingImage.Drawing = drawingGroup;
-
-            var centerPoint = new Point(controlWidth / 2, (controlHeight) / 2);
-            var startPoint = new Point(centerPoint.X, centerPoint.Y - r);
-
-            DrawCircle(canvas, centerPoint.X, centerPoint.Y, 5, Brushes.Red);
-            DrawCircle(canvas, startPoint.X, startPoint.Y, 5, Brushes.Green);
-
-            var angle = 360 * (percent / 100);
-            var radians = (Math.PI / 180) * angle;
-            var endPointX = Math.Sin(radians) * r + centerPoint.X;
-            var endPointY = centerPoint.Y - Math.Cos(radians) * r;
-            var endPoint = new Point(endPointX, endPointY);
-
-            DrawCircle(canvas, endPoint.X, endPoint.Y, 5, Brushes.Blue);
-
-            var drawing = new GeometryDrawing { Brush = new SolidColorBrush(Colors.Red) };
-            var pathGeometry = new PathGeometry();
-            var pathFigure = new PathFigure { StartPoint = centerPoint };
-
-            var ls1 = new LineSegment(startPoint, false);
-            var arc = new ArcSegment
-            {
-                SweepDirection = SweepDirection.Clockwise,
-                Size = new Size(r, r),
-                Point = endPoint,
-                IsLargeArc = percent > 50
-            };
-            var ls2 = new LineSegment(centerPoint, false);
-
-            drawing.Geometry = pathGeometry;
-            pathGeometry.Figures.Add(pathFigure);
-            pathFigure.Segments.Add(ls1);
-            pathFigure.Segments.Add(arc);
-            pathFigure.Segments.Add(ls2);
-
-            GeometryDrawing drawingRect = new GeometryDrawing(
-                Brushes.Lime,
-                new Pen(Brushes.Black, 2),
-                new RectangleGeometry(new Rect(0, 0, width, height))// new Size(width,height)))
-                );
-
-            drawingGroup.Children.Add(drawing);
-            drawingGroup.Children.Add(drawingRect);
-
-            Image img = new Image();
-            //img.Width = width;
-            //img.Height = height;
-            //img.Stretch = Stretch.None;
-            img.Source = drawingImage;
-
-            img.SetValue(Canvas.LeftProperty, (double)centerPoint.X - width / 2);
-            img.SetValue(Canvas.TopProperty, (double)centerPoint.Y - width / 2);
-
-            canvas.Children.Add(img);
-        }
-
-        private void CreateArcSegment(Canvas canvas)
-        {
-            var controlWidth = canvas.ActualWidth;
-            var controlHeight = canvas.ActualHeight;
-            var centerPoint = new Point(controlWidth / 2, controlHeight / 2);
-
-            PathFigure pthFigure = new PathFigure();
-            pthFigure.StartPoint = new Point(centerPoint.X - 50, centerPoint.Y); ;
-
-            ArcSegment arcSeg = new ArcSegment();
-            arcSeg.Point = new Point(centerPoint.X + 50, centerPoint.Y);
-            arcSeg.Size = new Size(50, 50);
-            arcSeg.IsLargeArc = true;
-            arcSeg.SweepDirection = SweepDirection.Counterclockwise;
-            arcSeg.RotationAngle = 30;
-
-            PathSegmentCollection myPathSegmentCollection = new PathSegmentCollection();
-            myPathSegmentCollection.Add(arcSeg);
-
-            pthFigure.Segments = myPathSegmentCollection;
-
-            PathFigureCollection pthFigureCollection = new PathFigureCollection();
-            pthFigureCollection.Add(pthFigure);
-
-            PathGeometry pthGeometry = new PathGeometry();
-            pthGeometry.Figures = pthFigureCollection;
-
-            Path arcPath = new Path();
-            arcPath.Stroke = new SolidColorBrush(Colors.Black);
-            arcPath.StrokeThickness = 1;
-            arcPath.Data = pthGeometry;
-            arcPath.Fill = new SolidColorBrush(Colors.Yellow);
-
-            canvas.Children.Add(arcPath);
         }
     }
 }
