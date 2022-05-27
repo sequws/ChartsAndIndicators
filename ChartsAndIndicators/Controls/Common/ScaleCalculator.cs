@@ -47,7 +47,6 @@ namespace Controls.Common
 
         public int MaxStepsOnYAxis { get; set; } = 20;
         public int TextHeight { get; set; } = 10;
-
         public double LineZeroY => _lineZeroY;
         public double CenterX => centerX;
         public double MinH => _minH;
@@ -114,7 +113,5 @@ namespace Controls.Common
 
             stepSizeVal = (Math.Abs(MinH) + MaxH) / (AxisYStepsNum - 1);
         }
-
-
     }
 }

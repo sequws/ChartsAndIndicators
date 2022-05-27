@@ -24,15 +24,6 @@ namespace Sample.Views
         {
             List<PiePart> pieParts = new List<PiePart>();
 
-            //pieParts.Add(new PiePart(1, "Hungary", 50, new SolidColorBrush(Colors.Blue)));
-            //pieParts.Add(new PiePart(2, "Poland", 50, new SolidColorBrush(Colors.Red)));
-            //pieParts.Add(new PiePart(3, "Spain", 100, new SolidColorBrush(Colors.Orange)));
-
-            // Test 
-            //pieParts.Add(new PiePart(1, "Hungary", 33, new SolidColorBrush(Colors.Blue)));
-            //pieParts.Add(new PiePart(2, "Poland", 33, new SolidColorBrush(Colors.Red)));
-            //pieParts.Add(new PiePart(3, "Spain", 33, new SolidColorBrush(Colors.Orange)));
-
             pieParts.Add(new PiePart(1, "Hungary", 9.75, new SolidColorBrush(Colors.Blue)));
             pieParts.Add(new PiePart(2, "Poland", 37.8, new SolidColorBrush(Colors.Red)));
             pieParts.Add(new PiePart(3, "Germany", 83.78, new SolidColorBrush(Colors.LightSalmon)));

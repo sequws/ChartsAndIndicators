@@ -116,8 +116,7 @@ namespace Controls.Common
         {
             for (int i = 0; i < _scaleCalculator.AxisYStepsNum; i++)
             {
-                // lines desc between min max
-                
+                // lines desc between min max                
                 var text = new TextBlock();
                 text.TextWrapping = TextWrapping.Wrap;
                 text.Text = $"{ _scaleCalculator.MinH + i * _scaleCalculator.StepSizeVal}";
