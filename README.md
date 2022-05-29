@@ -6,3 +6,4 @@ A collection of simple controls for drawing different types of charts
 - LineChart - for drawing line chart
 - CandleChart - candlestick chart based on OHLC data
 - PieChart - draws percent and pie part chart
+- StackedBarChart - for cumulative data on bar charts
